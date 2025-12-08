@@ -2,7 +2,7 @@
 import { type CollectionEntry, getCollection } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import Container from "@components/Container.astro";
-import ArrowCard from "@components/ArrowCard.astro";
+import Link from "@components/Link.astro";
 import { BLOG } from "@consts";
 
 const data = (await getCollection("blog"))
@@ -23,33 +23,52 @@ const posts = data.reduce((acc: Acc, post) => {
 }, {});
 
 const years = Object.keys(posts).sort((a, b) => parseInt(b) - parseInt(a));
+
+function formatDate(date: Date): string {
+  return date.toLocaleDateString("en-US", {
+    month: "short",
+    day: "2-digit",
+  });
+}
 ---
 
 <Layout title={BLOG.TITLE} description={BLOG.DESCRIPTION}>
   <Container>
-    <aside data-pagefind-ignore>
-      <div class="space-y-10">
-        <div class="space-y-4">
-          {
-            years.map((year) => (
-              <section class="animate space-y-4">
-                <div class="font-semibold text-black dark:text-white">
-                  {year}
-                </div>
-                <div>
-                  <ul class="not-prose flex flex-col gap-4">
-                    {posts[year].map((post) => (
-                      <li>
-                        <ArrowCard entry={post} />
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </section>
-            ))
-          }
-        </div>
+    <div class="space-y-10">
+      <h1 class="animate font-semibold text-black dark:text-white">
+        Blog
+      </h1>
+      
+      <div class="space-y-12">
+        {
+          years.map((year) => (
+            <section class="animate space-y-4">
+              <h2 class="text-2xl font-bold text-blue-600 dark:text-blue-400">
+                {year}
+              </h2>
+              <ul class="space-y-3">
+                {posts[year].map((post) => (
+                  <li>
+                    <Link 
+                      href={`/blog/${post.id}`}
+                      underline={false}
+                    >
+                      <div class="flex justify-between items-baseline gap-4 group">
+                        <div class="text-black group-hover:text-gray-700 dark:text-white dark:group-hover:text-gray-300 transition-colors flex-1">
+                          {post.data.title}
+                        </div>
+                        <div class="text-sm text-gray-500 dark:text-gray-500 whitespace-nowrap">
+                          {formatDate(post.data.date)}
+                        </div>
+                      </div>
+                    </Link>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))
+        }
       </div>
-    </aside>
+    </div>
   </Container>
 </Layout>
