@@ -34,7 +34,6 @@ jobs:
             
             const title = issue.title;
             const body = issue.body || '';
-            const isDraft = body.includes('- [x] Save as draft');
             const createdDate = new Date(issue.created_at).toISOString().split('T')[0];
             
             if (body.length === 0) {
@@ -42,19 +41,33 @@ jobs:
               return;
             }
             
+            // Check if issue has "draft" in the body or labels
+            const isDraft = body.toLowerCase().includes('[x] save as draft') || 
+                           issue.labels.some(label => label.name === 'draft');
+            
+            // Parse frontmatter and content
+            // Expecting format:
+            // ---
+            // description: ...
+            // tags: [...]
+            // ---
+            // Content here...
+            
             const frontmatterMatch = body.match(/---\s*\n([\s\S]*?)\n---/);
             if (!frontmatterMatch) {
-              core.setFailed('No frontmatter found in issue body');
+              core.setFailed('No frontmatter found. Please use the template format.');
               return;
             }
             
             const frontmatterContent = frontmatterMatch[1];
             const contentAfterFrontmatter = body.substring(frontmatterMatch.index + frontmatterMatch[0].length).trim();
             
+            // Extract description
             const descriptionMatch = frontmatterContent.match(/description:\s*(.+)/);
-            const tagsMatch = frontmatterContent.match(/tags:\s*\[(.*?)\]/);
-            
             const description = descriptionMatch ? descriptionMatch[1].trim() : '';
+            
+            // Extract tags
+            const tagsMatch = frontmatterContent.match(/tags:\s*\[(.*?)\]/);
             const tags = tagsMatch ? tagsMatch[1].split(',').map(t => t.trim()).filter(t => t) : [];
             
             if (!description) {
@@ -62,13 +75,21 @@ jobs:
               return;
             }
             
+            // Create filename from title (kebab-case)
             const filename = title
               .toLowerCase()
               .replace(/[^a-z0-9]+/g, '-')
               .replace(/^-+|-+$/g, '');
             
+            if (!filename) {
+              core.setFailed('Could not create valid filename from title');
+              return;
+            }
+            
+            // Build tags line
             const tagsLine = tags.length > 0 ? `\ntags: [${tags.map(t => `"${t}"`).join(', ')}]` : '';
             
+            // Build final markdown
             const markdown = `---
             title: "${title}"
             description: "${description}"
@@ -79,6 +100,7 @@ jobs:
             ${contentAfterFrontmatter}
             `;
             
+            // Write file
             const filePath = path.join(process.env.GITHUB_WORKSPACE, 'src', 'content', 'blog', `${filename}.md`);
             fs.writeFileSync(filePath, markdown);
             console.log(`Successfully created blog post: ${filePath}`);
