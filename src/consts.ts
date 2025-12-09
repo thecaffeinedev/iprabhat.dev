@@ -6,6 +6,7 @@ export const SITE: Site = {
   EMAIL: "iprabhatdev@gmail.com",
   NUM_POSTS_ON_HOMEPAGE: 3,
   NUM_PROJECTS_ON_HOMEPAGE: 3,
+  GA_MEASUREMENT_ID: "G-1M4YEK0F3D", 
 };
 
 export const HOME: Metadata = {

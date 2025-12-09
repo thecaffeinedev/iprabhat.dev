@@ -1,6 +1,7 @@
 ---
 import "../styles/global.css";
 import { ClientRouter } from "astro:transitions";
+import { SITE } from "@consts";
 
 import "@fontsource/geist-sans/100.css";
 import "@fontsource/geist-sans/200.css";
@@ -90,6 +91,30 @@ const { title, description, image = "/astro-micro.jpg" } = Astro.props;
 <!-- PageFind -->
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
 <script is:inline src="/pagefind/pagefind-ui.js"></script>
+
+<!-- Google Analytics -->
+{SITE.GA_MEASUREMENT_ID && (
+  <>
+    <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.GA_MEASUREMENT_ID}`}></script>
+    <script is:inline define:vars={{ GA_MEASUREMENT_ID: SITE.GA_MEASUREMENT_ID }}>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', GA_MEASUREMENT_ID);
+    </script>
+    
+    <!-- Track view transitions as page views -->
+    <script is:inline define:vars={{ GA_MEASUREMENT_ID: SITE.GA_MEASUREMENT_ID }}>
+      document.addEventListener('astro:after-swap', () => {
+        if (typeof gtag !== 'undefined') {
+          gtag('config', GA_MEASUREMENT_ID, {
+            page_path: window.location.pathname,
+          });
+        }
+      });
+    </script>
+  </>
+)}
 
 <ClientRouter />
 
