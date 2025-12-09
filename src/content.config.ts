@@ -40,4 +40,4 @@ const about = defineCollection({
   }),
 });
 
-export const collections = { blog, uses, about };
+export const collections = { blog, projects, uses, about };
