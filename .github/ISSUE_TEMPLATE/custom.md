@@ -1,10 +1,16 @@
 ---
-name: Custom issue template
-about: Describe this issue template's purpose here.
+name: 📝 New Blog Post
+about: Create a new blog post
 title: ''
-labels: ''
+labels: 'blog'
 assignees: ''
-
 ---
 
+---
+description: 
+tags: []
+---
 
+## Introduction
+
+Your blog content here...
