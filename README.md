@@ -1,11 +1,18 @@
-# Introducing [Astro Micro 🔬](https://astro-micro.vercel.app/)
+# Personal Website
 
-Astro Micro is an accessible theme for Astro. It's a fork of [Mark Horn's](https://github.com/markhorn-dev) popular theme [Astro Nano](https://astro-nano-demo.vercel.app/). Like Nano, Micro comes with zero frameworks installed.
+This is a static site powering my blog built using Astro.
 
-Micro adds features like [Pagefind](https://pagefind.app) for search, [Giscus](https://giscus.app) for comments, and more. For a full list of changes, see this [blog post](https://astro-micro.vercel.app/blog/00-micro-changelog).
+## Quick start
 
-Micro still comes with everything great about Nano — full type safety, a sitemap, an RSS feed, and Markdown + MDX support. Styled with TailwindCSS and preconfigured with system, light, and dark themes.
+```bash
+git clone https://github.com/thecaffeinedev/iprabhat.dev.git
+cd iprabhat.dev
+bun install
+bun run dev
+```
 
----
+I would recommend checking the [Deployment Methods](https://vercel.com/docs/concepts/deployments/overview) page on Vercel website.
 
-![astro-micro](https://github.com/user-attachments/assets/fc9b55b9-53e5-4933-9d23-936e1c61e6c2)
+## Credits
+
+This site is based on [Astro Micro](https://github.com/trevortylerlee/astro-micro) by Trevor Tyler Lee, with modifications for my specific needs.

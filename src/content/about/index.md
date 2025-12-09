@@ -2,6 +2,8 @@
 title: "About"
 description: "Learn more about Prabhat Kumar Sahu"
 ---
+![Prabhat Kumar Sahu](/avatar-prabhat.jpeg)
+
 
 My name is Prabhat. I'm a software engineer by profession, mostly working on ML infrastructure [@DeepEdge](https://deepedge.ai/).
 
