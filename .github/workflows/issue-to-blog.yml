@@ -1,0 +1,116 @@
+name: Create Blog Post from Issue
+
+on:
+  issues:
+    types: [opened, edited]
+
+jobs:
+  create-blog-post:
+    if: |
+      github.actor == github.repository_owner &&
+      contains(github.event.issue.labels.*.name, 'blog')
+    
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Create blog post from issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            
+            const issue = context.payload.issue;
+            if (!issue) {
+              core.setFailed('Could not get issue details');
+              return;
+            }
+            
+            const title = issue.title;
+            const body = issue.body || '';
+            const isDraft = body.includes('- [x] Save as draft');
+            const createdDate = new Date(issue.created_at).toISOString().split('T')[0];
+            
+            if (body.length === 0) {
+              core.setFailed('Issue body is empty');
+              return;
+            }
+            
+            const frontmatterMatch = body.match(/---\s*\n([\s\S]*?)\n---/);
+            if (!frontmatterMatch) {
+              core.setFailed('No frontmatter found in issue body');
+              return;
+            }
+            
+            const frontmatterContent = frontmatterMatch[1];
+            const contentAfterFrontmatter = body.substring(frontmatterMatch.index + frontmatterMatch[0].length).trim();
+            
+            const descriptionMatch = frontmatterContent.match(/description:\s*(.+)/);
+            const tagsMatch = frontmatterContent.match(/tags:\s*\[(.*?)\]/);
+            
+            const description = descriptionMatch ? descriptionMatch[1].trim() : '';
+            const tags = tagsMatch ? tagsMatch[1].split(',').map(t => t.trim()).filter(t => t) : [];
+            
+            if (!description) {
+              core.setFailed('Description is required in frontmatter');
+              return;
+            }
+            
+            const filename = title
+              .toLowerCase()
+              .replace(/[^a-z0-9]+/g, '-')
+              .replace(/^-+|-+$/g, '');
+            
+            const tagsLine = tags.length > 0 ? `\ntags: [${tags.map(t => `"${t}"`).join(', ')}]` : '';
+            
+            const markdown = `---
+            title: "${title}"
+            description: "${description}"
+            date: ${createdDate}
+            draft: ${isDraft}${tagsLine}
+            ---
+            
+            ${contentAfterFrontmatter}
+            `;
+            
+            const filePath = path.join(process.env.GITHUB_WORKSPACE, 'src', 'content', 'blog', `${filename}.md`);
+            fs.writeFileSync(filePath, markdown);
+            console.log(`Successfully created blog post: ${filePath}`);
+
+      - name: Commit and push blog post
+        run: |
+          git config --local user.email "github-actions[bot]@users.noreply.github.com"
+          git config --local user.name "github-actions[bot]"
+          git add src/content/blog/*.md
+          
+          if git diff --staged --quiet; then
+            echo "No changes to commit"
+          else
+            git commit -m "blog: add post from issue #${{ github.event.issue.number }}"
+            git push
+          fi
+
+      - name: Comment on issue
+        if: success()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue_number = context.issue.number;
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: issue_number,
+              body: '✅ Blog post created and pushed! Your post will be live once Vercel deploys.\n\nClosing this issue automatically.'
+            });
+
+      - name: Close issue
+        if: success()
+        run: gh issue close "${{ github.event.issue.number }}"
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
