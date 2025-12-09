@@ -1,135 +1,29 @@
 ---
+import { getEntry, render } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import Container from "@components/Container.astro";
-import Link from "@components/Link.astro";
-import { SITE } from "@consts";
+
+const entry = await getEntry("about", "index");
+
+if (!entry) {
+  return Astro.redirect("/404");
+}
+
+const { Content } = await render(entry);
 ---
 
-<Layout title="About" description="About Prabhat Kumar Sahu">
+<Layout title={entry.data.title} description={entry.data.description}>
   <Container>
     <div class="space-y-10">
-      <!-- Header with centered photo -->
-      <div class="space-y-6">
-        <!-- <div class="animate flex flex-col items-center space-y-4">
-          <img
-            src="/avatar-prabhat.jpg"
-            alt="Prabhat Kumar Sahu"
-            class="h-32 w-32 rounded-full object-cover shadow-lg"
-          />
-        </div> -->
-
-        <div class="animate space-y-4 text-gray-700 dark:text-gray-300">
-          <p>
-            My name is Prabhat. I'm a software engineer by profession, mostly working on ML infrastructure 
-            <Link href="https://deepedge.ai/" external>@DeepEdge</Link>.
-          </p>
-
-          <p>
-            My technical interests include software design, databases, distributed systems, machine learning, 
-            and backend infrastructure. And I enjoy working with Python stack and Go.
-          </p>
-
-          <p>
-            I write about my experiences in tech, personal interests, self-reflection, and my growth as a 
-            developer. In addition, I hope to become a better writer by blogging.
-          </p>
-
-          <p>
-            When I'm not hacking away on a project, I enjoy watching tv series, anime, writing, learning 
-            new things, and working out.
-          </p>
-        </div>
+      <div class="animate">
+        <h1 class="text-3xl font-semibold text-black dark:text-white">
+          About
+        </h1>
       </div>
-
-      <!-- Timeline Section -->
-      <div class="animate space-y-4">
-        <h2 class="text-2xl font-semibold text-black dark:text-white">
-          📆 Timeline
-        </h2>
-        <ul class="list-inside list-disc space-y-3 text-gray-700 dark:text-gray-300">
-          <li>
-            <strong>2020 August</strong> - DeepEdge, Hyderabad - Machine Learning Engineer
-          </li>
-          <li>
-            <strong>2019 June - 2020 March</strong> - Frolic, Hyderabad - ML Intern
-          </li>
-          <li>
-            <strong>2018 May - 2018 July</strong> - Central University Of Rajasthan - Machine Learning Intern
-          </li>
-          <li>
-            <strong>2015-2019</strong> - Sambalpur University Institute Of Information Technology, Burla, Odisha - B.Tech in Computer Science Engineering
-          </li>
-        </ul>
-      </div>
-
-      <!-- Contact Section -->
-      <div class="animate space-y-4">
-        <h2 class="text-2xl font-semibold text-black dark:text-white">
-          📬 Contact
-        </h2>
-        <p class="text-gray-700 dark:text-gray-300">
-          Feel free to get in touch if you want a chat. Pop me an email at{" "}
-          <Link href="mailto:iprabhatdev@gmail.com?subject=Hello%20Prabhat!" external>
-            iprabhatdev@gmail.com
-          </Link>
-          {" "}or come say hello on social media.
-        </p>
-        <p class="text-gray-700 dark:text-gray-300">
-          You can connect with me here ☎️👇🏻
-        </p>
-        <ul class="list-inside list-disc space-y-2 text-gray-700 dark:text-gray-300">
-          <li>
-            X:{" "}
-            <Link href="https://x.com/thecaffeinedev" external>
-              @caffeinedev
-            </Link>
-          </li>
-          <li>
-            LinkedIn:{" "}
-            <Link href="https://www.linkedin.com/in/prabhat-kumar-sahu-b9a53674/" external>
-              @prabhat
-            </Link>
-          </li>
-          <li>
-            GitHub:{" "}
-            <Link href="https://github.com/thecaffeinedev" external>
-              @thecaffeinedev
-            </Link>
-          </li>
-          <li>
-            Email:{" "}
-            <Link href="mailto:iprabhatdev@gmail.com" external>
-              iprabhatdev [at] gmail [dot] com
-            </Link>
-          </li>
-        </ul>
-      </div>
-
-      <!-- Site Info Section -->
-      <div class="animate space-y-4">
-        <h2 class="text-2xl font-semibold text-black dark:text-white">
-          👨‍💻 In case you're wondering, this site
-        </h2>
-        <ul class="list-inside list-disc space-y-2 text-gray-700 dark:text-gray-300">
-          <li>
-            Hosted on{" "}
-            <Link href="https://vercel.com/" external>Vercel</Link>
-          </li>
-          <li>Built on a M1 MacBook Pro</li>
-          <li>
-            Coded in{" "}
-            <Link href="https://code.visualstudio.com/" external>Visual Studio Code</Link>
-          </li>
-          <li>
-            Styled with{" "}
-            <Link href="https://fonts.google.com/" external>Google Fonts</Link>
-          </li>
-          <li>
-            Built with{" "}
-            <Link href="https://astro.build/" external>Astro</Link>
-          </li>
-        </ul>
-      </div>
+      
+      <article class="animate prose dark:prose-invert">
+        <Content />
+      </article>
     </div>
   </Container>
 </Layout>

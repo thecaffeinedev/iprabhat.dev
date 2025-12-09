@@ -23,6 +23,16 @@ export const PROJECTS: Metadata = {
   DESCRIPTION: "A collection of my projects with links to repositories and live demos.",
 };
 
+export const ABOUT: Metadata = {
+  TITLE: "About",
+  DESCRIPTION: "Learn more about Prabhat Kumar Sahu - Software Engineer working on ML infrastructure at DeepEdge.",
+};
+
+export const USES: Metadata = {
+  TITLE: "Uses",
+  DESCRIPTION: "Tools, technologies, and setup I use for development and productivity.",
+};
+
 export const SOCIALS: Socials = [
   {
     NAME: "X (formerly Twitter)",

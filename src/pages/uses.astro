@@ -1,60 +1,28 @@
 ---
+import { getEntry, render } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import Container from "@components/Container.astro";
+
+const entry = await getEntry("uses", "index");
+
+if (!entry) {
+  return Astro.redirect("/404");
+}
+
+const { Content } = await render(entry);
 ---
 
-<Layout title="Uses" description="Tools, apps, and gear I use">
+<Layout title={entry.data.title} description={entry.data.description}>
   <Container>
     <div class="space-y-10">
       <div class="animate">
         <h1 class="text-3xl font-semibold text-black dark:text-white">
-          What I Use
+          {entry.data.title}
         </h1>
-        <p class="mt-4 text-neutral-600 dark:text-neutral-400">
-          My current setup, tools, and software that I use daily.
-        </p>
       </div>
       
       <article class="animate prose dark:prose-invert">
-        <h2>💻 Hardware</h2>
-        <ul>
-          <li><strong>Laptop:</strong> [Your laptop model]</li>
-          <li><strong>Monitor:</strong> [Your monitor setup]</li>
-          <li><strong>Keyboard:</strong> [Your keyboard]</li>
-          <li><strong>Mouse:</strong> [Your mouse]</li>
-          <li><strong>Headphones:</strong> [Your headphones]</li>
-        </ul>
-
-        <h2>🛠️ Development Tools</h2>
-        <ul>
-          <li><strong>Editor:</strong> [VS Code / Neovim / etc.]</li>
-          <li><strong>Terminal:</strong> [iTerm2 / Warp / etc.]</li>
-          <li><strong>Theme:</strong> [Your preferred theme]</li>
-          <li><strong>Font:</strong> [Your code font]</li>
-          <li><strong>Version Control:</strong> Git with [GitHub/GitLab]</li>
-        </ul>
-
-        <h2>⚡ Productivity</h2>
-        <ul>
-          <li><strong>Note Taking:</strong> [Notion / Obsidian / etc.]</li>
-          <li><strong>Task Management:</strong> [Your task app]</li>
-          <li><strong>Calendar:</strong> [Your calendar app]</li>
-          <li><strong>Password Manager:</strong> [1Password / Bitwarden / etc.]</li>
-        </ul>
-
-        <h2>🌐 Web & Design</h2>
-        <ul>
-          <li><strong>Browser:</strong> [Chrome / Firefox / Arc]</li>
-          <li><strong>Design:</strong> [Figma / Sketch / etc.]</li>
-          <li><strong>Screenshots:</strong> [CleanShot / etc.]</li>
-        </ul>
-
-        <h2>📱 Apps</h2>
-        <ul>
-          <li><strong>Music:</strong> [Spotify / Apple Music]</li>
-          <li><strong>Communication:</strong> [Slack / Discord / etc.]</li>
-          <li><strong>Reading:</strong> [Your reading apps]</li>
-        </ul>
+        <Content />
       </article>
     </div>
   </Container>
