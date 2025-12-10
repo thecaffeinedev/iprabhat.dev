@@ -1,0 +1,52 @@
+name: Blog Post
+description: Create a new blog post
+title: "[BLOG] "
+labels: ["blog-post"]
+body:
+  - type: input
+    id: title
+    attributes:
+      label: Title
+      description: The title of your blog post
+      placeholder: "My Awesome Blog Post"
+    validations:
+      required: true
+  
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A brief description for SEO and previews
+      placeholder: "This post covers..."
+    validations:
+      required: true
+  
+  - type: input
+    id: tags
+    attributes:
+      label: Tags
+      description: Comma-separated tags
+      placeholder: "python, web, tutorial"
+    validations:
+      required: false
+  
+  - type: dropdown
+    id: draft
+    attributes:
+      label: Draft Status
+      description: Publish as draft or live?
+      options:
+        - "false"
+        - "true"
+      default: 0
+    validations:
+      required: true
+  
+  - type: textarea
+    id: content
+    attributes:
+      label: Content
+      description: Write your blog post content using Markdown
+      placeholder: "Start writing your post here..."
+    validations:
+      required: true

@@ -1,0 +1,90 @@
+name: Publish Blog Post from Issue
+
+on:
+  issues:
+    types: [labeled]
+
+jobs:
+  publish:
+    if: github.event.label.name == 'blog-post'
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+      issues: write
+    
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+      
+      - name: Parse issue and create file
+        id: parse
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const issue = context.payload.issue;
+            const body = issue.body;
+            const fs = require('fs');
+            const path = require('path');
+            
+            // Extract form values
+            const titleMatch = body.match(/### Title\s+([^\n]+)/);
+            const descMatch = body.match(/### Description\s+([^\n]+)/);
+            const tagsMatch = body.match(/### Tags\s+([^\n]+)/);
+            const draftMatch = body.match(/### Draft Status\s+([^\n]+)/);
+            const contentMatch = body.match(/### Content\s+([\s\S]+)/);
+            
+            const title = titleMatch ? titleMatch[1].trim() : issue.title.replace('[BLOG] ', '');
+            const description = descMatch ? descMatch[1].trim() : '';
+            const tags = tagsMatch ? tagsMatch[1].trim() : '';
+            const draft = draftMatch ? draftMatch[1].trim() === 'true' : false;
+            const content = contentMatch ? contentMatch[1].trim() : '';
+            
+            const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+            const date = new Date().toISOString().split('T')[0];
+            const filename = date + '-' + slug + '.mdx';
+            
+            const tagsArray = tags ? tags.split(',').map(t => t.trim()) : [];
+            const tagsFormatted = tagsArray.length > 0 ? '[' + tagsArray.map(t => '"' + t + '"').join(', ') + ']' : '[]';
+            
+            const frontmatter = '---\ntitle: "' + title + '"\ndescription: "' + description + '"\ndate: "' + date + '"\ndraft: ' + draft + '\ntags: ' + tagsFormatted + '\n---\n\n' + content;
+            
+            const filepath = path.join(process.env.GITHUB_WORKSPACE, 'src/content/blog', filename);
+            fs.writeFileSync(filepath, frontmatter);
+            
+            core.setOutput('filename', filename);
+            core.setOutput('slug', slug);
+            core.setOutput('title', title);
+      
+      - name: Commit and push
+        run: |
+          git config user.name "github-actions[bot]"
+          git config user.email "github-actions[bot]@users.noreply.github.com"
+          git add src/content/blog/*.mdx
+          git commit -m "Add blog post: ${{ steps.parse.outputs.title }}"
+          git push
+      
+      - name: Comment on issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const slug = '${{ steps.parse.outputs.slug }}';
+            const filename = '${{ steps.parse.outputs.filename }}';
+            const url = 'https://iprabhat.dev/blog/' + slug;
+            
+            github.rest.issues.createComment({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              body: 'Blog post published!\n\n ' + url + '\n\nFile: `src/content/blog/' + filename + '`'
+            });
+      
+      - name: Close issue
+        uses: actions/github-script@v7
+        with:
+          script: |
+            github.rest.issues.update({
+              owner: context.repo.owner,
+              repo: context.repo.repo,
+              issue_number: context.issue.number,
+              state: 'closed'
+            });
