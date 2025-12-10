@@ -1,0 +1,172 @@
+---
+title: "Using GitHub Issues to Write Blog Posts"
+description: "Automate blog post creation with GitHub Issues. Learn how to set up a workflow that converts issues into markdown posts and deploys them automatically."
+date: "2025-12-10"
+draft: false
+tags: ["automation"]
+---
+
+So here's the thing, I have been running this blog for a while now, and recently migrated from Next.js to Astro. The whole setup is pretty straightforward: write markdown files, commit, push, and Vercel handles the deployment. Works great when I'm on my laptop.
+
+But sometimes I'm not at my laptop. Sometimes I'm commuting, or just lying around, and an idea hits me. I want to capture it quickly before I forget. The problem is Creating a markdown file on mobile, committing it through GitHub's mobile interface... yeah, that's painful.
+
+I mean, technically you *can* do it. Open GitHub mobile, navigate to the repo, create a new file in `src/content/blog/`, write the frontmatter manually, add the content, commit... but by the time you're done with all that, you've probably lost the flow of what you wanted to write.
+
+## Why I Needed This
+
+I'm not going to pretend this is some unique problem I discovered. Pretty much anyone running a static site generator has faced this at some point. You want the flexibility of markdown and git-based workflows, but you also want the convenience of being able to publish from anywhere.
+
+I looked into a few options:
+- Using Notion and syncing it to GitHub (seemed overkill)
+- Setting up some fancy CMS (again, overkill for my needs)
+- Building a custom PWA (tempting, but do I really need *another* side project?)
+
+Then I remembered GitHub Issues. And I think it's kind of good for this.
+
+I'm not saying this is the *best* way to solve this problem; there are probably fancier solutions out there. But for my use case, it works, and that's what matters.
+
+## Why GitHub Issues Works
+
+Think about it - GitHub Issues already has:
+- A decent Github mobile app
+- Markdown support with preview
+- Built-in authentication (you're already logged in)
+- Form templates for structured input
+- Labels for categorization
+- It's free
+
+The only missing piece is the automation to convert an issue into an actual blog post. And that's where GitHub Actions comes in.
+
+## Setting Up the Workflow
+
+I am not going to pretend I wrote all this from scratch. I used Claude to generate the issue template and workflow, then adjusted it to match my needs. If you're running a static site with Astro, Jekyll, Hugo, or whatever, you probably know your way around GitHub Actions anyway. Here's the basic idea.
+
+First, I created an issue template. GitHub has this feature where you can create structured forms, which is way better than just a blank text area. Here's what mine looks like:
+
+```yaml
+name: Blog Post
+description: Create a new blog post
+title: "[BLOG] "
+labels: ["blog-post"]
+body:
+  - type: input
+    id: title
+    attributes:
+      label: Title
+      description: The title of your blog post
+      placeholder: "My Awesome Blog Post"
+    validations:
+      required: true
+  
+  - type: textarea
+    id: description
+    attributes:
+      label: Description
+      description: A brief description for SEO and previews
+      placeholder: "This post covers..."
+    validations:
+      required: true
+  
+  - type: input
+    id: tags
+    attributes:
+      label: Tags
+      description: Comma-separated tags
+      placeholder: "python, web, tutorial"
+  
+  - type: dropdown
+    id: draft
+    attributes:
+      label: Draft Status
+      options:
+        - "false"
+        - "true"
+      default: 0
+  
+  - type: textarea
+    id: content
+    attributes:
+      label: Content
+      description: Write your blog post content using Markdown
+      placeholder: "Start writing your post here..."
+    validations:
+      required: true
+```
+
+You put this in `.github/ISSUE_TEMPLATE/blog-post.yml` and suddenly you have a nice form when creating issues.
+
+Then comes the GitHub Action. This is the part that actually does the work. When I add the `blog-post` label to an issue, it triggers a workflow that:
+
+1. Parses the issue body to extract all the form fields
+2. Creates a slug from the title (you know, lowercase, hyphens, all that)
+3. Generates the frontmatter with the metadata
+4. Writes a new markdown file to `src/content/blog/`
+5. Commits and pushes it
+6. Comments on the issue with the live URL
+7. Closes the issue
+
+The workflow itself is a bit messy because you're essentially writing JavaScript inside YAML, which... yeah. Not my favorite thing. But it works.
+
+Here's the important part:
+
+```javascript
+const title = titleMatch ? titleMatch[1].trim() : issue.title.replace('[BLOG] ', '');
+const description = descMatch ? descMatch[1].trim() : '';
+const tags = tagsMatch ? tagsMatch[1].trim() : '';
+const draft = draftMatch ? draftMatch[1].trim() === 'true' : false;
+const content = contentMatch ? contentMatch[1].trim() : '';
+
+const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
+const date = new Date().toISOString().split('T')[0];
+const filename = date + '-' + slug + '.mdx';
+
+const frontmatter = '---\ntitle: "' + title + '"\ndescription: "' + description + '"\ndate: "' + date + '"\ndraft: ' + draft + '\ntags: ' + tagsFormatted + '\n---\n\n' + content;
+
+fs.writeFileSync(filepath, frontmatter);
+```
+
+It took me a couple of failed attempts to get this working. GitHub Actions can be tricky, especially when you're dealing with file operations. But once it clicked, it just... worked.
+
+One important thing: the workflow only runs when I (the repo owner) create and label the issue. I added a check if: github.actor == github.repository_owner to ensure that. Since the repo is public, anyone can create issues, but the workflow won't trigger unless I'm the one who labeled it with blog-post. Nothing gets published without my action.
+
+Here's the complete workflow if you want to check it out or adapt it for your setup:
+https://github.com/thecaffeinedev/iprabhat.dev/blob/main/.github/workflows/publish-blog-post.yml
+
+## Using It
+
+Now when I want to write a post from mobile:
+
+1. Open GitHub app
+2. Go to my repo, create new issue
+3. Select "Blog Post" template
+4. Fill in the form
+5. Submit
+6. GitHub Action runs, creates the post
+7. Vercel deploys it
+8. Done
+
+The whole thing takes maybe 2-3 minutes, most of which is just writing the actual content. 
+
+## Tradeoffs
+
+Is it perfect? No. There are a few things that could be better:
+
+**No image uploads** - GitHub Issues doesn't really have a great way to handle images. You can paste them into the issue, but then you'd need to download them and move them to your public folder. I just skip images for mobile posts. Maybe use links.
+
+**Markdown preview could be better** - The GitHub mobile app has markdown preview, but it's not as good as a proper editor. You kind of have to trust that your syntax is right.
+
+**Can't easily edit** - Once the issue is closed and the post is created, editing means going into the actual markdown file. Not the end of the world, but worth noting.
+
+But honestly? For quick posts, this works great. It's simple, it's free, and I don't have to maintain any additional infrastructure.
+
+## Wrapping Up
+
+If you're running a static site and want an easy way to post from mobile, give GitHub Issues a shot. The setup takes maybe an hour if you're familiar with GitHub Actions, and then you're good to go.
+
+The workflow file is in my repo if you want to check it out: [[github.com/thecaffeinedev/iprabhat.dev](https://github.com/thecaffeinedev/iprabhat.dev)](https://github.com/thecaffeinedev/iprabhat.dev)
+
+And , if you come up with improvements or a better way to handle this, let me know. Always happy to learn from others. 
+
+P.S. - This post was published from GitHub Issues
+
+Until next time.
