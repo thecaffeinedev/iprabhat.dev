@@ -94,27 +94,30 @@ function formatDate(date: Date): string {
             </h2>
             <Link href="/blog"> See all posts </Link>
           </div>
-          <ul class="space-y-4">
-            {
-              blog.map((post) => (
-                <li>
-                  <Link 
-                    href={`/blog/${post.id}`}
-                    underline={false}
-                  >
-                    <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4 group">
-                      <div class="flex-1 text-black group-hover:text-gray-700 dark:text-white dark:group-hover:text-gray-300 transition-colors">
-                        {post.data.title}
-                      </div>
-                      <div class="text-sm text-gray-500 dark:text-gray-500 whitespace-nowrap">
-                        {formatDate(post.data.date)}
-                      </div>
-                    </div>
-                  </Link>
-                </li>
-              ))
-            }
-          </ul>
+
+<ul class="space-y-4">
+  {
+    blog.map((post) => (
+      <li>
+        <Link 
+          href={`/blog/${post.id}`}
+          underline={false}
+        >
+          <div class="flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4 group">
+            <div class="flex-1 text-black group-hover:text-gray-700 dark:text-white dark:group-hover:text-gray-300 transition-colors relative">
+<span class="relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-black/50 after:transition-all after:duration-300 group-hover:after:w-full group-active:after:w-full dark:after:bg-white/50">
+  {post.data.title}
+</span>
+            </div>
+            <div class="text-sm text-gray-500 dark:text-gray-500 whitespace-nowrap">
+              {formatDate(post.data.date)}
+            </div>
+          </div>
+        </Link>
+      </li>
+    ))
+  }
+</ul>
         </section>
       </div>
     </aside>
