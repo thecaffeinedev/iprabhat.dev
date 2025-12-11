@@ -51,6 +51,7 @@
     @apply bg-white dark:bg-neutral-900;
     @apply text-gray-900 dark:text-white/75;
   }
+
   header {
     @apply fixed left-0 right-0 top-0 z-50 py-6;
     @apply bg-white/75 dark:bg-neutral-900/75;
@@ -104,11 +105,13 @@ html.scrolled #back-to-top {
 /* shiki config */
 pre {
   @apply border border-black/15 py-5 dark:border-white/20;
+  @apply rounded-lg;
+  @apply bg-[#fafafa] dark:bg-[#09090b];
 }
 
 :root {
   --astro-code-foreground: #09090b;
-  --astro-code-background: #fafafa;
+  --astro-code-background: transparent;
   --astro-code-token-comment: #a19595;
   --astro-code-token-keyword: #f47067;
   --astro-code-token-string: #00a99a;
@@ -122,7 +125,7 @@ pre {
 
 .dark {
   --astro-code-foreground: #fafafa;
-  --astro-code-background: #09090b;
+  --astro-code-background: transparent;
   --astro-code-token-comment: #a19595;
   --astro-code-token-keyword: #f47067;
   --astro-code-token-string: #00a99a;
