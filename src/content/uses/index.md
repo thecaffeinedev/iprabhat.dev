@@ -9,7 +9,7 @@ I see a lot of other developers making a "uses" page, so I figured I might as we
 
 The following is a list of the tools that I use on a daily basis. This page was inspired by [Wes Bos](https://wesbos.com/uses). See more pages like this [here](https://uses.tech).
 
-## 💻 Hardware
+## Hardware
 
 ### Computer Setup
 
@@ -28,7 +28,7 @@ The following is a list of the tools that I use on a daily basis. This page was 
 
 - **[IKEA Thyge Desk](https://www.ikea.com/sg/en/p/thyge-desk-white-silver-colour-s19245192/)** - Height adjustable
 
-## 🛠️ Software & Development
+## Software & Development
 
 ### Code Editors & Extensions
 
@@ -62,7 +62,7 @@ The following is a list of the tools that I use on a daily basis. This page was 
 - **[Medis](https://getmedis.com/)** - Redis GUI client
 - **[RedisInsight](https://redis.com/redis-enterprise/redis-insight/)** - Redis GUI by Redis Team
 
-## 🌐 Applications
+## Applications
 
 ### Browsers & Web
 
@@ -82,7 +82,7 @@ The following is a list of the tools that I use on a daily basis. This page was 
 - **[OnePlus Buds 3](https://www.oneplus.in/oneplus-buds-3)** - Secondary driver
 - **[HyperX QuadCast Microphone](https://hyperx.com/products/hyperx-quadcast-usb-microphone)** - Primary Microphone / Podcast Mic
 
-## ☁️ Services & Hosting
+## Services & Hosting
 
 ### Domain & Hosting
 

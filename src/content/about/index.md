@@ -5,9 +5,12 @@ description: "Learn more about Prabhat Kumar Sahu"
 
 <div class="prose dark:prose-invert max-w-none">
 
-<img src="/pks_3.jpg" alt="Prabhat Kumar Sahu" class="w-64 h-64 md:w-72 md:h-72 object-cover rounded-xl mx-auto mb-6 md:float-left md:mr-8 md:mb-2">
+<div style="text-align: center; margin-bottom: 3rem;">
+  <img src="/pks_3.jpg" alt="Prabhat at the beach" style="width: 280px; height: 280px; border-radius: 16px; object-fit: cover; margin: 0 auto; box-shadow: 0 4px 6px rgba(0,0,0,0.1);" />
+</div>
 
-**Hi There, My name is Prabhat.**
+
+**Hi there, My name is Prabhat.**
 I’m a software engineer by profession, mostly working on **ML infrastructure** at [DeepEdge](https://deepedge.ai/).
 
 My technical interests include software design, databases, distributed systems, machine learning, and backend infrastructure. And I enjoy working with the **Python** stack and **Go**.

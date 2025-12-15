@@ -24,6 +24,16 @@ const posts = data.reduce((acc: Acc, post) => {
 
 const years = Object.keys(posts).sort((a, b) => parseInt(b) - parseInt(a));
 
+// Get all unique tags with counts, sorted alphabetically
+const tagCounts = data.reduce((acc, post) => {
+  post.data.tags?.forEach(tag => {
+    acc[tag] = (acc[tag] || 0) + 1;
+  });
+  return acc;
+}, {} as Record<string, number>);
+
+const allTags = Object.entries(tagCounts).sort((a, b) => a[0].localeCompare(b[0]));
+
 function formatDate(date: Date): string {
   return date.toLocaleDateString("en-US", {
     month: "short",
@@ -38,17 +48,20 @@ function formatDate(date: Date): string {
       <h1 class="animate font-semibold text-black dark:text-white">
         Blog
       </h1>
-      
-      <div class="space-y-12">
+
+      <div class="space-y-12" id="posts-container">
         {
           years.map((year) => (
-            <section class="animate space-y-4">
+            <section class="animate space-y-4" data-year={year}>
               <h2 class="text-2xl font-bold text-blue-600 dark:text-blue-400">
                 {year}
               </h2>
               <ul class="space-y-3">
                 {posts[year].map((post) => (
-                  <li>
+                  <li
+                    class="post-item"
+                    data-tags={post.data.tags?.join(",") || ""}
+                  >
                     <Link 
                       href={`/blog/${post.id}`}
                       underline={false}
@@ -71,6 +84,99 @@ function formatDate(date: Date): string {
           ))
         }
       </div>
+
+      <!-- Tags List at Bottom -->
+      <div class="animate space-y-4 border-t border-black/15 pt-10 dark:border-white/20">
+        <!-- <h2 class="text-lg font-semibold text-black dark:text-white">
+          Filter by tag
+        </h2> -->
+        <div class="flex flex-wrap gap-2">
+          <button
+            data-tag="all"
+            class="tag-pill tag-pill-active rounded-full border border-black/15 px-4 py-1.5 text-sm transition-colors duration-300 dark:border-white/20"
+          >
+            All ({data.length})
+          </button>
+          {
+            allTags.map(([tag, count]) => (
+              <button
+                data-tag={tag}
+                class="tag-pill rounded-full border border-black/15 px-4 py-1.5 text-sm transition-colors duration-300 hover:bg-black/5 dark:border-white/20 dark:hover:bg-white/5"
+              >
+                {tag} ({count})
+              </button>
+            ))
+          }
+        </div>
+      </div>
     </div>
   </Container>
 </Layout>
+
+<style>
+  .tag-pill-active {
+    background-color: #2563eb;
+    color: white;
+    border-color: #2563eb;
+  }
+
+  .dark .tag-pill-active {
+    background-color: #3b82f6;
+    border-color: #3b82f6;
+  }
+
+  .tag-pill:not(.tag-pill-active):hover {
+    background-color: rgba(0, 0, 0, 0.05);
+  }
+
+  .dark .tag-pill:not(.tag-pill-active):hover {
+    background-color: rgba(255, 255, 255, 0.05);
+  }
+</style>
+
+<script>
+  function initTagFilters() {
+    const tagPills = document.querySelectorAll('.tag-pill[data-tag]');
+    const postItems = document.querySelectorAll('.post-item');
+    const yearSections = document.querySelectorAll('[data-year]');
+
+    tagPills.forEach(pill => {
+      pill.addEventListener('click', () => {
+        const selectedTag = pill.getAttribute('data-tag');
+        
+        // Update active state
+        tagPills.forEach(p => p.classList.remove('tag-pill-active'));
+        pill.classList.add('tag-pill-active');
+
+        // Scroll to top of blog list
+        document.getElementById('posts-container')?.scrollIntoView({ 
+          behavior: 'smooth', 
+          block: 'start' 
+        });
+
+        // Filter posts
+        postItems.forEach(item => {
+          const postTags = item.getAttribute('data-tags');
+          if (selectedTag === 'all' || postTags?.includes(selectedTag || '')) {
+            (item as HTMLElement).style.display = '';
+          } else {
+            (item as HTMLElement).style.display = 'none';
+          }
+        });
+
+        // Hide empty year sections
+        yearSections.forEach(section => {
+          const visiblePosts = section.querySelectorAll('.post-item:not([style*="display: none"])');
+          if (visiblePosts.length === 0) {
+            (section as HTMLElement).style.display = 'none';
+          } else {
+            (section as HTMLElement).style.display = '';
+          }
+        });
+      });
+    });
+  }
+
+  initTagFilters();
+  document.addEventListener('astro:after-swap', initTagFilters);
+</script>
