@@ -3,7 +3,7 @@ title: "Uses"
 description: "Tools, apps, and gear I use"
 ---
 
-![Terminal](https://live.staticflickr.com/65535/54714534662_2edbc9a1d7_b.jpg "fastfetch")
+<!-- ![Terminal](https://live.staticflickr.com/65535/54714534662_2edbc9a1d7_b.jpg "fastfetch") -->
 
 I see a lot of other developers making a "uses" page, so I figured I might as well too.
 
@@ -35,7 +35,6 @@ The following is a list of the tools that I use on a daily basis. This page was 
 - **[Visual Studio Code](https://code.visualstudio.com/)** - Primary editor with default Dark Modern Theme
 - **[Neovim](https://neovim.io/)** - Use it time to time
 - **[Zed](https://zed.dev/)** - Secondary editor
-- **[GoLand](https://www.jetbrains.com/go/)** - Go development IDE
 
 ### Terminal & Shell
 
@@ -48,9 +47,7 @@ The following is a list of the tools that I use on a daily basis. This page was 
 - **[exa](https://github.com/ogham/exa)** - `ls` replacement with [aliases](https://github.com/gazorby/fish-exa)
 - **[fzf](https://github.com/junegunn/fzf)** - Fuzzy finder
 - **[tldr](https://github.com/dbrgn/tealdeer)** - Simplified man pages
-- **[gtop](https://github.com/aksakalli/gtop)** - System monitoring dashboard
 - **[bat](https://github.com/sharkdp/bat)** - Better `cat` with syntax highlighting
-- **[zoxide](https://github.com/ajeetdsouza/zoxide)** - Smart directory jumper
 
 ### Development Tools
 
