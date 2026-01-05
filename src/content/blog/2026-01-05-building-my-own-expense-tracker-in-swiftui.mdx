@@ -1,0 +1,81 @@
+---
+title: "Building My Own Expense Tracker in SwiftUI"
+description: "Building My Own Expense Tracker in SwiftUI"
+date: "2026-01-05"
+draft: false
+tags: ["side-project"]
+---
+
+<p align="center">
+  <img src="https://live.staticflickr.com/65535/55025657454_efe45883d0_b.jpg" alt="HomePage">
+</p>
+
+
+
+### Why I even started this
+I was working on a hobby side project to manage my personal expenses. I have downloaded and tried many finance apps from the App Store, and they're all... fine? Some are actually pretty good. But there's always something that bugs me, either the UI feels cluttered, or there's a subscription fee for basic features.
+
+I just wanted to make an expense manager for myself. 
+I have an iPhone, so SwiftUI made sense.
+### Getting started
+SwiftData handles all the local storage. Currently these are the features:
+* Add expenses with categories, notes, and dates
+* Delete and edit expenses
+* Dark and light mode themes
+* Clear data option
+* View analytics in charts (very basic for now)
+* Filter expenses by date, amount range, categories, notes
+
+I am not that good at design, so I struggled with getting the UI to look right. I probably redesigned the expense detail view multiple times before settling on something I was okay with. I still want to get feedback and improve it.
+
+I really wanted home screen widgets. Since I am completely new to iOS development, figuring out App Groups and WidgetKit took some time.
+
+<p align="center">
+  <strong>Add Expense</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <strong>Analytics</strong>
+</p>
+<p align="center">
+  <img src="https://live.staticflickr.com/65535/55025729380_99fd4835da_b.jpg" width="400">
+  &nbsp;&nbsp;&nbsp;
+  <img src="https://live.staticflickr.com/65535/55025586408_a27fa797cb_b.jpg" width="400">
+</p>
+
+### Dark mode was a nightmare
+I built the entire app with these glass-morphism style backgrounds. I'm not that good in UI/UX design so I followed a very basic color pattern. Looked good in light mode. Then I tested dark mode for the first time and half the UI just disappeared. All my colors were hardcoded.
+
+Spent a full evening going through every single view file, replacing all those hardcoded colors with system adaptive ones. Opening each SwiftUI view, finding every Color initialization, checking how it looked in both modes, adjusting, testing again. 
+
+Should've used adaptive colors from the beginning.
+
+<p align="center">
+  <strong>Light Mode</strong>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+  <strong>Dark Mode</strong>
+</p>
+<p align="center">
+  <img src="https://live.staticflickr.com/65535/55025657454_efe45883d0_b.jpg" width="400">
+  &nbsp;&nbsp;&nbsp;
+  <img src="https://live.staticflickr.com/65535/55025586403_7d4944f189_b.jpg" width="400">
+</p>
+
+### Getting it on the App Store
+I had no idea what I was doing here. I have built Android apps before in my college days and the Play Store was pretty straightforward, but Apple's different.
+
+First, you need an Apple Developer account, ₹8,700 per year in India. I have taken the subscription, so let's see how it goes.
+
+The setup with Xcode, provisioning profiles, and certificates took some getting used to. Had to read through Apple's documentation and watched some tutorials to understand how everything connects. Swift as a language is really nice to work with though.
+
+
+TestFlight internal testing is instant; just upload and go. But external testing needs review. My first submission took about 48 hours. They approved it. The second version I submitted got approved in like 90 minutes.
+
+### What's next
+Right now everything saves locally. I want to add iCloud sync eventually so the data works across devices, and also if someone removes the app or gets a new device, they can get their data back.
+These are the features I am working on right now:
+* Fixing some UI bugs and making it look better
+* Working on iCloud sync
+* Data export
+* Better analytics
+
+These are in my current roadmap. I'll add more when the next version comes out. 
+I am letting a few friends test it right now.
+
+Thanks for reading.
