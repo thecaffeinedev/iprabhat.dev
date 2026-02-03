@@ -10,8 +10,8 @@ export const SITE: Site = {
 };
 
 export const HOME: Metadata = {
-  TITLE: "Home",
-  DESCRIPTION: "Prabhat Kumar Sahu - Software Engineer specializing in ML infrastructure and backend systems.",
+  TITLE: "Prabhat Kumar Sahu",
+  DESCRIPTION: "Prabhat Kumar Sahu (thecaffeinedev / caffeinedev) — Software Engineer specializing in ML infrastructure and backend systems.",
 };
 
 export const BLOG: Metadata = {
