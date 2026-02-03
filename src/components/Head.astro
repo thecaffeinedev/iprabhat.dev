@@ -31,7 +31,7 @@ interface Props {
 const canonicalURL = new URL(Astro.url.pathname, Astro.site);
 
 const { title, description, image = "/astro-micro.jpg" } = Astro.props;
-const personJsonLd = {
+const personJsonLd: Record<string, unknown> = {
   "@context": "https://schema.org",
   "@type": "Person",
   name: "Prabhat Kumar Sahu",
@@ -43,8 +43,11 @@ const personJsonLd = {
     "https://www.linkedin.com/in/prabhat-kumar-sahu-b9a53674/",
   ],
   jobTitle: "Software Engineer",
-  email: SITE.EMAIL ? `mailto:${SITE.EMAIL}` : undefined,
 };
+
+if (SITE.EMAIL) {
+  personJsonLd.email = `mailto:${SITE.EMAIL}`;
+}
 ---
 
 <script is:inline>
@@ -87,9 +90,7 @@ const personJsonLd = {
 <title>{title}</title>
 <meta name="title" content={title} />
 <meta name="description" content={description} />
-<script type="application/ld+json">
-  {JSON.stringify(personJsonLd)}
-</script>
+<script type="application/ld+json" set:html={JSON.stringify(personJsonLd)} />
 
 <!-- Open Graph / Facebook -->
 <meta property="og:type" content="website" />
