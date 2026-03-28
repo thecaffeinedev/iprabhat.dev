@@ -48,18 +48,18 @@
   body {
     @apply font-sans antialiased;
     @apply flex flex-col;
-    @apply bg-white dark:bg-neutral-900;
-    @apply text-gray-900 dark:text-white/75;
+    @apply bg-[#faf9f6] dark:bg-[#151514];
+    @apply text-[#1a1a1a] dark:text-white/85;
   }
 
   header {
-    @apply fixed left-0 right-0 top-0 z-50 py-6;
-    @apply bg-white/75 dark:bg-neutral-900/75;
-    @apply saturate-200 backdrop-blur-xs;
+    @apply fixed left-0 right-0 top-0 z-50 py-5;
+    @apply bg-[#faf9f6]/85 dark:bg-[#151514]/90;
+    @apply saturate-150 backdrop-blur-xs;
   }
 
   main {
-    @apply flex-1 py-32;
+    @apply flex-1 py-28;
   }
 
   footer {
@@ -68,7 +68,7 @@
 
   article {
     @apply prose prose-neutral max-w-full dark:prose-invert prose-img:mx-auto prose-img:my-auto;
-    @apply prose-headings:font-semibold;
+    @apply prose-headings:font-medium;
     @apply prose-headings:text-black dark:prose-headings:text-white;
   }
 }
@@ -76,24 +76,22 @@
 @layer utilities {
   article a {
     @apply font-sans text-current underline underline-offset-[3px];
-    @apply decoration-black/30 dark:decoration-white/30;
+    @apply decoration-[#b35c3a]/30 dark:decoration-[#d4845c]/30;
     @apply transition-colors duration-300 ease-in-out;
   }
   article a:hover {
     @apply text-black dark:text-white;
-    @apply decoration-black/50 dark:decoration-white/50;
+    @apply decoration-[#b35c3a]/60 dark:decoration-[#d4845c]/60;
   }
 }
 
 header nav a[aria-current="page"] {
-  @apply text-black dark:text-white;
-  @apply underline underline-offset-[3px];
-  @apply decoration-black/60 dark:decoration-white/60;
+  @apply text-[#b35c3a] dark:text-[#d4845c];
 }
 
 .animate {
-  @apply -translate-y-3 opacity-0;
-  @apply transition-all duration-300 ease-out;
+  @apply -translate-y-1 opacity-0;
+  @apply transition-all duration-500 ease-out;
 }
 
 .animate.show {
@@ -110,17 +108,17 @@ html.scrolled #back-to-top {
 
 /* shiki config */
 pre {
-  @apply border border-black/15 py-5 dark:border-white/20;
+  @apply border border-black/8 py-5 dark:border-white/10;
   @apply rounded-lg;
-  @apply bg-[#fafafa] dark:bg-[#09090b];
+  @apply bg-[#f5f4f0] dark:bg-[#1c1c1a];
 }
 
 :root {
-  --astro-code-foreground: #09090b;
+  --astro-code-foreground: #1a1a1a;
   --astro-code-background: transparent;
   --astro-code-token-comment: #a19595;
-  --astro-code-token-keyword: #f47067;
-  --astro-code-token-string: #00a99a;
+  --astro-code-token-keyword: #e07050;
+  --astro-code-token-string: #5fb8a8;
   --astro-code-token-function: #429996;
   --astro-code-token-constant: #2b70c5;
   --astro-code-token-parameter: #4e8fdf;
@@ -133,9 +131,9 @@ pre {
   --astro-code-foreground: #fafafa;
   --astro-code-background: transparent;
   --astro-code-token-comment: #a19595;
-  --astro-code-token-keyword: #f47067;
-  --astro-code-token-string: #00a99a;
-  --astro-code-token-function: #6eafad;
+  --astro-code-token-keyword: #e8836b;
+  --astro-code-token-string: #5fb8a8;
+  --astro-code-token-function: #7dbdba;
   --astro-code-token-constant: #b3cceb;
   --astro-code-token-parameter: #4e8fdf;
   --astro-code-token-string-expression: #bf7db6;
@@ -145,11 +143,11 @@ pre {
 
 /* copy code button on codeblocks */
 .copy-code {
-  @apply absolute right-3 top-3 grid size-9 place-content-center rounded-sm border border-black/15 bg-neutral-100 text-center duration-300 ease-in-out dark:border-white/20 dark:bg-neutral-900;
+  @apply absolute right-3 top-3 grid size-9 place-content-center rounded-sm border border-black/8 bg-[#f0efe9] text-center duration-300 ease-in-out dark:border-white/10 dark:bg-[#232320];
 }
 
 .copy-code:hover {
-  @apply bg-[#E9E9E9] transition-colors dark:bg-[#232323];
+  @apply bg-[#e5e4de] transition-colors dark:bg-[#2a2a27];
 }
 
 .copy-code:active {

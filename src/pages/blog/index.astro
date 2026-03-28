@@ -45,7 +45,7 @@ function formatDate(date: Date): string {
 <Layout title={BLOG.TITLE} description={BLOG.DESCRIPTION}>
   <Container>
     <div class="space-y-10">
-      <h1 class="animate font-semibold text-black dark:text-white">
+      <h1 class="animate font-medium text-black dark:text-white">
         Blog
       </h1>
 
@@ -53,7 +53,7 @@ function formatDate(date: Date): string {
         {
           years.map((year) => (
             <section class="animate space-y-4" data-year={year}>
-              <h2 class="text-2xl font-bold text-blue-600 dark:text-blue-400">
+              <h2 class="text-base font-mono text-[#b35c3a] dark:text-[#d4845c] tracking-wide">
                 {year}
               </h2>
               <ul class="space-y-3">
@@ -67,12 +67,12 @@ function formatDate(date: Date): string {
                       underline={false}
                     >
                       <div class="flex justify-between items-baseline gap-4 group">
-                        <div class="text-black group-hover:text-gray-700 dark:text-white dark:group-hover:text-gray-300 transition-colors flex-1">
-                          <span class="relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-black/50 after:transition-all after:duration-300 group-hover:after:w-full group-active:after:w-full dark:after:bg-white/50">
+                        <div class="text-black group-hover:text-[#b35c3a] dark:text-white dark:group-hover:text-[#d4845c] transition-colors duration-200 flex-1">
+                          <span class="relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-[#b35c3a]/40 after:transition-all after:duration-300 group-hover:after:w-full group-active:after:w-full dark:after:bg-[#d4845c]/40">
                             {post.data.title}
                           </span>
                         </div>
-                        <div class="text-sm text-gray-500 dark:text-gray-500 whitespace-nowrap">
+                        <div class="font-mono text-xs text-[#6b6b6b] dark:text-white/50 whitespace-nowrap tabular-nums">
                           {formatDate(post.data.date)}
                         </div>
                       </div>
@@ -86,14 +86,14 @@ function formatDate(date: Date): string {
       </div>
 
       <!-- Tags List at Bottom -->
-      <div class="animate space-y-4 border-t border-black/15 pt-10 dark:border-white/20">
+      <div class="animate space-y-4 border-t border-black/8 pt-10 dark:border-white/10">
         <!-- <h2 class="text-lg font-semibold text-black dark:text-white">
           Filter by tag
         </h2> -->
         <div class="flex flex-wrap gap-2">
           <button
             data-tag="all"
-            class="tag-pill tag-pill-active rounded-full border border-black/15 px-4 py-1.5 text-sm transition-colors duration-300 dark:border-white/20"
+            class="tag-pill tag-pill-active rounded-sm border border-black/8 px-4 py-1.5 text-sm font-mono transition-colors duration-300 dark:border-white/10"
           >
             All ({data.length})
           </button>
@@ -101,7 +101,7 @@ function formatDate(date: Date): string {
             allTags.map(([tag, count]) => (
               <button
                 data-tag={tag}
-                class="tag-pill rounded-full border border-black/15 px-4 py-1.5 text-sm transition-colors duration-300 hover:bg-black/5 dark:border-white/20 dark:hover:bg-white/5"
+                class="tag-pill rounded-sm border border-black/8 px-4 py-1.5 text-sm font-mono transition-colors duration-300 hover:bg-black/5 dark:border-white/10 dark:hover:bg-white/5"
               >
                 {tag} ({count})
               </button>
@@ -115,14 +115,14 @@ function formatDate(date: Date): string {
 
 <style>
   .tag-pill-active {
-    background-color: #2563eb;
+    background-color: #b35c3a;
     color: white;
-    border-color: #2563eb;
+    border-color: #b35c3a;
   }
 
   .dark .tag-pill-active {
-    background-color: #3b82f6;
-    border-color: #3b82f6;
+    background-color: #d4845c;
+    border-color: #d4845c;
   }
 
   .tag-pill:not(.tag-pill-active):hover {

@@ -57,29 +57,29 @@ const { Content, headings } = await render(post);
       <BackToPrevious href="/blog">Back to blog</BackToPrevious>
     </div>
     <div class="my-10 space-y-1">
-      <div class="animate flex items-center gap-1.5">
-        <div class="font-base text-sm">
+      <div class="animate flex items-center gap-1.5 font-mono text-xs text-[#6b6b6b] dark:text-white/50">
+        <div>
           <FormattedDate date={post.data.date} />
         </div>
         &bull;
         {post.body && (
-          <div class="font-base text-sm">
+          <div>
             {readingTime(post.body)}
           </div>
-        )}        
+        )}
       </div>
-      <h1 class="animate text-3xl font-semibold text-black dark:text-white">
+      <h1 class="animate text-3xl font-medium text-black dark:text-white tracking-tight">
         {post.data.title}
       </h1>
       {
         post.data.tags && post.data.tags?.length > 0 ? (
-          <div class="animate flex gap-2 pt-1">
+          <div class="animate flex gap-3 pt-1">
             {post.data.tags.map((tag) => (
               <a
                 href={`/tags/${tag}`}
-                class="rounded-sm border border-black/15 px-2 py-1 text-sm transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"
+                class="font-mono text-xs text-[#6b6b6b] dark:text-white/50 hover:text-[#b35c3a] dark:hover:text-[#d4845c] transition-colors duration-200"
               >
-                {tag}
+                #{tag}
               </a>
             ))}
           </div>
