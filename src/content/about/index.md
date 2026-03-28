@@ -5,8 +5,8 @@ description: "Learn more about Prabhat Kumar Sahu"
 
 <div class="prose dark:prose-invert max-w-none">
 
-<div style="text-align: center; margin-bottom: 3rem;">
-  <img src="/pks_3.jpg" alt="Prabhat at the beach" style="width: 280px; height: 280px; border-radius: 16px; object-fit: cover; margin: 0 auto; box-shadow: 0 4px 6px rgba(0,0,0,0.1);" />
+<div class="flex justify-center mb-12">
+  <img src="/pks_3.jpg" alt="Prabhat at the beach" class="w-[280px] h-[280px] rounded-2xl object-cover shadow-md" />
 </div>
 
 

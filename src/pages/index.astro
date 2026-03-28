@@ -35,8 +35,8 @@ function formatDate(date: Date): string {
           <h1 class="text-[28px] font-medium text-black dark:text-white tracking-tight">
             Prabhat Kumar Sahu
           </h1>
-          <p class="text-[15px] text-[#6b6b6b] dark:text-white/50">
-            Building, breaking, learning.
+          <p class="max-w-sm text-center text-[15px] text-[#6b6b6b] dark:text-white/50 leading-relaxed">
+            Software engineer working on ML infrastructure. I write about distributed systems, tools, and things I'm learning.
           </p>
         </div>
 
@@ -86,38 +86,40 @@ function formatDate(date: Date): string {
         </ul>
       </div>
 
-      <div class="mt-12 space-y-10">
+      <div class="mt-10 space-y-10">
         <section class="animate space-y-4">
           <div class="flex items-baseline justify-between gap-6">
             <h2 class="text-xs font-mono uppercase tracking-widest text-[#6b6b6b] dark:text-white/50">
               Writing
             </h2>
-            <Link href="/blog"> See all posts </Link>
+            <a href="/blog" class="font-mono text-xs text-[#6b6b6b] dark:text-white/50 hover:text-[#b35c3a] dark:hover:text-[#d99068] transition-colors duration-200">
+              all posts &rarr;
+            </a>
           </div>
 
-<ul class="space-y-3">
-  {
-    blog.map((post) => (
-      <li>
-        <Link 
-          href={`/blog/${post.id}`}
-          underline={false}
-        >
-          <div class="group flex flex-col gap-1">
-            <div class="text-black group-hover:text-[#b35c3a] dark:text-white dark:group-hover:text-[#d99068] transition-colors duration-200 relative">
-<span class="relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-[#b35c3a]/40 after:transition-all after:duration-300 group-hover:after:w-full group-active:after:w-full dark:after:bg-[#d99068]/40">
-  {post.data.title}
-</span>
-            </div>
-            <div class="font-mono text-xs text-[#6b6b6b] dark:text-white/50 tabular-nums">
-              {formatDate(post.data.date)}
-            </div>
-          </div>
-        </Link>
-      </li>
-    ))
-  }
-</ul>
+          <ul class="space-y-3">
+            {
+              blog.map((post) => (
+                <li>
+                  <Link
+                    href={`/blog/${post.id}`}
+                    underline={false}
+                  >
+                    <div class="group flex justify-between items-baseline gap-4">
+                      <div class="text-black group-hover:text-[#b35c3a] dark:text-white dark:group-hover:text-[#d99068] transition-colors duration-200 relative flex-1">
+                        <span class="relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-[#b35c3a]/40 after:transition-all after:duration-300 group-hover:after:w-full group-active:after:w-full dark:after:bg-[#d99068]/40">
+                          {post.data.title}
+                        </span>
+                      </div>
+                      <div class="font-mono text-xs text-[#6b6b6b] dark:text-white/50 tabular-nums whitespace-nowrap">
+                        {formatDate(post.data.date)}
+                      </div>
+                    </div>
+                  </Link>
+                </li>
+              ))
+            }
+          </ul>
         </section>
       </div>
     </aside>
