@@ -45,15 +45,40 @@ function formatDate(date: Date): string {
 <Layout title={BLOG.TITLE} description={BLOG.DESCRIPTION}>
   <Container>
     <div class="space-y-10">
-      <h1 class="animate font-medium text-black dark:text-white">
-        Blog
-      </h1>
+      <div class="animate">
+        <h1 class="font-medium text-black dark:text-white">
+          Blog
+        </h1>
+
+        <!-- Inline tag filter -->
+        <nav class="mt-4 flex flex-wrap items-center gap-x-1.5 gap-y-1 font-mono text-xs text-[#6b6b6b] dark:text-white/50">
+          <button
+            data-tag="all"
+            class="tag-filter tag-filter-active transition-colors duration-200"
+          >
+            all
+          </button>
+          {
+            allTags.map(([tag], i) => (
+              <>
+                <span class="text-black/20 dark:text-white/20">·</span>
+                <button
+                  data-tag={tag}
+                  class="tag-filter transition-colors duration-200 hover:text-[#b35c3a] dark:hover:text-[#d99068]"
+                >
+                  {tag}
+                </button>
+              </>
+            ))
+          }
+        </nav>
+      </div>
 
       <div class="space-y-12" id="posts-container">
         {
           years.map((year) => (
             <section class="animate space-y-4" data-year={year}>
-              <h2 class="text-base font-mono text-[#b35c3a] dark:text-[#d4845c] tracking-wide">
+              <h2 class="text-base font-mono text-[#b35c3a] dark:text-[#d99068] tracking-wide">
                 {year}
               </h2>
               <ul class="space-y-3">
@@ -62,13 +87,13 @@ function formatDate(date: Date): string {
                     class="post-item"
                     data-tags={post.data.tags?.join(",") || ""}
                   >
-                    <Link 
+                    <Link
                       href={`/blog/${post.id}`}
                       underline={false}
                     >
                       <div class="flex justify-between items-baseline gap-4 group">
-                        <div class="text-black group-hover:text-[#b35c3a] dark:text-white dark:group-hover:text-[#d4845c] transition-colors duration-200 flex-1">
-                          <span class="relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-[#b35c3a]/40 after:transition-all after:duration-300 group-hover:after:w-full group-active:after:w-full dark:after:bg-[#d4845c]/40">
+                        <div class="text-black group-hover:text-[#b35c3a] dark:text-white dark:group-hover:text-[#d99068] transition-colors duration-200 flex-1">
+                          <span class="relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-[#b35c3a]/40 after:transition-all after:duration-300 group-hover:after:w-full group-active:after:w-full dark:after:bg-[#d99068]/40">
                             {post.data.title}
                           </span>
                         </div>
@@ -84,74 +109,38 @@ function formatDate(date: Date): string {
           ))
         }
       </div>
-
-      <!-- Tags List at Bottom -->
-      <div class="animate space-y-4 border-t border-black/8 pt-10 dark:border-white/10">
-        <!-- <h2 class="text-lg font-semibold text-black dark:text-white">
-          Filter by tag
-        </h2> -->
-        <div class="flex flex-wrap gap-2">
-          <button
-            data-tag="all"
-            class="tag-pill tag-pill-active rounded-sm border border-black/8 px-4 py-1.5 text-sm font-mono transition-colors duration-300 dark:border-white/10"
-          >
-            All ({data.length})
-          </button>
-          {
-            allTags.map(([tag, count]) => (
-              <button
-                data-tag={tag}
-                class="tag-pill rounded-sm border border-black/8 px-4 py-1.5 text-sm font-mono transition-colors duration-300 hover:bg-black/5 dark:border-white/10 dark:hover:bg-white/5"
-              >
-                {tag} ({count})
-              </button>
-            ))
-          }
-        </div>
-      </div>
     </div>
   </Container>
 </Layout>
 
 <style>
-  .tag-pill-active {
-    background-color: #b35c3a;
-    color: white;
-    border-color: #b35c3a;
+  .tag-filter-active {
+    color: #b35c3a;
   }
 
-  .dark .tag-pill-active {
-    background-color: #d4845c;
-    border-color: #d4845c;
-  }
-
-  .tag-pill:not(.tag-pill-active):hover {
-    background-color: rgba(0, 0, 0, 0.05);
-  }
-
-  .dark .tag-pill:not(.tag-pill-active):hover {
-    background-color: rgba(255, 255, 255, 0.05);
+  .dark .tag-filter-active {
+    color: #d99068;
   }
 </style>
 
 <script>
   function initTagFilters() {
-    const tagPills = document.querySelectorAll('.tag-pill[data-tag]');
+    const tagFilters = document.querySelectorAll('.tag-filter[data-tag]');
     const postItems = document.querySelectorAll('.post-item');
     const yearSections = document.querySelectorAll('[data-year]');
 
-    tagPills.forEach(pill => {
-      pill.addEventListener('click', () => {
-        const selectedTag = pill.getAttribute('data-tag');
-        
+    tagFilters.forEach(filter => {
+      filter.addEventListener('click', () => {
+        const selectedTag = filter.getAttribute('data-tag');
+
         // Update active state
-        tagPills.forEach(p => p.classList.remove('tag-pill-active'));
-        pill.classList.add('tag-pill-active');
+        tagFilters.forEach(f => f.classList.remove('tag-filter-active'));
+        filter.classList.add('tag-filter-active');
 
         // Scroll to top of blog list
-        document.getElementById('posts-container')?.scrollIntoView({ 
-          behavior: 'smooth', 
-          block: 'start' 
+        document.getElementById('posts-container')?.scrollIntoView({
+          behavior: 'smooth',
+          block: 'start'
         });
 
         // Filter posts
