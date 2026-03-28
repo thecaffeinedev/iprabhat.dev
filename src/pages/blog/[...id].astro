@@ -113,7 +113,7 @@ const { Content, headings } = await render(post);
       const scrollTop = window.scrollY;
       const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
-      bar.style.width = `${Math.min(progress, 100)}%`;
+      bar!.style.width = `${Math.min(progress, 100)}%`;
     }
 
     window.addEventListener('scroll', updateProgress, { passive: true });
