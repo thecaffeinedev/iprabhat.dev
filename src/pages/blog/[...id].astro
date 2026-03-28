@@ -52,6 +52,11 @@ const { Content, headings } = await render(post);
 ---
 
 <Layout title={post.data.title} description={post.data.description}>
+  <div
+    id="reading-progress"
+    class="fixed top-0 left-0 z-[60] h-[2px] bg-[#b35c3a] dark:bg-[#d99068] transition-[width] duration-100 ease-out"
+    style="width: 0%"
+  ></div>
   <Container>
     <div class="animate">
       <BackToPrevious href="/blog">Back to blog</BackToPrevious>
@@ -98,3 +103,23 @@ const { Content, headings } = await render(post);
     </article>
   </Container>
 </Layout>
+
+<script>
+  function initProgressBar() {
+    const bar = document.getElementById('reading-progress');
+    if (!bar) return;
+
+    function updateProgress() {
+      const scrollTop = window.scrollY;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
+      bar.style.width = `${Math.min(progress, 100)}%`;
+    }
+
+    window.addEventListener('scroll', updateProgress, { passive: true });
+    updateProgress();
+  }
+
+  initProgressBar();
+  document.addEventListener('astro:after-swap', initProgressBar);
+</script>

@@ -15,12 +15,9 @@ I’m a software engineer by profession, mostly working on **ML infrastructure**
 
 My technical interests include software design, databases, distributed systems, machine learning, and backend infrastructure. And I enjoy working with the **Python** stack and **Go**.
 
-<div style="clear: both;"></div>
 I write about my experiences in tech, personal interests, self-reflection, and my growth as a developer. In addition, I hope to become a better writer by blogging.
 
 When I'm not hacking away on a project, I enjoy watching tv series, anime, writing, learning new things, and working out.
-
-<div style="clear: both;"></div>
 
 ## 📆 Timeline
 

@@ -7,13 +7,18 @@ import { SITE } from "@consts";
 
 <Layout title="404" description={SITE.DESCRIPTION}>
   <Container>
-    <div class="mt-16 grid place-items-center gap-3">
-      <h4 class="animate text-2xl font-semibold text-black dark:text-white">
-        404: Page not found
-      </h4>
-      <span class="animate">
+    <div class="mt-16 flex flex-col items-center gap-6 text-center">
+      <div class="animate font-mono text-7xl font-medium text-[#b35c3a] dark:text-[#d99068]">
+        404
+      </div>
+      <div class="animate space-y-2">
+        <h1 class="text-2xl font-medium text-black dark:text-white">
+          This page is somewhere on the Grand Line... but not here. 🏴‍☠️
+        </h1>
+      </div>
+      <div class="animate">
         <BackToPrevious href="/">Go to home page</BackToPrevious>
-      </span>
+      </div>
     </div>
   </Container>
 </Layout>
