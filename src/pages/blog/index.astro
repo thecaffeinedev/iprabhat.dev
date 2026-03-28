@@ -129,13 +129,21 @@ function formatDate(date: Date): string {
     const postItems = document.querySelectorAll('.post-item');
     const yearSections = document.querySelectorAll('[data-year]');
 
+    const allFilter = document.querySelector('.tag-filter[data-tag="all"]');
+
     tagFilters.forEach(filter => {
       filter.addEventListener('click', () => {
-        const selectedTag = filter.getAttribute('data-tag');
+        let selectedTag = filter.getAttribute('data-tag');
 
-        // Update active state
-        tagFilters.forEach(f => f.classList.remove('tag-filter-active'));
-        filter.classList.add('tag-filter-active');
+        // Toggle: clicking active tag resets to "all"
+        if (selectedTag !== 'all' && filter.classList.contains('tag-filter-active')) {
+          selectedTag = 'all';
+          tagFilters.forEach(f => f.classList.remove('tag-filter-active'));
+          allFilter?.classList.add('tag-filter-active');
+        } else {
+          tagFilters.forEach(f => f.classList.remove('tag-filter-active'));
+          filter.classList.add('tag-filter-active');
+        }
 
         // Scroll to top of blog list
         document.getElementById('posts-container')?.scrollIntoView({
