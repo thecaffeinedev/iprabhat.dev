@@ -53,17 +53,6 @@
     @apply flex flex-col;
     @apply bg-[#f6f2e8] dark:bg-[#171611];
     @apply text-[#25231d] dark:text-[#f5f2ea];
-    background-image:
-      radial-gradient(
-        circle at top left,
-        rgba(118, 148, 122, 0.2),
-        transparent 28rem
-      ),
-      radial-gradient(
-        circle at top right,
-        rgba(235, 224, 201, 0.55),
-        transparent 22rem
-      );
   }
 
   header {

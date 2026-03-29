@@ -22,19 +22,21 @@ function formatDate(date: Date): string {
 <Layout title={HOME.TITLE} description={HOME.DESCRIPTION}>
   <Container>
     <aside data-pagefind-ignore class="space-y-14">
-      <section class="animate max-w-[42rem] space-y-6 pt-6">
+      <section
+        class="animate max-w-[40rem] space-y-5 pt-4 sm:space-y-6 sm:pt-6"
+      >
         <p
           class="text-sm tracking-[0.18em] text-[#3f6a45] uppercase dark:text-[#7ea184]"
         >
           Hello, I&apos;m Prabhat
         </p>
         <h1
-          class="max-w-[14ch] font-serif text-3xl font-semibold tracking-[-0.03em] text-[#25231d] sm:text-4xl dark:text-[#f5f2ea]"
+          class="max-w-[14ch] font-serif text-[1.95rem] leading-[1.05] font-semibold tracking-[-0.025em] text-[#25231d] sm:max-w-[13ch] sm:text-[2.55rem] sm:leading-[1.02] sm:tracking-[-0.03em] dark:text-[#f5f2ea]"
         >
           Writing about software, systems, and life as it unfolds.
         </h1>
         <div
-          class="max-w-[38rem] space-y-4 text-[1.05rem] leading-8 text-[#4e4a43] dark:text-white/70"
+          class="max-w-[32rem] space-y-4 text-[1rem] leading-8 text-[#4e4a43] sm:text-[1.03rem] dark:text-white/70"
         >
           <p>
             I work on ML infrastructure and backend systems, with a generalist
@@ -48,7 +50,7 @@ function formatDate(date: Date): string {
           </p>
         </div>
         <ul
-          class="flex flex-wrap items-center gap-x-4 gap-y-2 text-[0.95rem] text-[#6a665f] dark:text-white/45"
+          class="flex flex-wrap items-center gap-x-5 gap-y-2 text-[0.9rem] text-[#6a665f] dark:text-white/45"
         >
           {
             SOCIALS.map((social) => (
@@ -56,7 +58,7 @@ function formatDate(date: Date): string {
                 <Link
                   href={social.HREF}
                   external
-                  class="rounded-full border border-black/8 px-3 py-1 text-[#7a766d] no-underline hover:border-[#3f6a45]/25 hover:bg-[#e2ece1] dark:border-white/10 dark:text-white/45 dark:hover:bg-white/5"
+                  class="border-b border-transparent px-0 py-0 text-[#7a766d] no-underline hover:border-[#3f6a45]/30 hover:text-[#21492b] dark:text-white/45 dark:hover:text-[#d0e6d2]"
                 >
                   {social.NAME.replace("X (formerly Twitter)", "X")}
                 </Link>
@@ -67,7 +69,7 @@ function formatDate(date: Date): string {
             <Link
               href={`mailto:${SITE.EMAIL}`}
               external
-              class="rounded-full border border-black/8 px-3 py-1 text-[#7a766d] no-underline hover:border-[#3f6a45]/25 hover:bg-[#e2ece1] dark:border-white/10 dark:text-white/45 dark:hover:bg-white/5"
+              class="border-b border-transparent px-0 py-0 text-[#7a766d] no-underline hover:border-[#3f6a45]/30 hover:text-[#21492b] dark:text-white/45 dark:hover:text-[#d0e6d2]"
             >
               Email
             </Link>
@@ -75,30 +77,33 @@ function formatDate(date: Date): string {
         </ul>
       </section>
 
-      <section class="animate space-y-5">
+      <section class="animate space-y-4 sm:space-y-5">
         <div
-          class="flex items-center justify-between gap-4 border-b border-black/6 pb-3 dark:border-white/8"
+          class="flex items-end justify-between gap-3 border-b border-black/6 pb-3 dark:border-white/8"
         >
           <h2
             class="font-serif text-2xl font-semibold text-[#25231d] dark:text-[#f5f2ea]"
           >
             Writing
           </h2>
-          <Link href="/blog" class="text-sm text-[#7a766d] dark:text-white/45">
+          <Link
+            href="/blog"
+            class="text-sm text-[#7a766d] sm:mr-2 dark:text-white/45"
+          >
             view archive
           </Link>
         </div>
 
-        <ul class="space-y-4">
+        <ul class="space-y-3 sm:space-y-4">
           {
             blog.map((post) => (
               <li class="border-b border-black/6 pb-4 last:border-b-0 dark:border-white/8">
                 <Link href={`/blog/${post.id}`} underline={false} group>
-                  <div class="group flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
-                    <div class="flex-1 text-[1.05rem] font-medium text-[#25231d] transition-colors duration-200 group-hover:text-[#21492b] dark:text-[#f5f2ea] dark:group-hover:text-[#d0e6d2]">
+                  <div class="group flex flex-col gap-1.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
+                    <div class="flex-1 text-[1.02rem] leading-8 font-medium text-[#25231d] transition-colors duration-200 group-hover:text-[#21492b] sm:text-[1.05rem] sm:leading-normal dark:text-[#f5f2ea] dark:group-hover:text-[#d0e6d2]">
                       {post.data.title}
                     </div>
-                    <div class="text-sm text-[#938d82] tabular-nums dark:text-white/40">
+                    <div class="text-sm text-[#938d82] tabular-nums sm:min-w-[110px] sm:text-right dark:text-white/40">
                       {formatDate(post.data.date)}
                     </div>
                   </div>
