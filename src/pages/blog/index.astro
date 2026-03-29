@@ -25,14 +25,19 @@ const posts = data.reduce((acc: Acc, post) => {
 const years = Object.keys(posts).sort((a, b) => parseInt(b) - parseInt(a));
 
 // Get all unique tags with counts, sorted alphabetically
-const tagCounts = data.reduce((acc, post) => {
-  post.data.tags?.forEach(tag => {
-    acc[tag] = (acc[tag] || 0) + 1;
-  });
-  return acc;
-}, {} as Record<string, number>);
+const tagCounts = data.reduce(
+  (acc, post) => {
+    post.data.tags?.forEach((tag) => {
+      acc[tag] = (acc[tag] || 0) + 1;
+    });
+    return acc;
+  },
+  {} as Record<string, number>,
+);
 
-const allTags = Object.entries(tagCounts).sort((a, b) => a[0].localeCompare(b[0]));
+const allTags = Object.entries(tagCounts).sort((a, b) =>
+  a[0].localeCompare(b[0]),
+);
 
 function formatDate(date: Date): string {
   return date.toLocaleDateString("en-US", {
@@ -44,31 +49,33 @@ function formatDate(date: Date): string {
 
 <Layout title={BLOG.TITLE} description={BLOG.DESCRIPTION}>
   <Container>
-    <div class="space-y-10">
-      <div class="animate">
-        <h1 class="text-3xl font-medium text-black dark:text-white">
+    <div class="space-y-12">
+      <div class="animate space-y-4">
+        <h1
+          class="font-serif text-3xl font-semibold text-black dark:text-white"
+        >
           Blog
         </h1>
 
-        <!-- Inline tag filter -->
-        <nav class="mt-4 flex flex-wrap items-center gap-x-1.5 gap-y-1 font-mono text-xs text-[#6b6b6b] dark:text-white/50">
+        <nav
+          class="flex flex-wrap gap-2 text-[0.92rem]"
+          aria-label="Filter posts by tag"
+        >
           <button
             data-tag="all"
-            class="tag-filter tag-filter-active transition-colors duration-200"
+            class="tag-filter tag-filter-active rounded-full border border-black/8 px-2.5 py-1 text-[#7a766d] transition-all duration-200 hover:border-[#3f6a45]/25 hover:bg-[#e2ece1] hover:text-[#21492b] dark:border-white/10 dark:text-white/45 dark:hover:border-[#7ea184]/30 dark:hover:bg-white/5 dark:hover:text-[#d0e6d2]"
           >
             all
           </button>
           {
-            allTags.map(([tag]) => (
-              <>
-                <span class="text-black/20 dark:text-white/20">·</span>
-                <button
-                  data-tag={tag}
-                  class="tag-filter transition-colors duration-200 hover:text-[#b35c3a] dark:hover:text-[#d99068]"
-                >
-                  {tag}
-                </button>
-              </>
+            allTags.map(([tag, count]) => (
+              <button
+                data-tag={tag}
+                class="tag-filter rounded-full border border-black/8 px-2.5 py-1 text-[#7a766d] transition-all duration-200 hover:border-[#3f6a45]/25 hover:bg-[#e2ece1] hover:text-[#21492b] dark:border-white/10 dark:text-white/45 dark:hover:border-[#7ea184]/30 dark:hover:bg-white/5 dark:hover:text-[#d0e6d2]"
+              >
+                {tag}
+                <span class="ml-1 text-[0.76em] opacity-55">({count})</span>
+              </button>
             ))
           }
         </nav>
@@ -77,27 +84,30 @@ function formatDate(date: Date): string {
       <div class="space-y-12" id="posts-container">
         {
           years.map((year) => (
-            <section class="animate space-y-4" data-year={year}>
-              <h2 class="text-base font-mono text-[#b35c3a] dark:text-[#d99068] tracking-wide">
-                {year}
-              </h2>
-              <ul class="space-y-3">
+            <section
+              class="animate space-y-5 border-t border-black/6 pt-8 first:border-t-0 first:pt-0 dark:border-white/8"
+              data-year={year}
+            >
+              <div class="flex items-center gap-4">
+                <h2 class="font-serif text-lg text-[#3f6a45] dark:text-[#7ea184]">
+                  {year}
+                </h2>
+                <div class="h-px flex-1 bg-black/6 dark:bg-white/8" />
+              </div>
+              <ul class="space-y-1">
                 {posts[year].map((post) => (
                   <li
-                    class="post-item"
+                    class="post-item border-b border-black/4 py-3 last:border-b-0 dark:border-white/6"
                     data-tags={post.data.tags?.join(",") || ""}
                   >
-                    <Link
-                      href={`/blog/${post.id}`}
-                      underline={false}
-                    >
-                      <div class="flex justify-between items-baseline gap-4 group">
-                        <div class="text-black group-hover:text-[#b35c3a] dark:text-white dark:group-hover:text-[#d99068] transition-colors duration-200 flex-1">
-                          <span class="relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-[#b35c3a]/40 after:transition-all after:duration-300 group-hover:after:w-full group-active:after:w-full dark:after:bg-[#d99068]/40">
+                    <Link href={`/blog/${post.id}`} underline={false} group>
+                      <div class="group grid gap-1 sm:grid-cols-[minmax(0,1fr)_88px] sm:items-baseline sm:gap-6">
+                        <div class="min-w-0 text-[1.06rem] text-black transition-colors duration-200 group-hover:text-[#21492b] dark:text-white dark:group-hover:text-[#d0e6d2]">
+                          <span class="relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-[#3f6a45]/45 after:transition-all after:duration-300 group-hover:after:w-full group-active:after:w-full dark:after:bg-[#7ea184]/45">
                             {post.data.title}
                           </span>
                         </div>
-                        <div class="font-mono text-xs text-[#6b6b6b] dark:text-white/50 whitespace-nowrap tabular-nums">
+                        <div class="text-sm whitespace-nowrap text-[#a29a8f] tabular-nums sm:text-right dark:text-white/40">
                           {formatDate(post.data.date)}
                         </div>
                       </div>
@@ -115,59 +125,68 @@ function formatDate(date: Date): string {
 
 <style>
   .tag-filter-active {
-    color: #b35c3a;
+    color: #21492b;
+    border-color: rgba(63, 106, 69, 0.28);
+    background: #e2ece1;
   }
 
   .dark .tag-filter-active {
-    color: #d99068;
+    color: #d0e6d2;
+    border-color: rgba(126, 161, 132, 0.3);
+    background: rgba(255, 255, 255, 0.05);
   }
 </style>
 
 <script>
   function initTagFilters() {
-    const tagFilters = document.querySelectorAll('.tag-filter[data-tag]');
-    const postItems = document.querySelectorAll('.post-item');
-    const yearSections = document.querySelectorAll('[data-year]');
+    const tagFilters = document.querySelectorAll(".tag-filter[data-tag]");
+    const postItems = document.querySelectorAll(".post-item");
+    const yearSections = document.querySelectorAll("[data-year]");
 
     const allFilter = document.querySelector('.tag-filter[data-tag="all"]');
 
-    tagFilters.forEach(filter => {
-      filter.addEventListener('click', () => {
-        let selectedTag = filter.getAttribute('data-tag');
+    tagFilters.forEach((filter) => {
+      filter.addEventListener("click", () => {
+        let selectedTag = filter.getAttribute("data-tag");
 
         // Toggle: clicking active tag resets to "all"
-        if (selectedTag !== 'all' && filter.classList.contains('tag-filter-active')) {
-          selectedTag = 'all';
-          tagFilters.forEach(f => f.classList.remove('tag-filter-active'));
-          allFilter?.classList.add('tag-filter-active');
+        if (
+          selectedTag !== "all" &&
+          filter.classList.contains("tag-filter-active")
+        ) {
+          selectedTag = "all";
+          tagFilters.forEach((f) => f.classList.remove("tag-filter-active"));
+          allFilter?.classList.add("tag-filter-active");
         } else {
-          tagFilters.forEach(f => f.classList.remove('tag-filter-active'));
-          filter.classList.add('tag-filter-active');
+          tagFilters.forEach((f) => f.classList.remove("tag-filter-active"));
+          filter.classList.add("tag-filter-active");
         }
 
         // Scroll to top of blog list
-        document.getElementById('posts-container')?.scrollIntoView({
-          behavior: 'smooth',
-          block: 'start'
+        document.getElementById("posts-container")?.scrollIntoView({
+          behavior: "smooth",
+          block: "start",
         });
 
         // Filter posts
-        postItems.forEach(item => {
-          const postTags = item.getAttribute('data-tags');
-          if (selectedTag === 'all' || postTags?.includes(selectedTag || '')) {
-            (item as HTMLElement).style.display = '';
+        postItems.forEach((item) => {
+          const postTags = item.getAttribute("data-tags");
+          if (selectedTag === "all" || postTags?.includes(selectedTag || "")) {
+            (item as HTMLElement).style.display = "";
           } else {
-            (item as HTMLElement).style.display = 'none';
+            (item as HTMLElement).style.display = "none";
           }
         });
 
         // Hide empty year sections
-        yearSections.forEach(section => {
-          const visiblePosts = section.querySelectorAll('.post-item:not([style*="display: none"])');
+        yearSections.forEach((section) => {
+          const visiblePosts = section.querySelectorAll(
+            '.post-item:not([style*="display: none"])',
+          );
           if (visiblePosts.length === 0) {
-            (section as HTMLElement).style.display = 'none';
+            (section as HTMLElement).style.display = "none";
           } else {
-            (section as HTMLElement).style.display = '';
+            (section as HTMLElement).style.display = "";
           }
         });
       });
@@ -175,5 +194,5 @@ function formatDate(date: Date): string {
   }
 
   initTagFilters();
-  document.addEventListener('astro:after-swap', initTagFilters);
+  document.addEventListener("astro:after-swap", initTagFilters);
 </script>

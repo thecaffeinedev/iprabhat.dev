@@ -6,6 +6,7 @@ type Props = {
   external?: boolean;
   underline?: boolean;
   group?: boolean;
+  class?: string;
 };
 
 const {
@@ -13,6 +14,7 @@ const {
   external,
   underline = true,
   group = false,
+  class: className,
   ...rest
 } = Astro.props;
 ---
@@ -21,9 +23,10 @@ const {
   href={href}
   target={external ? "_blank" : "_self"}
   class={cn(
-    "inline-block decoration-[#b35c3a]/30 dark:decoration-[#d99068]/30 hover:decoration-[#b35c3a]/60 focus-visible:decoration-[#b35c3a]/60 dark:hover:decoration-[#d99068]/60 dark:focus-visible:decoration-[#d99068]/60 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-200 ease-in-out",
+    "inline-block decoration-[#3f6a45]/25 dark:decoration-[#7ea184]/30 hover:decoration-[#3f6a45]/60 focus-visible:decoration-[#3f6a45]/60 dark:hover:decoration-[#7ea184]/65 dark:focus-visible:decoration-[#7ea184]/65 text-current hover:text-[#21492b] focus-visible:text-[#21492b] dark:hover:text-[#d0e6d2] dark:focus-visible:text-[#d0e6d2] transition-colors duration-200 ease-in-out",
     underline && "underline underline-offset-[3px]",
-    group && "group"
+    group && "group",
+    className,
   )}
   {...rest}
 >

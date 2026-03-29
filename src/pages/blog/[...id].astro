@@ -54,26 +54,27 @@ const { Content, headings } = await render(post);
 <Layout title={post.data.title} description={post.data.description}>
   <div
     id="reading-progress"
-    class="fixed top-0 left-0 z-[60] h-[2px] bg-[#b35c3a] dark:bg-[#d99068] transition-[width] duration-100 ease-out"
+    class="fixed top-0 left-0 z-[60] h-[2px] bg-[#3f6a45] transition-[width] duration-100 ease-out dark:bg-[#7ea184]"
     style="width: 0%"
-  ></div>
+  >
+  </div>
   <Container>
     <div class="animate">
       <BackToPrevious href="/blog">Back to blog</BackToPrevious>
     </div>
     <div class="my-10 space-y-1">
-      <div class="animate flex items-center gap-1.5 font-mono text-xs text-[#6b6b6b] dark:text-white/50">
+      <div
+        class="animate flex items-center gap-1.5 text-sm text-[#9ca3af] dark:text-white/50"
+      >
         <div>
           <FormattedDate date={post.data.date} />
         </div>
         &bull;
-        {post.body && (
-          <div>
-            {readingTime(post.body)}
-          </div>
-        )}
+        {post.body && <div>{readingTime(post.body)}</div>}
       </div>
-      <h1 class="animate text-3xl font-medium text-black dark:text-white tracking-tight">
+      <h1
+        class="animate font-serif text-3xl font-semibold tracking-tight text-black dark:text-white"
+      >
         {post.data.title}
       </h1>
       {
@@ -82,7 +83,7 @@ const { Content, headings } = await render(post);
             {post.data.tags.map((tag) => (
               <a
                 href={`/tags/${tag}`}
-                class="font-mono text-xs text-[#6b6b6b] dark:text-white/50 hover:text-[#b35c3a] dark:hover:text-[#d99068] transition-colors duration-200"
+                class="text-sm text-[#6b6b6b] transition-colors duration-200 hover:text-[#21492b] dark:text-white/50 dark:hover:text-[#d0e6d2]"
               >
                 #{tag}
               </a>
@@ -106,20 +107,21 @@ const { Content, headings } = await render(post);
 
 <script>
   function initProgressBar() {
-    const bar = document.getElementById('reading-progress');
+    const bar = document.getElementById("reading-progress");
     if (!bar) return;
 
     function updateProgress() {
       const scrollTop = window.scrollY;
-      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+      const docHeight =
+        document.documentElement.scrollHeight - window.innerHeight;
       const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
       bar!.style.width = `${Math.min(progress, 100)}%`;
     }
 
-    window.addEventListener('scroll', updateProgress, { passive: true });
+    window.addEventListener("scroll", updateProgress, { passive: true });
     updateProgress();
   }
 
   initProgressBar();
-  document.addEventListener('astro:after-swap', initProgressBar);
+  document.addEventListener("astro:after-swap", initProgressBar);
 </script>
