@@ -50,64 +50,70 @@ function formatDate(date: Date): string {
 <Layout title={BLOG.TITLE} description={BLOG.DESCRIPTION}>
   <Container>
     <div class="space-y-12">
-      <div class="animate space-y-4">
+      <div class="animate space-y-3">
         <h1
-          class="font-serif text-3xl font-semibold text-black dark:text-white"
+          class="font-serif text-3xl font-semibold text-[#25231d] dark:text-[#f5f2ea]"
         >
           Blog
         </h1>
+        <p class="text-[0.95rem] text-[#7a766d] dark:text-white/50">
+          Thoughts on engineering, travel, and life as it unfolds.
+        </p>
 
         <nav
-          class="flex flex-wrap gap-2 text-[0.92rem]"
+          class="flex flex-wrap items-center gap-x-1 gap-y-0.5 pt-1 text-[0.84rem]"
           aria-label="Filter posts by tag"
         >
           <button
             data-tag="all"
-            class="tag-filter tag-filter-active rounded-full border border-black/8 px-2.5 py-1 text-[#7a766d] transition-all duration-200 hover:border-[#3f6a45]/25 hover:bg-[#e2ece1] hover:text-[#21492b] dark:border-white/10 dark:text-white/45 dark:hover:border-[#7ea184]/30 dark:hover:bg-white/5 dark:hover:text-[#d0e6d2]"
+            class="tag-filter tag-filter-active px-1.5 py-0.5 text-[#7a766d] transition-colors duration-200 hover:text-[#21492b] dark:text-white/45 dark:hover:text-[#d0e6d2]"
           >
             all
           </button>
+          <span class="text-black/15 dark:text-white/15">/</span>
           {
-            allTags.map(([tag, count]) => (
-              <button
-                data-tag={tag}
-                class="tag-filter rounded-full border border-black/8 px-2.5 py-1 text-[#7a766d] transition-all duration-200 hover:border-[#3f6a45]/25 hover:bg-[#e2ece1] hover:text-[#21492b] dark:border-white/10 dark:text-white/45 dark:hover:border-[#7ea184]/30 dark:hover:bg-white/5 dark:hover:text-[#d0e6d2]"
-              >
-                {tag}
-                <span class="ml-1 text-[0.76em] opacity-55">({count})</span>
-              </button>
+            allTags.map(([tag, _count], i) => (
+              <>
+                <button
+                  data-tag={tag}
+                  class="tag-filter px-1.5 py-0.5 text-[#7a766d] transition-colors duration-200 hover:text-[#21492b] dark:text-white/45 dark:hover:text-[#d0e6d2]"
+                >
+                  {tag}
+                </button>
+                {i < allTags.length - 1 && (
+                  <span class="text-black/15 dark:text-white/15">/</span>
+                )}
+              </>
             ))
           }
         </nav>
       </div>
 
-      <div class="space-y-12" id="posts-container">
+      <div class="space-y-8" id="posts-container">
         {
           years.map((year) => (
             <section
-              class="animate space-y-5 border-t border-black/6 pt-8 first:border-t-0 first:pt-0 dark:border-white/8"
+              class="animate space-y-3"
               data-year={year}
             >
-              <div class="flex items-center gap-4">
-                <h2 class="font-serif text-lg text-[#3f6a45] dark:text-[#7ea184]">
+              <div class="flex items-center gap-3">
+                <h2 class="text-sm font-medium tracking-wide text-[#3f6a45] uppercase dark:text-[#7ea184]">
                   {year}
                 </h2>
                 <div class="h-px flex-1 bg-black/6 dark:bg-white/8" />
               </div>
-              <ul class="space-y-1">
+              <ul>
                 {posts[year].map((post) => (
                   <li
-                    class="post-item border-b border-black/4 py-3 last:border-b-0 dark:border-white/6"
+                    class="post-item border-b border-black/5 py-3 last:border-b-0 dark:border-white/6"
                     data-tags={post.data.tags?.join(",") || ""}
                   >
                     <Link href={`/blog/${post.id}`} underline={false} group>
-                      <div class="group grid gap-1 sm:grid-cols-[minmax(0,1fr)_88px] sm:items-baseline sm:gap-6">
-                        <div class="min-w-0 text-[1.06rem] text-black transition-colors duration-200 group-hover:text-[#21492b] dark:text-white dark:group-hover:text-[#d0e6d2]">
-                          <span class="relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-[#3f6a45]/45 after:transition-all after:duration-300 group-hover:after:w-full group-active:after:w-full dark:after:bg-[#7ea184]/45">
-                            {post.data.title}
-                          </span>
+                      <div class="group flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
+                        <div class="min-w-0 text-[1.02rem] font-medium text-[#25231d] transition-colors duration-200 group-hover:text-[#21492b] dark:text-[#f5f2ea] dark:group-hover:text-[#d0e6d2]">
+                          {post.data.title}
                         </div>
-                        <div class="text-sm whitespace-nowrap text-[#a29a8f] tabular-nums sm:text-right dark:text-white/40">
+                        <div class="shrink-0 text-sm whitespace-nowrap text-[#7a766d] tabular-nums dark:text-white/50">
                           {formatDate(post.data.date)}
                         </div>
                       </div>
@@ -126,14 +132,12 @@ function formatDate(date: Date): string {
 <style>
   .tag-filter-active {
     color: #21492b;
-    border-color: rgba(63, 106, 69, 0.28);
-    background: #e2ece1;
+    font-weight: 500;
   }
 
   .dark .tag-filter-active {
     color: #d0e6d2;
-    border-color: rgba(126, 161, 132, 0.3);
-    background: rgba(255, 255, 255, 0.05);
+    font-weight: 500;
   }
 </style>
 
