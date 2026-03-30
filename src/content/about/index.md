@@ -3,15 +3,22 @@ title: "About"
 description: "Learn more about Prabhat Kumar Sahu"
 ---
 
-<div class="prose dark:prose-invert max-w-none">
+<figure class="about-hero not-prose mb-10">
+  <img
+    src="/pks8.jpeg"
+    alt="Prabhat sitting by the sea"
+    class="h-[320px] w-full rounded-[2rem] object-cover shadow-[0_24px_60px_rgba(37,35,29,0.14)] ring-1 ring-black/8 dark:shadow-[0_24px_60px_rgba(0,0,0,0.3)] dark:ring-white/10 sm:h-[360px]"
+  />
+  <figcaption class="mt-3 text-sm text-[#8a8479] dark:text-white/40">
+    Somewhere by the sea. A good place to think.
+  </figcaption>
+</figure>
 
-<div class="flex justify-center mb-12">
-  <img src="/pks_3.jpg" alt="Prabhat at the beach" class="w-[280px] h-[280px] rounded-2xl object-cover shadow-md" />
-</div>
-
-
-**Hi there, My name is Prabhat.**
-I’m a software engineer by profession, mostly working on **ML infrastructure** at [DeepEdge](https://deepedge.ai/).
+<p class="about-intro">
+  <strong>Hi there, my name is Prabhat.</strong>
+  I'm a software engineer working on <strong>ML infrastructure</strong> at
+  <a href="https://deepedge.ai/">DeepEdge</a>.
+</p>
 
 My technical interests include software design, databases, distributed systems, machine learning, and backend infrastructure. And I enjoy working with the **Python** stack and **Go**.
 
@@ -19,28 +26,24 @@ I write about my experiences in tech, personal interests, self-reflection, and m
 
 When I'm not hacking away on a project, I enjoy watching tv series, anime, writing, learning new things, and working out.
 
-## 📆 Timeline
+## Timeline
 
 - **2020 August** - DeepEdge, Hyderabad - Machine Learning Engineer
 - **2019 June - 2020 March** - Frolic, Hyderabad - ML Intern
 - **2018 May - 2018 July** - Central University Of Rajasthan - Machine Learning Intern
 - **2015 - 2019** - Sambalpur University Institute Of Information Technology, Burla, Odisha - B.Tech in Computer Science Engineering
 
-## 📬 Contact
+## Contact
 
 Feel free to get in touch if you want a chat. Pop me an email at [iprabhatdev@gmail.com](mailto:iprabhatdev@gmail.com) or come say hello on social media.
-
-You can connect with me here ☎️👇🏻
 
 - **X:** [@caffeinedev](https://x.com/thecaffeinedev)
 - **LinkedIn:** [@prabhat](https://www.linkedin.com/in/prabhat-kumar-sahu-b9a53674/)
 - **GitHub:** [@thecaffeinedev](https://github.com/thecaffeinedev)
 - **Email:** iprabhatdev [at] gmail [dot] com
 
-## 👨🏻‍💻 In case you're wondering, this site
+## In case you're wondering, this site
 
 - Hosted on [Vercel](https://vercel.com/)
 - Built with [Astro](https://astro.build/)
 - Coded in [VS Code](https://code.visualstudio.com/)
-
-</div>

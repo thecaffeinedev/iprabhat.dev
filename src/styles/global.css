@@ -87,6 +87,39 @@
     @apply text-[#21492b] dark:text-[#d0e6d2];
     @apply decoration-[#3f6a45]/65 dark:decoration-[#7ea184]/65;
   }
+
+  .about-content {
+    @apply mx-auto max-w-[640px];
+  }
+
+  .about-content > :first-child {
+    @apply mt-0;
+  }
+
+  .about-content .about-hero {
+    @apply mx-auto max-w-[540px];
+  }
+
+  .about-content .about-hero figcaption {
+    @apply text-center;
+  }
+
+  .about-content .about-intro a {
+    @apply font-medium text-current underline underline-offset-[3px];
+    @apply decoration-[#3f6a45]/35 dark:decoration-[#7ea184]/35;
+  }
+
+  .about-content .about-intro {
+    @apply mb-8 text-[1.08rem] leading-8 text-[#4e4a43] dark:text-white/72;
+  }
+
+  .about-content p {
+    @apply text-[1.04rem];
+  }
+
+  .about-content h2 {
+    @apply mt-14;
+  }
 }
 
 header nav a[aria-current="page"] {
