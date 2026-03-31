@@ -80,12 +80,12 @@
 @layer utilities {
   article a {
     @apply font-sans text-current underline underline-offset-[3px];
-    @apply decoration-[#3f6a45]/35 dark:decoration-[#7ea184]/35;
+    @apply decoration-[#2f5d3a]/35 dark:decoration-[#73957a]/35;
     @apply transition-colors duration-300 ease-in-out;
   }
   article a:hover {
-    @apply text-[#21492b] dark:text-[#d0e6d2];
-    @apply decoration-[#3f6a45]/65 dark:decoration-[#7ea184]/65;
+    @apply text-[#1d4427] dark:text-[#d7ead9];
+    @apply decoration-[#2f5d3a]/65 dark:decoration-[#73957a]/65;
   }
 
   .about-content {
@@ -106,7 +106,7 @@
 
   .about-content .about-intro a {
     @apply font-medium text-current underline underline-offset-[3px];
-    @apply decoration-[#3f6a45]/35 dark:decoration-[#7ea184]/35;
+    @apply decoration-[#2f5d3a]/35 dark:decoration-[#73957a]/35;
   }
 
   .about-content .about-intro {
@@ -123,7 +123,15 @@
 }
 
 header nav a[aria-current="page"] {
-  @apply text-[#21492b] dark:text-[#d0e6d2];
+  @apply text-[#1d4427] dark:text-[#d7ead9];
+}
+
+.dark header nav {
+  @apply text-[#7a9f81];
+}
+
+.dark header nav a:hover {
+  @apply text-[#e7f3e8];
 }
 
 .animate {
@@ -141,6 +149,14 @@ html #back-to-top {
 
 html.scrolled #back-to-top {
   @apply pointer-events-auto opacity-100;
+}
+
+.dark #back-to-top {
+  @apply border-white/12 text-white/60;
+}
+
+.dark #back-to-top:hover {
+  @apply border-[#73957a]/30 text-[#e7f3e8];
 }
 
 /* shiki config */

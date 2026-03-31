@@ -50,4 +50,9 @@ export const SOCIALS: Socials = [
     HREF: "https://www.linkedin.com/in/prabhat-kumar-sahu-b9a53674/",
     ICON: "linkedin",
   },
+  {
+    NAME: "Instagram",
+    HREF: "https://www.instagram.com/caffeinedev/",
+    ICON: "instagram",
+  },
 ];
