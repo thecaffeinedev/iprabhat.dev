@@ -60,7 +60,7 @@
   }
 
   main {
-    @apply pb-16;
+    @apply pb-24;
   }
 
   footer {
@@ -123,7 +123,7 @@
 }
 
 header nav a[aria-current="page"] {
-  @apply text-[#1d4427] dark:text-[#d7ead9];
+  @apply bg-[#3f6a45]/10 text-[#1d4427] dark:bg-white/8 dark:text-[#d7ead9];
 }
 
 .dark header nav {

@@ -30,26 +30,29 @@ const isActive = (href: string) =>
         </div>
       </Link>
       <nav
-        class="flex items-center gap-4 text-[1.04rem] font-medium text-[#2f5d3a] dark:text-[#73957a]"
+        class="flex items-center gap-1 text-[0.95rem] font-medium text-[#2f5d3a] dark:text-[#73957a]"
       >
-        <Link
+        <a
           href="/blog"
           aria-current={isActive("/blog") ? "page" : undefined}
+          class="rounded-lg px-3 py-1.5 transition-colors duration-200 hover:bg-[#3f6a45]/8 dark:hover:bg-white/6"
         >
           blog
-        </Link>
-        <Link
+        </a>
+        <a
           href="/uses"
           aria-current={isActive("/uses") ? "page" : undefined}
+          class="rounded-lg px-3 py-1.5 transition-colors duration-200 hover:bg-[#3f6a45]/8 dark:hover:bg-white/6"
         >
           uses
-        </Link>
-        <Link
+        </a>
+        <a
           href="/about"
           aria-current={isActive("/about") ? "page" : undefined}
+          class="rounded-lg px-3 py-1.5 transition-colors duration-200 hover:bg-[#3f6a45]/8 dark:hover:bg-white/6"
         >
           about
-        </Link>
+        </a>
         <button
           id="theme-toggle"
           aria-label="Toggle theme"

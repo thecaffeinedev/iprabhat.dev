@@ -21,18 +21,18 @@ function formatDate(date: Date): string {
 
 <Layout title={HOME.TITLE} description={HOME.DESCRIPTION}>
   <Container>
-    <aside data-pagefind-ignore class="space-y-9 sm:space-y-11">
+    <aside data-pagefind-ignore class="space-y-16 sm:space-y-20">
       <section
-        class="animate max-w-[37rem] space-y-5 pt-3 sm:space-y-5.5 sm:pt-4"
+        class="animate max-w-[37rem] space-y-6 pt-6 sm:space-y-7 sm:pt-10"
       >
         <p
           class="font-serif text-[1.92rem] leading-tight font-semibold tracking-[-0.02em] text-[#25231d] sm:text-[2.22rem] dark:text-[#f5f2ea]"
         >
           Hello, I&apos;m Prabhat
         </p>
-        <div class="max-w-[31rem] space-y-3.5">
+        <div class="max-w-[31rem] space-y-5">
           <p
-            class="text-[1.03rem] leading-[1.8] text-[#3d3a33] sm:text-[1.08rem] dark:text-white/82"
+            class="text-[0.96rem] leading-[1.75] text-[#4e4a43] sm:text-[1rem] dark:text-white/72"
           >
             I work on ML infrastructure and backend systems, with a generalist
             mindset that lets me move across the stack when needed. This site is
@@ -40,14 +40,14 @@ function formatDate(date: Date): string {
             I&apos;m learning.
           </p>
           <p
-            class="text-[1.03rem] leading-[1.8] text-[#3d3a33] sm:text-[1.08rem] dark:text-white/82"
+            class="text-[0.96rem] leading-[1.75] text-[#4e4a43] sm:text-[1rem] dark:text-white/72"
           >
             Outside work, I&apos;m usually reading, lifting, watching something
             good, or trying to keep life simple enough to pay attention.
           </p>
         </div>
         <ul
-          class="flex flex-wrap items-center gap-x-5 gap-y-2 pt-1"
+          class="flex flex-wrap items-center gap-x-5 gap-y-2 pt-3"
         >
           {
             SOCIALS.map((social) => (
@@ -87,7 +87,7 @@ function formatDate(date: Date): string {
         </ul>
       </section>
 
-      <section class="animate space-y-4">
+      <section class="animate space-y-6">
         <div
           class="flex items-end justify-between gap-3 border-b border-black/6 pb-3 dark:border-white/8"
         >
@@ -104,7 +104,7 @@ function formatDate(date: Date): string {
           </Link>
         </div>
 
-        <ul class="space-y-3">
+        <ul class="space-y-4">
           {
             blog.map((post) => (
               <li class="border-b border-black/6 pb-4 last:border-b-0 dark:border-white/8">
