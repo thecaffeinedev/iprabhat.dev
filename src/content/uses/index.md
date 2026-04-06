@@ -5,9 +5,7 @@ description: "Tools, apps, and gear I use"
 
 <!-- ![Terminal](https://live.staticflickr.com/65535/54714534662_2edbc9a1d7_b.jpg "fastfetch") -->
 
-I see a lot of other developers making a "uses" page, so I figured I might as well too.
-
-The following is a list of the tools that I use on a daily basis. This page was inspired by [Wes Bos](https://wesbos.com/uses). See more pages like this [here](https://uses.tech).
+The following is a list of the tools that I use on a daily basis. This page is inspired by [Wes Bos](https://wesbos.com/uses).
 
 ## Hardware
 
@@ -33,7 +31,7 @@ The following is a list of the tools that I use on a daily basis. This page was 
 ### Code Editors & Extensions
 
 - **[Visual Studio Code](https://code.visualstudio.com/)** - Primary editor with default Dark Modern Theme
-- **[Neovim](https://neovim.io/)** - Use it time to time
+- **[Neovim](https://neovim.io/)** - Occasionally
 - **[Zed](https://zed.dev/)** - Secondary editor
 
 ### Terminal & Shell
@@ -89,10 +87,10 @@ The following is a list of the tools that I use on a daily basis. This page was 
 
 ### Development Services
 
-- **[GitHub](https://github.com/)** - Code repository stuff
+- **[GitHub](https://github.com/)** - Code hosting
 - **[AWS](https://aws.amazon.com/)** - Cloud services
 
-## 📱 Mobile & Personal
+## Mobile & Personal
 
 ### Devices
 
