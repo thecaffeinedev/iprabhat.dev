@@ -85,7 +85,7 @@ function formatDate(date: Date): string {
         </nav>
       </div>
 
-      <div class="space-y-8" id="posts-container">
+      <div class="space-y-10" id="posts-container">
         {
           years.map((year) => (
             <section
@@ -129,11 +129,15 @@ function formatDate(date: Date): string {
   .tag-filter-active {
     color: #21492b;
     font-weight: 500;
+    border-bottom: 1.5px solid #3f6a45;
+    padding-bottom: 1px;
   }
 
   .dark .tag-filter-active {
     color: #d0e6d2;
     font-weight: 500;
+    border-bottom: 1.5px solid #7ea184;
+    padding-bottom: 1px;
   }
 </style>
 
