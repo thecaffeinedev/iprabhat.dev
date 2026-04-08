@@ -73,6 +73,7 @@
     @apply prose-headings:text-[#25231d] dark:prose-headings:text-[#f5f2ea];
     @apply prose-p:text-[1.02rem] prose-p:leading-[1.82] prose-p:text-[#4e4a43] dark:prose-p:text-white/72;
     @apply prose-li:text-[1rem] prose-li:text-[#4e4a43] dark:prose-li:text-white/72;
+    @apply prose-li:marker:text-[#4e4a43] dark:prose-li:marker:text-white/50;
     @apply prose-strong:text-[#25231d] dark:prose-strong:text-[#f5f2ea];
   }
 }
@@ -119,6 +120,15 @@
 
   .about-content h2 {
     @apply mt-12;
+  }
+
+  .uses-content h3 {
+    @apply font-sans text-[1.05rem] font-semibold text-[#25231d] dark:text-[#f5f2ea];
+    @apply mt-8 mb-3;
+  }
+
+  .uses-content h2 {
+    @apply mt-14;
   }
 }
 

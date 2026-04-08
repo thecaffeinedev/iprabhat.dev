@@ -11,9 +11,9 @@ The following is a list of the tools that I use on a daily basis. This page is i
 
 ### Computer Setup
 
-- I am currently using [M1 Macbook Pro 2020 - 16GB - 512GB SSD](https://www.apple.com/in/shop/buy-mac/macbook-pro/13-inch-macbook-pro)
-- I use 27" [Samsung Gaming Monitor](https://www.samsung.com/in/monitors/gaming/odyssey-g7-27-inch-240hz-1ms-curved-lc27g75tqswxxl/)
-- Gaming PC - NVIDIA GeForce RTX 3060 Ti, 32GB RAM, 1TB SSD, Intel Core i7 12th Gen, DDR5 Gigabyte Motherboard
+- **[M1 Macbook Pro 2020](https://www.apple.com/in/shop/buy-mac/macbook-pro/13-inch-macbook-pro)** - 16GB, 512GB SSD
+- **[Samsung Gaming Monitor](https://www.samsung.com/in/monitors/gaming/odyssey-g7-27-inch-240hz-1ms-curved-lc27g75tqswxxl/)** - 27" Odyssey G7
+- **Gaming PC** - RTX 3060 Ti, 32GB RAM, 1TB SSD, i7 12th Gen
 
 ### Peripherals
 
