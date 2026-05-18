@@ -171,28 +171,28 @@ html.scrolled #back-to-top {
 
 /* shiki config */
 pre {
-  @apply border border-black/8 py-5 dark:border-white/10;
+  @apply border border-[#d8cfbf] py-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.45)] dark:border-white/10 dark:shadow-none;
   @apply rounded-lg;
-  @apply bg-[#f2ede1] dark:bg-[#1f1d18];
+  @apply bg-[#eee8dc] dark:bg-[#1f1d18];
 }
 
 :root {
-  --astro-code-foreground: #1a1a1a;
-  --astro-code-background: transparent;
-  --astro-code-token-comment: #a19595;
-  --astro-code-token-keyword: #e07050;
-  --astro-code-token-string: #5fb8a8;
-  --astro-code-token-function: #429996;
-  --astro-code-token-constant: #2b70c5;
-  --astro-code-token-parameter: #4e8fdf;
-  --astro-code-token-string-expression: #ae42a0;
-  --astro-code-token-punctuation: #8996a3;
-  --astro-code-token-link: #8d85ff;
+  --astro-code-foreground: #25231d;
+  --astro-code-background: #eee8dc;
+  --astro-code-token-comment: #7c746b;
+  --astro-code-token-keyword: #9a4b35;
+  --astro-code-token-string: #3d6970;
+  --astro-code-token-function: #5f5143;
+  --astro-code-token-constant: #285f8f;
+  --astro-code-token-parameter: #5a554d;
+  --astro-code-token-string-expression: #82507a;
+  --astro-code-token-punctuation: #777066;
+  --astro-code-token-link: #4f5f9a;
 }
 
 .dark {
   --astro-code-foreground: #fafafa;
-  --astro-code-background: transparent;
+  --astro-code-background: #1f1d18;
   --astro-code-token-comment: #a19595;
   --astro-code-token-keyword: #e8836b;
   --astro-code-token-string: #5fb8a8;
@@ -206,11 +206,11 @@ pre {
 
 /* copy code button on codeblocks */
 .copy-code {
-  @apply absolute top-3 right-3 grid size-9 place-content-center rounded-sm border border-black/8 bg-[#ece6d8] text-center duration-300 ease-in-out dark:border-white/10 dark:bg-[#252420];
+  @apply absolute top-3 right-3 grid size-9 place-content-center rounded-sm border border-[#d8cfbf] bg-[#e7dfd0] text-center text-[#5f584f] duration-300 ease-in-out dark:border-white/10 dark:bg-[#252420] dark:text-white/65;
 }
 
 .copy-code:hover {
-  @apply bg-[#e4ddcd] transition-colors dark:bg-[#2d2c28];
+  @apply border-[#bfb3a2] bg-[#ddd4c3] text-[#25231d] transition-colors dark:bg-[#2d2c28] dark:text-[#f5f2ea];
 }
 
 .copy-code:active {
