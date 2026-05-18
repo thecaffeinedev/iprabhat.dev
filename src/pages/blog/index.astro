@@ -62,7 +62,7 @@ function formatDate(date: Date): string {
         >
           <button
             data-tag="all"
-            class="tag-filter tag-filter-active px-1.5 py-0.5 text-[#7a766d] transition-colors duration-200 hover:text-[#21492b] dark:text-white/45 dark:hover:text-[#d0e6d2]"
+            class="tag-filter tag-filter-active px-1.5 py-0.5 text-[#7a766d] transition-colors duration-200 hover:text-[#25231d] dark:text-white/45 dark:hover:text-[#f5f2ea]"
           >
             all
           </button>
@@ -72,7 +72,7 @@ function formatDate(date: Date): string {
               <>
                 <button
                   data-tag={tag}
-                  class="tag-filter px-1.5 py-0.5 text-[#7a766d] transition-colors duration-200 hover:text-[#21492b] dark:text-white/45 dark:hover:text-[#d0e6d2]"
+                  class="tag-filter px-1.5 py-0.5 text-[#7a766d] transition-colors duration-200 hover:text-[#25231d] dark:text-white/45 dark:hover:text-[#f5f2ea]"
                 >
                   {tag}
                 </button>
@@ -93,7 +93,7 @@ function formatDate(date: Date): string {
               data-year={year}
             >
               <div class="flex items-center gap-3">
-                <h2 class="text-sm font-medium tracking-wide text-[#3f6a45] uppercase dark:text-[#7ea184]">
+                <h2 class="text-sm font-medium tracking-wide text-[#4e4a43] uppercase dark:text-white/55">
                   {year}
                 </h2>
                 <div class="h-px flex-1 bg-black/6 dark:bg-white/8" />
@@ -106,7 +106,7 @@ function formatDate(date: Date): string {
                   >
                     <Link href={`/blog/${post.id}`} underline={false} group>
                       <div class="group flex flex-col gap-1 sm:flex-row sm:items-baseline sm:justify-between sm:gap-4">
-                        <div class="min-w-0 text-[1.02rem] font-medium text-[#25231d] transition-colors duration-200 group-hover:text-[#21492b] dark:text-[#f5f2ea] dark:group-hover:text-[#d0e6d2]">
+                        <div class="min-w-0 text-[1.02rem] font-medium text-[#25231d] transition-colors duration-200 group-hover:text-black dark:text-[#f5f2ea] dark:group-hover:text-white">
                           {post.data.title}
                         </div>
                         <div class="shrink-0 text-sm whitespace-nowrap text-[#7a766d] tabular-nums dark:text-white/50">
@@ -127,16 +127,16 @@ function formatDate(date: Date): string {
 
 <style>
   .tag-filter-active {
-    color: #21492b;
+    color: #25231d;
     font-weight: 500;
-    border-bottom: 1.5px solid #3f6a45;
+    border-bottom: 1.5px solid #25231d;
     padding-bottom: 1px;
   }
 
   .dark .tag-filter-active {
-    color: #d0e6d2;
+    color: #f5f2ea;
     font-weight: 500;
-    border-bottom: 1.5px solid #7ea184;
+    border-bottom: 1.5px solid #f5f2ea;
     padding-bottom: 1px;
   }
 </style>
