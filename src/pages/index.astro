@@ -26,20 +26,20 @@ function formatDate(date: Date): string {
         class="animate max-w-[37rem] space-y-6 pt-6 sm:space-y-7 sm:pt-10"
       >
         <p
-          class="font-serif text-[1.92rem] leading-tight font-semibold tracking-[-0.02em] text-[#25231d] sm:text-[2.22rem] dark:text-[#f5f2ea]"
+          class="font-serif text-[1.72rem] leading-tight font-semibold tracking-[-0.03em] text-[#25231d] sm:text-[2rem] dark:text-[#f5f2ea]"
         >
           Hello, I&apos;m Prabhat
         </p>
         <div class="max-w-[31rem] space-y-5">
           <p
-            class="text-[0.96rem] leading-[1.75] text-[#4e4a43] [text-wrap:pretty] sm:text-[1rem] dark:text-white/72"
+            class="text-[0.96rem] leading-[1.75] text-[#3e3930] [text-wrap:pretty] sm:text-[1rem] dark:text-white/80"
           >
             I work on ML infrastructure and backend systems, with a generalist
             mindset driven by curiosity. This site is a mix of engineering
             notes, travel stories, life updates, and things I&apos;m learning.
           </p>
           <p
-            class="text-[0.96rem] leading-[1.75] text-[#4e4a43] [text-wrap:pretty] sm:text-[1rem] dark:text-white/72"
+            class="text-[0.96rem] leading-[1.75] text-[#3e3930] [text-wrap:pretty] sm:text-[1rem] dark:text-white/80"
           >
             Outside work, I&apos;m usually cafe-hopping for good coffee,
             watching something good, or trying to keep life simple
@@ -92,7 +92,7 @@ function formatDate(date: Date): string {
           class="flex items-end justify-between gap-3 border-b border-black/6 pb-3 dark:border-white/8"
         >
           <h2
-            class="font-serif text-[1.55rem] font-semibold text-[#25231d] dark:text-[#f5f2ea]"
+            class="font-serif text-[1.65rem] font-semibold tracking-[-0.01em] text-[#25231d] dark:text-[#f5f2ea]"
           >
             Writing
           </h2>
@@ -110,10 +110,10 @@ function formatDate(date: Date): string {
               <li class="border-b border-black/6 pb-4 last:border-b-0 dark:border-white/8">
                 <Link href={`/blog/${post.id}`} underline={false} group>
                   <div class="group flex flex-col gap-1.5 sm:flex-row sm:items-baseline sm:justify-between sm:gap-6">
-                    <div class="flex-1 text-[1rem] leading-7 font-medium text-[#25231d] transition-colors duration-200 group-hover:text-[#25231d] sm:text-[1.03rem] sm:leading-normal dark:text-[#f5f2ea] dark:group-hover:text-white">
+                    <div class="flex-1 text-[1rem] leading-7 font-semibold tracking-[-0.01em] text-[#25231d] transition-colors duration-200 group-hover:underline group-hover:underline-offset-2 sm:text-[1.02rem] sm:leading-normal dark:text-[#f5f2ea] dark:group-hover:text-white">
                       {post.data.title}
                     </div>
-                    <div class="text-sm text-[#6b675f] tabular-nums sm:min-w-[110px] sm:text-right dark:text-white/60">
+                    <div class="text-[0.8rem] text-[#9a9590] tabular-nums sm:min-w-[110px] sm:text-right dark:text-white/40">
                       {formatDate(post.data.date)}
                     </div>
                   </div>

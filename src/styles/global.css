@@ -71,9 +71,9 @@
     @apply prose prose-neutral dark:prose-invert prose-img:mx-auto prose-img:my-auto max-w-full;
     @apply prose-headings:font-serif prose-headings:font-semibold;
     @apply prose-headings:text-[#25231d] dark:prose-headings:text-[#f5f2ea];
-    @apply prose-p:text-[1.02rem] prose-p:leading-[1.82] prose-p:text-[#4e4a43] dark:prose-p:text-white/72;
-    @apply prose-li:text-[1rem] prose-li:text-[#4e4a43] dark:prose-li:text-white/72;
-    @apply prose-li:marker:text-[#4e4a43] dark:prose-li:marker:text-white/50;
+    @apply prose-p:text-[1.02rem] prose-p:leading-[1.82] prose-p:text-[#3e3930] dark:prose-p:text-white/80;
+    @apply prose-li:text-[1rem] prose-li:text-[#3e3930] dark:prose-li:text-white/80;
+    @apply prose-li:marker:text-[#3e3930] dark:prose-li:marker:text-white/50;
     @apply prose-strong:text-[#25231d] dark:prose-strong:text-[#f5f2ea];
   }
 }
@@ -111,7 +111,7 @@
   }
 
   .about-content .about-intro {
-    @apply mb-7 text-[1.05rem] leading-[1.82] text-[#4e4a43] dark:text-white/72;
+    @apply mb-7 text-[1.05rem] leading-[1.82] text-[#3e3930] dark:text-white/80;
   }
 
   .about-content p {
