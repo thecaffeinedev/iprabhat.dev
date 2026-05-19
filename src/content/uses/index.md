@@ -94,8 +94,8 @@ The following is a list of the tools that I use on a daily basis. This page is i
 
 ### Devices
 
-**Current**
-- **iPhone 17 Pro** – Daily driver since December 2025
+#### Current
+- **iPhone 17 Pro** – Since Dec 2025
 
-**Previously Used**
+#### Previously Used
 - **iPhone 13** – (2022 – 2025)

@@ -127,8 +127,13 @@
     @apply mt-8 mb-3;
   }
 
+  .uses-content h4 {
+    @apply font-sans text-[0.75rem] font-semibold uppercase tracking-[0.07em] text-[#9a9590] dark:text-white/40;
+    @apply mt-6 mb-2;
+  }
+
   .uses-content h2 {
-    @apply mt-14;
+    @apply mt-14 tracking-[-0.01em];
   }
 }
 

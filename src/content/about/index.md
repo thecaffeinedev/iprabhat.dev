@@ -9,7 +9,7 @@ description: "Learn more about Prabhat Kumar Sahu"
     alt="Prabhat sitting by the sea"
     class="h-[320px] w-full rounded-[2rem] object-cover ring-1 ring-black/8 dark:ring-white/10 sm:h-[360px]"
   />
-  <figcaption class="mt-3 text-sm text-[#6b675f] dark:text-white/50">
+  <figcaption class="mt-3 text-sm text-[#9a9590] dark:text-white/40">
     Somewhere by the sea. A good place to think.
   </figcaption>
 </figure>
@@ -20,7 +20,7 @@ description: "Learn more about Prabhat Kumar Sahu"
   <a href="https://deepedge.ai/">DeepEdge</a>.
 </p>
 
-My technical interests include software design, databases, distributed systems, machine learning, and backend infrastructure. And I enjoy working with the **Python** stack and **Go**.
+Distributed systems, software design, ML infrastructure. That's where I spend most of my time. Though I'm generally the kind of person who ends up three tabs deep into something completely unrelated. I'll read about anything if it's interesting enough.
 
 I write about my experiences in tech, personal interests, self-reflection, and my growth as a developer. In addition, I hope to become a better writer by blogging.
 
