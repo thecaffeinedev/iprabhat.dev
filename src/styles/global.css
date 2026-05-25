@@ -48,18 +48,18 @@
   body {
     @apply font-sans antialiased;
     @apply flex flex-col;
-    @apply bg-white dark:bg-neutral-900;
+    @apply bg-neutral-100 dark:bg-neutral-900;
     @apply text-gray-900 dark:text-white/75;
   }
 
   header {
     @apply sticky top-0 z-50 py-6;
-    @apply bg-white/90 dark:bg-neutral-900/90;
+    @apply bg-neutral-100/90 dark:bg-neutral-900/90;
     @apply backdrop-blur-sm;
   }
 
   main {
-    @apply flex-1 py-16;
+    @apply flex-1 pt-8 pb-16;
   }
 
   footer {
@@ -75,13 +75,12 @@
 
 @layer utilities {
   article a {
-    @apply font-sans text-current underline underline-offset-[3px];
-    @apply decoration-black/30 dark:decoration-white/30;
+    @apply font-sans underline underline-offset-[3px];
+    @apply text-[#e05a4a] decoration-[#e05a4a]/50;
     @apply transition-colors duration-300 ease-in-out;
   }
   article a:hover {
-    @apply text-black dark:text-white;
-    @apply decoration-black/50 dark:decoration-white/50;
+    @apply text-[#c44535] decoration-[#c44535]/70;
   }
 }
 

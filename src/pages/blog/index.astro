@@ -70,7 +70,7 @@ function formatDate(date: Date): string {
         {
           years.map((year) => (
             <section class="animate space-y-4" data-year={year}>
-              <h2 class="text-2xl font-bold text-blue-600 dark:text-blue-400">
+              <h2 class="text-xl font-semibold text-gray-500 dark:text-gray-400">
                 {year}
               </h2>
               <ul class="space-y-3">
@@ -103,16 +103,16 @@ function formatDate(date: Date): string {
   </Container>
 </Layout>
 
-<style>
+<style is:global>
   .tag-filter-active {
-    color: black;
+    color: black !important;
     font-weight: 500;
     border-bottom: 1.5px solid black;
     padding-bottom: 1px;
   }
 
   .dark .tag-filter-active {
-    color: white;
+    color: white !important;
     border-bottom-color: white;
   }
 </style>
