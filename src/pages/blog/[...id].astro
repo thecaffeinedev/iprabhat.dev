@@ -54,38 +54,37 @@ const { Content, headings } = await render(post);
 <Layout title={post.data.title} description={post.data.description}>
   <div
     id="reading-progress"
-    class="fixed top-0 left-0 z-[60] h-[2px] bg-[#25231d] transition-[width] duration-100 ease-out dark:bg-[#f5f2ea]"
+    class="fixed top-0 left-0 z-[60] h-[2px] bg-black transition-[width] duration-100 ease-out dark:bg-white"
     style="width: 0%"
-  >
-  </div>
+  ></div>
   <Container>
     <div class="animate">
       <BackToPrevious href="/blog">Back to blog</BackToPrevious>
     </div>
     <div class="my-10 space-y-1">
-      <div
-        class="animate flex items-center gap-1.5 text-sm text-[#9ca3af] dark:text-white/50"
-      >
-        <div>
+      <div class="animate flex items-center gap-1.5">
+        <div class="font-base text-sm">
           <FormattedDate date={post.data.date} />
         </div>
         &bull;
-        {post.body && <div>{readingTime(post.body)}</div>}
+        {post.body && (
+          <div class="font-base text-sm">
+            {readingTime(post.body)}
+          </div>
+        )}
       </div>
-      <h1
-        class="animate font-serif text-3xl font-semibold tracking-tight text-black dark:text-white"
-      >
+      <h1 class="animate text-3xl font-semibold text-black dark:text-white">
         {post.data.title}
       </h1>
       {
         post.data.tags && post.data.tags?.length > 0 ? (
-          <div class="animate flex gap-3 pt-1">
+          <div class="animate flex gap-2 pt-1">
             {post.data.tags.map((tag) => (
               <a
                 href={`/tags/${tag}`}
-                class="text-sm text-[#6b6b6b] transition-colors duration-200 hover:text-[#25231d] dark:text-white/50 dark:hover:text-[#f5f2ea]"
+                class="rounded-sm border border-black/15 px-2 py-1 text-sm transition-colors duration-300 ease-in-out hover:bg-black/5 hover:text-black focus-visible:bg-black/5 focus-visible:text-black dark:border-white/20 dark:hover:bg-white/5 dark:hover:text-white dark:focus-visible:bg-white/5 dark:focus-visible:text-white"
               >
-                #{tag}
+                {tag}
               </a>
             ))}
           </div>
@@ -112,8 +111,7 @@ const { Content, headings } = await render(post);
 
     function updateProgress() {
       const scrollTop = window.scrollY;
-      const docHeight =
-        document.documentElement.scrollHeight - window.innerHeight;
+      const docHeight = document.documentElement.scrollHeight - window.innerHeight;
       const progress = docHeight > 0 ? (scrollTop / docHeight) * 100 : 0;
       bar!.style.width = `${Math.min(progress, 100)}%`;
     }

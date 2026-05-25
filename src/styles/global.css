@@ -1,17 +1,14 @@
-@import "tailwindcss";
+@import 'tailwindcss';
 
 @plugin '@tailwindcss/typography';
 
 @custom-variant dark (&:is(.dark *));
 
 @theme {
-  --font-sans:
-    "Inter Variable", "Inter", ui-sans-serif, system-ui, sans-serif,
-    "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
-  --font-serif: "Lora", "Georgia", "Cambria", "Times New Roman", serif;
-  --font-mono:
-    "Geist Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
-    "Liberation Mono", "Courier New", monospace;
+  --font-sans: Geist Sans, ui-sans-serif, system-ui, sans-serif,
+    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
+  --font-mono: Geist Mono, ui-monospace, SFMono-Regular, Menlo, Monaco,
+    Consolas, 'Liberation Mono', 'Courier New', monospace;
 }
 
 /*
@@ -51,16 +48,18 @@
   body {
     @apply font-sans antialiased;
     @apply flex flex-col;
-    @apply bg-[#f6f2e8] dark:bg-[#171611];
-    @apply text-[#25231d] dark:text-[#f5f2ea];
+    @apply bg-white dark:bg-neutral-900;
+    @apply text-gray-900 dark:text-white/75;
   }
 
   header {
-    @apply relative z-20 py-7;
+    @apply fixed left-0 right-0 top-0 z-50 py-6;
+    @apply bg-white/75 dark:bg-neutral-900/75;
+    @apply saturate-200 backdrop-blur-xs;
   }
 
   main {
-    @apply pb-24;
+    @apply flex-1 py-32;
   }
 
   footer {
@@ -68,90 +67,33 @@
   }
 
   article {
-    @apply prose prose-neutral dark:prose-invert prose-img:mx-auto prose-img:my-auto max-w-full;
-    @apply prose-headings:font-serif prose-headings:font-semibold;
-    @apply prose-headings:text-[#25231d] dark:prose-headings:text-[#f5f2ea];
-    @apply prose-p:text-[1.02rem] prose-p:leading-[1.82] prose-p:text-[#3e3930] dark:prose-p:text-white/80;
-    @apply prose-li:text-[1rem] prose-li:text-[#3e3930] dark:prose-li:text-white/80;
-    @apply prose-li:marker:text-[#3e3930] dark:prose-li:marker:text-white/50;
-    @apply prose-strong:text-[#25231d] dark:prose-strong:text-[#f5f2ea];
+    @apply prose prose-neutral max-w-full dark:prose-invert prose-img:mx-auto prose-img:my-auto;
+    @apply prose-headings:font-semibold;
+    @apply prose-headings:text-black dark:prose-headings:text-white;
   }
 }
 
 @layer utilities {
   article a {
     @apply font-sans text-current underline underline-offset-[3px];
-    @apply decoration-[#25231d]/35 dark:decoration-white/35;
+    @apply decoration-black/30 dark:decoration-white/30;
     @apply transition-colors duration-300 ease-in-out;
   }
   article a:hover {
-    @apply text-[#25231d] dark:text-[#f5f2ea];
-    @apply decoration-[#25231d]/65 dark:decoration-white/65;
-  }
-
-  .about-content {
-    @apply mx-auto max-w-[640px];
-  }
-
-  .about-content > :first-child {
-    @apply mt-0;
-  }
-
-  .about-content .about-hero {
-    @apply mx-auto max-w-[540px];
-  }
-
-  .about-content .about-hero figcaption {
-    @apply text-center;
-  }
-
-  .about-content .about-intro a {
-    @apply font-medium text-current underline underline-offset-[3px];
-    @apply decoration-[#25231d]/35 dark:decoration-white/35;
-  }
-
-  .about-content .about-intro {
-    @apply mb-7 text-[1.05rem] leading-[1.82] text-[#3e3930] dark:text-white/80;
-  }
-
-  .about-content p {
-    @apply text-[1.02rem];
-  }
-
-  .about-content h2 {
-    @apply mt-12;
-  }
-
-  .uses-content h3 {
-    @apply font-sans text-[1.05rem] font-semibold text-[#25231d] dark:text-[#f5f2ea];
-    @apply mt-8 mb-3;
-  }
-
-  .uses-content h4 {
-    @apply font-sans text-[0.75rem] font-semibold uppercase tracking-[0.07em] text-[#9a9590] dark:text-white/40;
-    @apply mt-6 mb-2;
-  }
-
-  .uses-content h2 {
-    @apply mt-14 tracking-[-0.01em];
+    @apply text-black dark:text-white;
+    @apply decoration-black/50 dark:decoration-white/50;
   }
 }
 
 header nav a[aria-current="page"] {
-  @apply bg-[#25231d]/7 text-[#25231d] dark:bg-white/8 dark:text-[#f5f2ea];
-}
-
-.dark header nav {
-  @apply text-white/60;
-}
-
-.dark header nav a:hover {
-  @apply text-[#f5f2ea];
+  @apply text-black dark:text-white;
+  @apply underline underline-offset-[3px];
+  @apply decoration-black/60 dark:decoration-white/60;
 }
 
 .animate {
-  @apply -translate-y-1 opacity-0;
-  @apply transition-all duration-500 ease-out;
+  @apply -translate-y-3 opacity-0;
+  @apply transition-all duration-300 ease-out;
 }
 
 .animate.show {
@@ -166,42 +108,34 @@ html.scrolled #back-to-top {
   @apply pointer-events-auto opacity-100;
 }
 
-.dark #back-to-top {
-  @apply border-white/12 text-white/60;
-}
-
-.dark #back-to-top:hover {
-  @apply border-white/20 text-[#f5f2ea];
-}
-
 /* shiki config */
 pre {
-  @apply border border-[#d8cfbf] py-5 shadow-[inset_0_1px_0_rgba(255,255,255,0.45)] dark:border-white/10 dark:shadow-none;
+  @apply border border-black/15 py-5 dark:border-white/20;
   @apply rounded-lg;
-  @apply bg-[#eee8dc] dark:bg-[#1f1d18];
+  @apply bg-[#fafafa] dark:bg-[#09090b];
 }
 
 :root {
-  --astro-code-foreground: #25231d;
-  --astro-code-background: #eee8dc;
-  --astro-code-token-comment: #7c746b;
-  --astro-code-token-keyword: #9a4b35;
-  --astro-code-token-string: #3d6970;
-  --astro-code-token-function: #5f5143;
-  --astro-code-token-constant: #285f8f;
-  --astro-code-token-parameter: #5a554d;
-  --astro-code-token-string-expression: #82507a;
-  --astro-code-token-punctuation: #777066;
-  --astro-code-token-link: #4f5f9a;
+  --astro-code-foreground: #09090b;
+  --astro-code-background: transparent;
+  --astro-code-token-comment: #a19595;
+  --astro-code-token-keyword: #f47067;
+  --astro-code-token-string: #00a99a;
+  --astro-code-token-function: #429996;
+  --astro-code-token-constant: #2b70c5;
+  --astro-code-token-parameter: #4e8fdf;
+  --astro-code-token-string-expression: #ae42a0;
+  --astro-code-token-punctuation: #8996a3;
+  --astro-code-token-link: #8d85ff;
 }
 
 .dark {
   --astro-code-foreground: #fafafa;
-  --astro-code-background: #1f1d18;
+  --astro-code-background: transparent;
   --astro-code-token-comment: #a19595;
-  --astro-code-token-keyword: #e8836b;
-  --astro-code-token-string: #5fb8a8;
-  --astro-code-token-function: #7dbdba;
+  --astro-code-token-keyword: #f47067;
+  --astro-code-token-string: #00a99a;
+  --astro-code-token-function: #6eafad;
   --astro-code-token-constant: #b3cceb;
   --astro-code-token-parameter: #4e8fdf;
   --astro-code-token-string-expression: #bf7db6;
@@ -211,17 +145,13 @@ pre {
 
 /* copy code button on codeblocks */
 .copy-code {
-  @apply absolute top-3 right-3 grid size-9 place-content-center rounded-sm border border-[#d8cfbf] bg-[#e7dfd0] text-center text-[#5f584f] duration-300 ease-in-out dark:border-white/10 dark:bg-[#252420] dark:text-white/65;
+  @apply absolute right-3 top-3 grid size-9 place-content-center rounded-sm border border-black/15 bg-neutral-100 text-center duration-300 ease-in-out dark:border-white/20 dark:bg-neutral-900;
 }
 
 .copy-code:hover {
-  @apply border-[#bfb3a2] bg-[#ddd4c3] text-[#25231d] transition-colors dark:bg-[#2d2c28] dark:text-[#f5f2ea];
+  @apply bg-[#E9E9E9] transition-colors dark:bg-[#232323];
 }
 
 .copy-code:active {
   @apply scale-90 transition-transform;
-}
-
-::selection {
-  background: rgba(37, 35, 29, 0.16);
 }
