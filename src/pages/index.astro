@@ -79,7 +79,7 @@ function formatDate(date: Date): string {
       </div>
 
       <div class="mt-12 space-y-10">
-        <section class="animate space-y-4">
+        <section class="animate mx-auto max-w-lg space-y-4">
           <div class="flex items-baseline justify-between gap-6">
             <h2 class="font-semibold text-black dark:text-white">
               Latest posts
@@ -91,14 +91,14 @@ function formatDate(date: Date): string {
             {
               blog.map((post) => (
                 <li>
-                  <Link href={`/blog/${post.id}`} underline={false}>
-                    <div class="group flex flex-col gap-1">
-                      <div class="text-black group-hover:text-gray-700 dark:text-white dark:group-hover:text-gray-300 transition-colors relative">
+                  <Link href={`/blog/${post.id}`} underline={false} class="block w-full decoration-transparent">
+                    <div class="group flex items-baseline justify-between gap-4">
+                      <div class="text-black group-hover:text-gray-700 dark:text-white dark:group-hover:text-gray-300 transition-colors">
                         <span class="relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-black/50 after:transition-all after:duration-300 group-hover:after:w-full group-active:after:w-full dark:after:bg-white/50">
                           {post.data.title}
                         </span>
                       </div>
-                      <div class="text-xs text-gray-500 dark:text-gray-400 tabular-nums">
+                      <div class="shrink-0 text-xs text-gray-400 tabular-nums dark:text-gray-500">
                         {formatDate(post.data.date)}
                       </div>
                     </div>
