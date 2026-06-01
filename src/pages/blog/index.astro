@@ -24,15 +24,6 @@ const posts = data.reduce((acc: Acc, post) => {
 
 const years = Object.keys(posts).sort((a, b) => parseInt(b) - parseInt(a));
 
-const tagCounts = data.reduce((acc, post) => {
-  post.data.tags?.forEach(tag => {
-    acc[tag] = (acc[tag] || 0) + 1;
-  });
-  return acc;
-}, {} as Record<string, number>);
-
-const allTags = Object.entries(tagCounts).sort((a, b) => a[0].localeCompare(b[0]));
-
 function formatDate(date: Date): string {
   return date.toLocaleDateString("en-US", {
     month: "short",
@@ -44,49 +35,36 @@ function formatDate(date: Date): string {
 <Layout title={BLOG.TITLE} description={BLOG.DESCRIPTION}>
   <Container>
     <div class="space-y-10">
-      <div class="animate space-y-3">
-        <h1 class="text-3xl font-semibold text-black dark:text-white">
+      <div class="animate space-y-2">
+        <h1 class="text-2xl font-semibold text-black dark:text-white">
           Blog
         </h1>
-        <nav class="flex flex-wrap items-center gap-x-1 gap-y-0.5 text-sm" aria-label="Filter posts by tag">
-          <button data-tag="all" class="tag-filter tag-filter-active px-1.5 py-0.5 text-gray-500 transition-colors duration-200 hover:text-black dark:text-white/45 dark:hover:text-white">
-            all
-          </button>
-          <span class="text-black/15 dark:text-white/15">/</span>
-          {
-            allTags.map(([tag], i) => (
-              <>
-                <button data-tag={tag} class="tag-filter px-1.5 py-0.5 text-gray-500 transition-colors duration-200 hover:text-black dark:text-white/45 dark:hover:text-white">
-                  {tag}
-                </button>
-                {i < allTags.length - 1 && <span class="text-black/15 dark:text-white/15">/</span>}
-              </>
-            ))
-          }
-        </nav>
+        <p class="text-[15px] text-gray-500 dark:text-gray-400">
+          I keep meaning to write more. Haven't quite gotten there yet. Everything I've published so far, feel free to browse by <Link href="/tags">topic</Link>.
+        </p>
       </div>
 
-      <div class="space-y-12" id="posts-container">
+      <div class="space-y-8" id="posts-container">
         {
           years.map((year) => (
-            <section class="animate space-y-4" data-year={year}>
-              <h2 class="text-xl font-semibold text-gray-500 dark:text-gray-400">
+            <section class="animate space-y-3" data-year={year}>
+              <h2 class="text-xs font-medium uppercase tracking-widest text-gray-400 dark:text-gray-500">
                 {year}
               </h2>
-              <ul class="space-y-3">
+              <ul class="space-y-2">
                 {posts[year].map((post) => (
                   <li
                     class="post-item"
                     data-tags={post.data.tags?.join(",") || ""}
                   >
-                    <Link href={`/blog/${post.id}`} underline={false}>
-                      <div class="flex justify-between items-baseline gap-4 group">
-                        <div class="text-black group-hover:text-gray-700 dark:text-white dark:group-hover:text-gray-300 transition-colors flex-1">
+                    <Link href={`/blog/${post.id}`} underline={false} class="block w-full">
+                      <div class="group flex items-baseline justify-between gap-4">
+                        <div class="text-black group-hover:text-gray-700 dark:text-white dark:group-hover:text-gray-300 transition-colors">
                           <span class="relative after:absolute after:bottom-0 after:left-0 after:h-[1px] after:w-0 after:bg-black/50 after:transition-all after:duration-300 group-hover:after:w-full group-active:after:w-full dark:after:bg-white/50">
                             {post.data.title}
                           </span>
                         </div>
-                        <div class="text-sm text-gray-500 dark:text-gray-500 whitespace-nowrap">
+                        <div class="shrink-0 text-xs text-gray-400 tabular-nums dark:text-gray-500">
                           {formatDate(post.data.date)}
                         </div>
                       </div>
@@ -103,61 +81,3 @@ function formatDate(date: Date): string {
   </Container>
 </Layout>
 
-<style is:global>
-  .tag-filter-active {
-    color: black !important;
-    font-weight: 500;
-    border-bottom: 1.5px solid black;
-    padding-bottom: 1px;
-  }
-
-  .dark .tag-filter-active {
-    color: white !important;
-    border-bottom-color: white;
-  }
-</style>
-
-<script>
-  function initTagFilters() {
-    const tagFilters = document.querySelectorAll('.tag-filter[data-tag]');
-    const postItems = document.querySelectorAll('.post-item');
-    const yearSections = document.querySelectorAll('[data-year]');
-    const allFilter = document.querySelector('.tag-filter[data-tag="all"]');
-
-    tagFilters.forEach(filter => {
-      filter.addEventListener('click', () => {
-        let selectedTag = filter.getAttribute('data-tag');
-
-        if (selectedTag !== 'all' && filter.classList.contains('tag-filter-active')) {
-          selectedTag = 'all';
-          tagFilters.forEach(f => f.classList.remove('tag-filter-active'));
-          allFilter?.classList.add('tag-filter-active');
-        } else {
-          tagFilters.forEach(f => f.classList.remove('tag-filter-active'));
-          filter.classList.add('tag-filter-active');
-        }
-
-        postItems.forEach(item => {
-          const postTags = item.getAttribute('data-tags');
-          if (selectedTag === 'all' || postTags?.includes(selectedTag || '')) {
-            (item as HTMLElement).style.display = '';
-          } else {
-            (item as HTMLElement).style.display = 'none';
-          }
-        });
-
-        yearSections.forEach(section => {
-          const visiblePosts = section.querySelectorAll('.post-item:not([style*="display: none"])');
-          if (visiblePosts.length === 0) {
-            (section as HTMLElement).style.display = 'none';
-          } else {
-            (section as HTMLElement).style.display = '';
-          }
-        });
-      });
-    });
-  }
-
-  initTagFilters();
-  document.addEventListener('astro:after-swap', initTagFilters);
-</script>
