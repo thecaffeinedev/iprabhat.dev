@@ -39,19 +39,19 @@ function formatDate(date: Date): string {
         <h1 class="text-2xl font-semibold text-black dark:text-white">
           Blog
         </h1>
-        <p class="text-[15px] text-gray-500 dark:text-gray-400">
+        <p class="max-w-[60ch] text-[15px] text-gray-500 dark:text-gray-400">
           I keep meaning to write more. Haven't quite gotten there yet. Everything I've published so far, feel free to browse by <Link href="/tags">topic</Link>.
         </p>
       </div>
 
-      <div class="space-y-8" id="posts-container">
+      <div class="space-y-10" id="posts-container">
         {
           years.map((year) => (
-            <section class="animate space-y-3" data-year={year}>
+            <section class="animate space-y-3 border-t border-black/8 pt-6 dark:border-white/8" data-year={year}>
               <h2 class="text-xs font-medium uppercase tracking-widest text-gray-400 dark:text-gray-500">
-                {year}
+                {year} <span class="font-normal normal-case tracking-normal">({posts[year].length})</span>
               </h2>
-              <ul class="space-y-2">
+              <ul class="space-y-3">
                 {posts[year].map((post) => (
                   <li
                     class="post-item"
