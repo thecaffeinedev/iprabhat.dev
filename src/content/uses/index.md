@@ -3,7 +3,7 @@ title: "Uses"
 description: "Tools, apps, and gear I use"
 ---
 
-<!-- ![Terminal](https://live.staticflickr.com/65535/54714534662_2edbc9a1d7_b.jpg "fastfetch") -->
+![Terminal](https://pub-796f2d4544de4744bac07860963f1376.r2.dev/blog-posts/Setup-Prabhat.jpeg "Setup")
 
 The following is a list of the tools that I use on a daily basis. This page is inspired by [Wes Bos](https://wesbos.com/uses).
 
