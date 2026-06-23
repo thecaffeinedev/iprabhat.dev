@@ -1,0 +1,106 @@
+---
+title: "Part 2: The Transactional Outbox Pattern"
+description: "Outbox Pattern"
+date: "2026-04-28"
+draft: false
+tags: ["distributed-systems"]
+---
+
+
+This is the follow-up to [Part 1](https://iprabhat.dev/blog/2026-04-25-eda-foundations). If you haven't read it, here's the short version: we looked at how an application grows from one big program into separate services, and how those services talk by *announcing events* that other services react to. We ended on a problem, and this post is about solving it.
+
+## The problem we're solving
+
+When an order comes in, the Order Service has to do two things:
+1. Save the order in its database.
+2. Send an "order was placed" event (a message announcing what happened) to the **message broker**, the separate system that hands these messages out to whichever services care about them.
+
+The problem is what happens when one of those works and the other doesn't.
+If the save works but the message is never sent, the order exists but nobody is told. If the message goes out but the save fails, every other service starts reacting to an order that doesn't actually exist.
+
+This is the **dual-write problem**. "Dual-write" just means you're writing to two different places, the database and the broker, and you want them to either both succeed or both fail. 
+
+## Why not just send the message after the save works?
+
+This is the first thing most people try. And it *almost* works.
+
+The idea is simple. Save the order first. Only if that succeeds, send the message to the broker. That way you can't announce an order that didn't get saved, because the saving already happened.
+
+It feels fine. But there's still a gap, and the gap is *time*.
+There's a tiny moment between "the order is saved" and "the message is sent." What if, right in that moment, the program crashes? Servers crash all the time, they get restarted for updates, they run out of memory, etc. Or maybe the broker itself is down for a few seconds. 
+
+In any of those cases, the message never gets sent. And the order is *already saved*, so there's nothing to undo, and nothing anywhere reminding us that a message was still owed. The order just sits there.
+
+The natural next thought is "okay, I'll just retry sending the message a few times until it works." That helps, but it doesn't actually fix it. Those retry attempts only exist inside the running program, in its memory. 
+
+If the program itself dies mid-retry, or the broker stays down longer than you keep trying, the message vanishes along with the program. Memory doesn't survive a crash.
+
+So the real problem kinda of stays again. We need the message to survive even if the program suddenly dies. And one thing *does* survive crashes, the database. 
+
+## First, what's a transaction?
+Before the solution makes sense, there's one idea we need, and it's the thing that makes everything work, a **transaction**.
+
+A transaction is a feature every database has. It lets you bundle several changes together and tell the database, "treat all of these as one single unit, either do all of them, or do none of them."
+
+You wrap both steps in a transaction. The database then promises that either both happen, or neither does. There's no in-between.
+
+## The Outbox Pattern
+
+The reason the dual-write problem is so hard is that we're writing to *two* different systems, a database and a broker, and those two can't be wrapped in a single transaction together. The database's "both or neither" promise only covers things *inside the database*.
+
+So the Outbox Pattern asks: what if we don't write to two systems at all? What if we only write to one? When an order comes in, we don't send anything to the broker yet. Instead, we save *two things into the same database*, in one transaction:
+
+* The order itself, into the orders table.
+* The event we want to send later, into a second table called the **outbox** table.
+
+Because both of these are in the same database, we *can* wrap them in a single transaction. And then database's "both or neither" promise comes in. Either the order and its message are both saved, or neither is. They can never get out of sync. 
+
+The dual-write problem is gone because we're only writing to a single transactional system.
+
+At this point, the message hasn't been sent anywhere yet. It's sitting safely in the outbox table, written down and ready to go, but not delivered.
+
+## How the message actually gets sent
+Something needs to pick up the messages sitting in the outbox table and deliver them to the broker. The modern way to do this is a technique called **Change Data Capture**, or CDC.
+
+It turns out every database secretly keeps a kind of a log. Every time it makes a change, it first writes that change down in an internal log, called the **write-ahead log** (WAL). The database does this for its own safety, so that if it crashes, it can recover by replaying its log.
+
+Every change is already being recorded there, including every new message added to our outbox table.
+
+So we use a tool that reads this log directly and notices new entries the instant they appear. This is what Change Data Capture means, it captures every change to the data as it happens. 
+
+The popular tool for it is called **Debezium**, and it typically delivers those captured changes into Kafka (one of the common message brokers we mentioned in [Part 1](https://iprabhat.dev/blog/2026-04-25-eda-foundations)  ).
+
+Now your application's job is tiny. It just saves the order and the message into the outbox table in one transaction, exactly as we described, and Debezium watches the database's log, spots the new message, and delivers it to the broker for you, often within milliseconds. 
+
+And it's resilient. If the broker or the tool goes down for a while, nothing is lost. Debezium keeps track of how far it has read through the log, so when it comes back it simply picks up where it left off. The message can't disappear, because it was safely written into the database the whole time.
+
+The trade-off is that you're now running more machinery, the database's WAL feed, Kafka, and the CDC tool tying them together. That's more to set up and keep an eye on. But in return you get fast, reliable delivery without writing and maintaining that part yourself.
+
+## What about duplicates?
+
+This setup is reliable, but it isn't perfect, and there's one quirk you need to know about.
+A tool like Debezium can occasionally deliver the same change more than once, for example if it restarts and re-reads a bit of the database's WAL it had already covered. So every message will definitely arrive, but every now and then, one might arrive more than once. 
+
+This is called **at-least-once** delivery. Trying to make it perfectly exactly-once just drags you right back into the same kind of impossible problem we started with, so we don't fight it.
+
+Instead, we handle it on the *receiving* end. We make sure that if a service gets the same message twice, the second one does no harm. There's a word for this: **idempotent**, it just means "doing something twice has the same result as doing it once."
+
+The usual way to do this is to give every message a unique ID. Each service then keeps track of which IDs it has already handled. If a message shows up that it's seen before, it just ignores it. 
+
+You stop trying to guarantee a message is delivered *exactly* once (which is nearly impossible), and instead make it *safe* for a message to be delivered more than once (which is quite doable).
+
+## Wrapping up
+That's the entire Outbox Pattern. 
+
+You'll find this pattern everywhere, from small apps to systems handling billions of events a day.
+
+Patterns like this exist because of very specific failures people ran into in production.
+
+I will share a practical example in the next post.
+
+Thanks for reading.
+
+## Further reading
+* microservices.io — Transactional Outbox pattern: [https://microservices.io/patterns/data/transactional-outbox.html](https://microservices.io/patterns/data/transactional-outbox.html)
+* Debezium — Outbox Event Router: [https://debezium.io/documentation/reference/stable/transformations/outbox-event-router.html](https://debezium.io/documentation/reference/stable/transformations/outbox-event-router.html)
+* Debezium — Outbox pattern example : [https://github.com/debezium/debezium-examples/blob/main/outbox/README.md](https://github.com/debezium/debezium-examples/blob/main/outbox/README.md)

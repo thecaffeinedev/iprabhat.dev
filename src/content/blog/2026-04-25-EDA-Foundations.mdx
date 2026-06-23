@@ -1,0 +1,152 @@
+---
+title: "Part 1: Event-Driven Architecture: How It Works"
+description: "Event-Driven Architecture: How It Works"
+date: "2026-04-25"
+draft: false
+tags: ["distributed-systems"]
+---
+
+
+This post is going to be a bit long, so I added section headers. Feel free to skip around
+
+This post is part of a three-part series:
+
+- Part 1: [Event-Driven Systems — The Foundations](https://iprabhat.dev/blog/2026-04-25-eda-foundations)
+- Part 2: [The Outbox Pattern and CDC](https://iprabhat.dev/blog/2026-04-28-outbox-pattern)
+- Part 3: [Running the Outbox Pattern End-to-End](https://iprabhat.dev/blog/2026-05-01-outbox-pattern-implementation)
+
+
+## Intro
+Let's take a simple example of building an online shopping application.
+
+A real shopping application can have hundreds of features, but for this post we'll focus on one specific area , events and how systems communicate with each other.
+
+Now, A customer visits your site, browses a few products, adds something to the cart, and places an order.
+
+Once the order is placed, a lot of things need to happen:
+
+* Save the order to your database.
+* Send the customer a confirmation email.
+* The warehouse should be informed so it can pack and ship the item.
+* Update the inventory counts.
+* Push data to your analytics pipeline.
+
+And there are many more. 
+
+When you're starting out, the simplest approach is usually one application that handles everything.
+
+The order comes in, and the code executes one step after another. Save the order. Update inventory. Send an email. Notify shipping. It’s Simple.
+
+In other words, a monolith. Everything in one codebase, one deployment. 
+
+For small products, this is often the right choice.
+
+In fact, for most of the history of web software, this is how systems were built. And for many projects today, it's still a perfectly reasonable place to start.
+
+I'm also not going to get into another monolith vs microservices debate. We've all seen enough examples by now to know that both approaches can work when used in the right context. The answer is “It depends” 
+
+## When Things Start Growing
+
+Now imagine your store takes off. Instead of 50 or 100 orders a day, you're processing 100K or 300K orders every day. Then maybe you hire more engineers to handle things. The team size will grow and the codebase also. 
+
+At some point, even if different teams are working on completely different areas of the product, they're still tied to the same application and deployment process.
+
+Let’s say, the payment team wants to deploy independently . The checkout team has its own roadmap. Shipping wants to move faster. Some parts of the system need significantly more resources than others.
+
+Eventually, you hit the point where you decide to split things apart into standalone services like:
+
+* Order Service
+* Payment Service
+* Email Service
+* Shopping Cart Service
+
+And many more.
+
+Now a question comes:
+
+**How do these services communicate with each other?**
+### Option 1: Direct Communication
+This is the most straightforward approach. When an order is placed, the Order Service directly calls the Payment Service. After that, it calls the Inventory Service. Then the Email Service. And so on.
+
+This is known as **synchronous communication** because each service waits for a response before continuing.
+
+Usually, this is done through REST APIs. It's straightforward and easy to reason about.
+
+But as the system grows, some downsides start showing up:
+* Service A calls Service B, which calls Service C. If Service C is slow or unavailable, everything upstream is blocked.
+* Services become tightly coupled to each other. 
+* Customers may end up waiting for operations that don't actually need to happen immediately.
+### Option 2: Event-Driven Communication
+Instead of telling every service what to do, the Order Service can simply announce what happened and move on.
+
+Examples:
+* OrderPlaced
+* PaymentReceived
+* ItemShipped
+
+These announcements are called **events**. An event is simply a record of something that already happened. Notice how those are all in the past tense? That’s because events describe immutable facts of things that *already happened*, not instructions on what to do next
+
+The Order Service publishes an event and moves on.
+
+Any service that cares can listen and react in its own time:
+* Email Service sends a confirmation email.
+* Inventory Service updates stock.
+* Warehouse Service starts packing.
+* Analytics Service records the sale.
+
+The services don't need to know about each other. They only need to know about the event.
+
+This is **Event-Driven Architecture (EDA).** You'll push these announcements through a message broker whether that’s Kafka, RabbitMQ, NATS, EventBridge, SNS, SQS, whatever fits your stack.
+
+The pro’s are:
+* Loose coupling
+* Better resilience
+* Easier to extend
+* Scales independently
+
+⠀The downside:
+* There are way more moving parts to manage and deploy
+* Harder to debug
+* Eventual consistency ( eg: meaning that confirmation email might show up a few seconds late, and you have to design around that))
+  
+Event-driven systems are harder to reason about. You can't read one file top-to-bottom to see what happens when an order is placed; the logic is scattered across listeners. 
+
+Things settle correctly, but not instantly, that confirmation email might land two seconds after checkout, not the same millisecond. And when something breaks, you're tracing an event across services instead of stepping through one function.
+
+## So which should you use?
+Neither is "better." They're tools for different jobs. The trade-offs depend on your problem, your scale, your team.
+
+To be honest, almost every production system I have seen ends up using a mix of both.  For example, they might use a synchronous REST call for critical paths like payment processing (where you need an immediate response), and events for everything else (emails, shipping, analytics, etc.).
+
+## A practical challenge
+So far, event-driven systems sound great. But there's still a problem.
+
+When an order is placed, the Order Service usually has two responsibilities:
+
+1. Save the order in the database.
+2. Publish an OrderPlaced event.
+
+What if the first succeeds and the second fails? The order is saved, but nobody knows. Or the event goes out and the database write fails, so your whole system reacts to an order that doesn't exist. 
+
+This is known as the **dual-write problem**.
+
+The challenge is that you're trying to perform two separate operations:
+* Write to a database.
+* Publish a message.
+
+And you want them to either both succeed or both fail.
+
+Doing that reliably across different systems is harder than it sounds. This problem shows up in many event-driven systems, and over time a few common solutions have emerged.
+
+One of the most widely used approaches is the **Outbox Pattern**.
+
+We'll look at how it works in the next post.
+
+_Note: This post is written by me. I have used an LLM only for grammar and wording improvements. The content and opinions are my own._
+
+## Further reading
+* AWS Event-Driven Architecture overview: [https://aws.amazon.com/event-driven-architecture/](https://aws.amazon.com/event-driven-architecture/)
+* Walmart Global Tech - Reliably Processing Trillions of Kafka Messages Per Day: [https://medium.com/walmartglobaltech/reliably-processing-trillions-of-kafka-messages-per-day-23494f553ef9](https://medium.com/walmartglobaltech/reliably-processing-trillions-of-kafka-messages-per-day-23494f553ef9)
+* Walmart Global Tech - Microservices & EDA articles: [https://medium.com/walmartglobaltech/tagged/microservices](https://medium.com/walmartglobaltech/tagged/microservices)
+* Kong - The API Mandate (the Bezos memo story): [https://konghq.com/blog/enterprise/api-mandate](https://konghq.com/blog/enterprise/api-mandate)
+* Nordic APIs - The Bezos API Mandate: [https://nordicapis.com/the-bezos-api-mandate-amazons-manifesto-for-externalization/](https://nordicapis.com/the-bezos-api-mandate-amazons-manifesto-for-externalization/)
