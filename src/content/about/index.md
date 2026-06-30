@@ -3,13 +3,13 @@ title: "About"
 description: "Learn more about Prabhat Kumar Sahu"
 ---
 
-<figure class="about-hero not-prose mb-10">
+<figure class="about-hero not-prose mb-0">
   <img
     src="/pks8.jpeg"
     alt="Prabhat sitting by the sea"
-    class="h-[320px] w-full rounded-[2rem] object-cover ring-1 ring-black/8 dark:ring-white/10 sm:h-[360px]"
+    class="h-[300px] w-full rounded-[18px] object-cover sm:h-[380px]"
   />
-  <figcaption class="mt-3 text-sm text-[#9a9590] dark:text-white/40">
+  <figcaption class="mt-3.5 mb-[42px] text-[14px] text-muted">
     Somewhere by the sea. A good place to think.
   </figcaption>
 </figure>

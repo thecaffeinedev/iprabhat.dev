@@ -31,17 +31,13 @@ function buildToc(headings: Heading[]) {
 }
 ---
 
-<details
-  open
-  class="animate group rounded-lg border border-black/8 dark:border-white/10"
+<nav
+  class="animate not-prose my-10 max-w-[560px] rounded-l-none rounded-r-[12px] border border-border border-l-[3px] border-l-accent bg-surface2 px-[26px] pb-[18px] pt-[22px]"
 >
-  <summary
-    class="cursor-pointer rounded-t-lg px-3 py-1.5 font-medium transition-colors group-open:bg-black/5 hover:bg-black/5 dark:group-open:bg-white/5 hover:dark:bg-white/5"
-    >Table of Contents</summary
-  >
-  <nav>
-    <ul class="py-3">
-      {toc.map((heading) => <TableOfContentsHeading heading={heading} />)}
-    </ul>
-  </nav>
-</details>
+  <p class="mb-3.5 font-mono text-[11.5px] uppercase tracking-[2.5px] text-muted">
+    Contents
+  </p>
+  <ul>
+    {toc.map((heading, i) => <TableOfContentsHeading heading={heading} index={i + 1} />)}
+  </ul>
+</nav>
