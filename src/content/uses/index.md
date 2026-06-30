@@ -3,7 +3,13 @@ title: "Uses"
 description: "Tools, apps, and gear I use"
 ---
 
-![Terminal](https://pub-796f2d4544de4744bac07860963f1376.r2.dev/blog-posts/Setup-Prabhat.jpeg "Setup")
+<figure class="uses-hero not-prose mb-10">
+  <img
+    src="https://pub-796f2d4544de4744bac07860963f1376.r2.dev/blog-posts/uses-setup.jpeg"
+    alt="My desk setup"
+    class="block h-auto w-full rounded-[18px]"
+  />
+</figure>
 
 The following is a list of the tools that I use on a daily basis. This page is inspired by [Wes Bos](https://wesbos.com/uses).
 
