@@ -20,7 +20,7 @@ description: "Learn more about Prabhat Kumar Sahu"
   <a href="https://deepedge.ai/">DeepEdge</a>.
 </p>
 
-Distributed systems, software design, ML infrastructure. That's where I spend most of my time. Though I'm generally the kind of person who ends up three tabs deep into something completely unrelated. I'll read about anything if it's interesting enough.
+I spend most of my time working on distributed systems, software design, and ML infrastructure. But I also enjoy exploring random topics that have nothing to do with my day job. Curiosity gets the better of me more often than not.
 
 I write about my experiences in tech, personal interests, self-reflection, and my growth as a developer. In addition, I hope to become a better writer by blogging.
 
