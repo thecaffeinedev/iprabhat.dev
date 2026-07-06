@@ -47,13 +47,23 @@ const { Content, headings } = await render(project);
         (project.data.demoURL || project.data.repoURL) && (
           <nav class="flex gap-1">
             {project.data.demoURL && (
-              <Link href={project.data.demoURL} external>
+              <Link
+                href={project.data.demoURL}
+                external
+                data-umami-event="project-demo"
+                data-umami-event-project={project.id}
+              >
                 demo
               </Link>
             )}
             {project.data.demoURL && project.data.repoURL && <span>/</span>}
             {project.data.repoURL && (
-              <Link href={project.data.repoURL} external>
+              <Link
+                href={project.data.repoURL}
+                external
+                data-umami-event="project-repo"
+                data-umami-event-project={project.id}
+              >
                 repo
               </Link>
             )}
