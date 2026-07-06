@@ -6,7 +6,13 @@ export const SITE: Site = {
   EMAIL: "iprabhatdev@gmail.com",
   NUM_POSTS_ON_HOMEPAGE: 3,
   NUM_PROJECTS_ON_HOMEPAGE: 3,
-  GA_MEASUREMENT_ID: "G-1M4YEK0F3D", 
+  // One provider at a time: { PROVIDER: "google", MEASUREMENT_ID: "G-..." }
+  // or { PROVIDER: "umami", WEBSITE_ID: "...", SRC: "https://.../script.js" }
+  ANALYTICS: {
+    PROVIDER: "umami",
+    WEBSITE_ID: "3cb1b39a-4dc9-4f58-bcb4-c257e61d9ac5",
+    SRC: "https://cloud.umami.is/script.js",
+  },
 };
 
 export const HOME: Metadata = {

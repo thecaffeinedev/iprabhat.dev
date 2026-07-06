@@ -98,28 +98,32 @@ if (SITE.EMAIL) {
 <link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
 <script is:inline src="/pagefind/pagefind-ui.js"></script>
 
-<!-- Google Analytics -->
-{SITE.GA_MEASUREMENT_ID && (
+<!-- Analytics (one provider, configured via SITE.ANALYTICS) -->
+{SITE.ANALYTICS?.PROVIDER === "google" && (
   <>
-    <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.GA_MEASUREMENT_ID}`}></script>
-    <script is:inline define:vars={{ GA_MEASUREMENT_ID: SITE.GA_MEASUREMENT_ID }}>
+    <script is:inline async src={`https://www.googletagmanager.com/gtag/js?id=${SITE.ANALYTICS.MEASUREMENT_ID}`}></script>
+    <script is:inline define:vars={{ GA_MEASUREMENT_ID: SITE.ANALYTICS.MEASUREMENT_ID }}>
       window.dataLayer = window.dataLayer || [];
       function gtag(){dataLayer.push(arguments);}
       gtag('js', new Date());
       gtag('config', GA_MEASUREMENT_ID);
-    </script>
-    
-    <!-- Track view transitions as page views -->
-    <script is:inline define:vars={{ GA_MEASUREMENT_ID: SITE.GA_MEASUREMENT_ID }}>
+
+      // Track view transitions as page views
       document.addEventListener('astro:after-swap', () => {
-        if (typeof gtag !== 'undefined') {
-          gtag('config', GA_MEASUREMENT_ID, {
-            page_path: window.location.pathname,
-          });
-        }
+        gtag('config', GA_MEASUREMENT_ID, {
+          page_path: window.location.pathname,
+        });
       });
     </script>
   </>
+)}
+{SITE.ANALYTICS?.PROVIDER === "umami" && (
+  <script
+    is:inline
+    defer
+    src={SITE.ANALYTICS.SRC}
+    data-website-id={SITE.ANALYTICS.WEBSITE_ID}
+  ></script>
 )}
 
 <ClientRouter />
