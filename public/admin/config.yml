@@ -1,0 +1,78 @@
+# yaml-language-server: $schema=https://unpkg.com/@sveltia/cms/schema/sveltia-cms.json
+backend:
+  name: github
+  repo: thecaffeinedev/iprabhat.dev
+  branch: main
+
+
+publish_mode: editorial_workflow
+
+media_folder: public/blog
+public_folder: /blog
+
+collections:
+  - name: blog
+    label: Blog Posts
+    label_singular: Post
+    folder: src/content/blog
+    create: true
+    extension: mdx
+    format: frontmatter
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    summary: "{{title}}"
+    sortable_fields: [date, title]
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Description, name: description, widget: text }
+      - {
+          label: Date,
+          name: date,
+          widget: datetime,
+          format: "YYYY-MM-DD",
+          time_format: false,
+        }
+      - { label: Draft, name: draft, widget: boolean, default: false, required: false }
+      - { label: Tags, name: tags, widget: list, required: false }
+      - { label: Body, name: body, widget: markdown }
+
+  - name: projects
+    label: Projects
+    label_singular: Project
+    folder: src/content/projects
+    create: true
+    extension: md
+    format: frontmatter
+    path: "{{slug}}/index"
+    summary: "{{title}}"
+    fields:
+      - { label: Title, name: title, widget: string }
+      - { label: Description, name: description, widget: text }
+      - {
+          label: Date,
+          name: date,
+          widget: datetime,
+          format: "MM/DD/YYYY",
+          time_format: false,
+        }
+      - { label: Draft, name: draft, widget: boolean, default: false, required: false }
+      - { label: Demo URL, name: demoURL, widget: string, required: false }
+      - { label: Repo URL, name: repoURL, widget: string, required: false }
+      - { label: Body, name: body, widget: markdown }
+
+  - name: pages
+    label: Pages
+    files:
+      - name: about
+        label: About
+        file: src/content/about/index.md
+        fields:
+          - { label: Title, name: title, widget: string }
+          - { label: Description, name: description, widget: text }
+          - { label: Body, name: body, widget: markdown }
+      - name: uses
+        label: Uses
+        file: src/content/uses/index.md
+        fields:
+          - { label: Title, name: title, widget: string }
+          - { label: Description, name: description, widget: text }
+          - { label: Body, name: body, widget: markdown }
