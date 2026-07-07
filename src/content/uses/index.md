@@ -1,6 +1,6 @@
 ---
-title: "Uses"
-description: "Tools, apps, and gear I use"
+title: Uses
+description: Tools, apps, and gear I use
 ---
 
 <figure class="uses-hero not-prose mb-10">
@@ -17,91 +17,95 @@ The following is a list of the tools that I use on a daily basis. This page is i
 
 ### Computer Setup
 
-- **[M1 Macbook Pro 2020](https://www.apple.com/in/shop/buy-mac/macbook-pro/13-inch-macbook-pro)** - 16GB, 512GB SSD
-- **[Samsung Gaming Monitor](https://www.samsung.com/in/monitors/gaming/odyssey-g7-27-inch-240hz-1ms-curved-lc27g75tqswxxl/)** - 27" Odyssey G7
+- [**M1 MacBook Pro 2020**](https://www.apple.com/in/shop/buy-mac/macbook-pro/13-inch-macbook-pro) - 16GB, 512GB SSD
+- [**Samsung Gaming Monitor**](https://www.samsung.com/in/monitors/gaming/odyssey-g7-27-inch-240hz-1ms-curved-lc27g75tqswxxl/) - 27" Odyssey G7
 - **Gaming PC** - RTX 3060 Ti, 32GB RAM, 1TB SSD, i7 12th Gen
 
 ### Peripherals
 
-- **[Keychron K2-V2](https://keychron.in/product/keychron-k2-v-2/)** - Wireless mechanical keyboard with Blue switches
-- **[Logitech K380s](https://www.logitech.com/en-in/shop/p/pebble-keys-2.920-011753)** - Wireless minimalist and slim keyboard
-- **[Logitech MX MASTER 3S](https://www.logitech.com/en-in/products/mice/mx-master-3s.910-006561.html)** - Wireless mouse
-- **[Razor Viper 8K](https://www.amazon.in/Razer-Ambidextrous-Esports-Polling-Optical/dp/B08P1PWN2Q)** - Wired Gaming mouse
+- [**Keychron K2-V2**](https://keychron.in/product/keychron-k2-v-2/) - Wireless mechanical keyboard with Blue switches
+- [**Logitech K380s**](https://www.logitech.com/en-in/shop/p/pebble-keys-2.920-011753) - Wireless minimalist and slim keyboard
+- [**Logitech MX MASTER 3S**](https://www.logitech.com/en-in/products/mice/mx-master-3s.910-006561.html) - Wireless mouse
+- [**Razor Viper 8K**](https://www.amazon.in/Razer-Ambidextrous-Esports-Polling-Optical/dp/B08P1PWN2Q) - Wired Gaming mouse
 
 ### Workspace
 
-- **[IKEA Thyge Desk](https://www.ikea.com/sg/en/p/thyge-desk-white-silver-colour-s19245192/)** - Height adjustable
+- [**IKEA Thyge Desk**](https://www.ikea.com/sg/en/p/thyge-desk-white-silver-colour-s19245192/) - Height adjustable
 
 ## Software & Development
 
 ### Code Editors & Extensions
 
-- **[Visual Studio Code](https://code.visualstudio.com/)** - Primary editor with default Dark Modern Theme
-- **[Neovim](https://neovim.io/)** - Occasionally
-- **[Zed](https://zed.dev/)** - Secondary editor
+- [**Visual Studio Code**](https://code.visualstudio.com/) - Primary editor with default Dark Modern Theme
+- [**Neovim**](https://neovim.io/) - Occasionally
+- [**Zed**](https://zed.dev/) - Secondary editor
 
 ### Terminal & Shell
 
-- **[Ghostty](https://ghostty.org/)** - Terminal emulator
-- **[Starship](https://starship.rs/)** - Cross-shell prompt
+- [**Ghostty**](https://ghostty.org/) - Terminal emulator
+- [**Starship**](https://starship.rs/) - Cross-shell prompt
 - **Zsh** - Default shell
 
 ### CLI Tools
 
-- **[exa](https://github.com/ogham/exa)** - `ls` replacement with [aliases](https://github.com/gazorby/fish-exa)
-- **[fzf](https://github.com/junegunn/fzf)** - Fuzzy finder
-- **[tldr](https://github.com/dbrgn/tealdeer)** - Simplified man pages
-- **[bat](https://github.com/sharkdp/bat)** - Better `cat` with syntax highlighting
+- [**exa**](https://github.com/ogham/exa) - `ls` replacement with [aliases](https://github.com/gazorby/fish-exa)
+- [**fzf**](https://github.com/junegunn/fzf) - Fuzzy finder
+- [**tldr**](https://github.com/dbrgn/tealdeer) - Simplified man pages
+- [**bat**](https://github.com/sharkdp/bat) - Better `cat` with syntax highlighting
 
 ### Development Tools
 
-- **[Docker](https://www.docker.com/)** - Container management
-- **[Git](https://git-scm.com/)** - Version control
-- **[HTTPie](https://httpie.io/)** - GUI and Command-line HTTP client
-- **[Bruno](https://www.usebruno.com/)** - API testing and development
-- **[Beekeeper Studio](https://www.beekeeperstudio.io/)** - SQL database GUI
-- **[Medis](https://getmedis.com/)** - Redis GUI client
-- **[RedisInsight](https://redis.com/redis-enterprise/redis-insight/)** - Redis GUI by Redis Team
+- [**Docker**](https://www.docker.com/) - Container management
+- [**Git**](https://git-scm.com/) - Version control
+- [**HTTPie**](https://httpie.io/) - GUI and Command-line HTTP client
+- [**Bruno**](https://www.usebruno.com/) - API testing and development
+- [**Beekeeper Studio**](https://www.beekeeperstudio.io/) - SQL database GUI
+- [**Medis**](https://getmedis.com/) - Redis GUI client
+- [**RedisInsight**](https://redis.com/redis-enterprise/redis-insight/) - Redis GUI by Redis Team
 
 ## Applications
 
 ### Browsers & Web
 
-- **[Chrome](https://www.google.com/)** - Primary browser
-- **[Firefox](https://www.mozilla.org/firefox/)** - Secondary browser
+- [**Chrome**](https://www.google.com/) - Primary browser
+- [**Firefox**](https://www.mozilla.org/firefox/) - Secondary browser
 
 ### Productivity & Utilities
 
-- **[Bear](https://bear.app/)** - Note-taking and writing
-- **[UpNote](https://getupnote.com/)** - Additional note-taking app
-- **[Rectangle](https://rectangleapp.com/)** - Window management
-- **[1Password](https://1password.com/)** - Password manager
+- [**Bear**](https://bear.app/) - Note-taking and writing
+- [**UpNote**](https://getupnote.com/) - Additional note-taking app
+- [**Rectangle**](https://rectangleapp.com/) - Window management
 
 ### Audio & Communication
 
-- **[AirPods Pro](https://www.apple.com/airpods-pro/)** - Daily driver
-- **[OnePlus Buds 3](https://www.oneplus.in/oneplus-buds-3)** - Secondary driver
-- **[HyperX QuadCast Microphone](https://hyperx.com/products/hyperx-quadcast-usb-microphone)** - Primary Microphone / Podcast Mic
+- [**OnePlus Buds 3**](https://www.oneplus.in/oneplus-buds-3) - Primary
+- [**HyperX QuadCast Microphone**](https://hyperx.com/products/hyperx-quadcast-usb-microphone) - Primary Microphone / Podcast Mic
+- [**AirPods Pro**](https://www.apple.com/airpods-pro/) - Not using anymore
 
 ## Services & Hosting
 
 ### Domain & Hosting
 
-- **[Namecheap](https://www.namecheap.com/)** - Domain registrar
-- **[Vercel](https://vercel.com/)** - Website hosting
-- **[Railway](https://railway.app/)** - Fast deployment and prototyping
+- [**Namecheap**](https://www.namecheap.com/) - Domain registrar
+- [**Vercel**](https://vercel.com/) - Website hosting
+- [**Railway**](https://railway.app/) - Fast deployment and prototyping
 
 ### Development Services
 
-- **[GitHub](https://github.com/)** - Code hosting
-- **[AWS](https://aws.amazon.com/)** - Cloud services
+- [**GitHub**](https://github.com/) - Code hosting
+- [**AWS**](https://aws.amazon.com/) - Cloud services
 
 ## Mobile & Personal
 
 ### Devices
 
 #### Current
+
 - **iPhone 17 Pro** – Since Dec 2025
 
 #### Previously Used
+
 - **iPhone 13** – (2022 – 2025)
+- **OnePlus 7T** - (2020 Mid -2022)
+- **Asus Zenfone Max Pro M2** - (2019-2020 Mid) 
+- **Moto G3** - (2015-2019)
