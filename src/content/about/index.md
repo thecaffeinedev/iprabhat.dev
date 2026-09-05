@@ -16,8 +16,8 @@ description: Learn more about Prabhat Kumar Sahu
 
 <p class="about-intro">
   <strong>Hi there, my name is Prabhat.</strong>
-  I build software, mostly around distributed systems and ML infrastructure. I previously worked at <strong> <a href="https://deepedge.ai/">DeepEdge</a> </strong> as a <strong>Lead MLEngineer</strong>  and these days I'm exploring ideas, building things, and figuring out what I want to work on next.
-  
+  I build software, mostly around distributed systems and ML infrastructure. I previously worked at <strong> <a href="https://deepedge.ai/">DeepEdge</a> </strong> as a <strong>Lead ML Engineer</strong>  and these days I'm exploring ideas, building things, and figuring out what I want to work on next.
+
 </p>
 
 My interests tend to wander well beyond work. I enjoy exploring random topics that have nothing to do with my day job. Curiosity gets the better of me more often than not.
