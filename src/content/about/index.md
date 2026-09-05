@@ -1,6 +1,6 @@
 ---
-title: "About"
-description: "Learn more about Prabhat Kumar Sahu"
+title: About
+description: Learn more about Prabhat Kumar Sahu
 ---
 
 <figure class="about-hero not-prose mb-0">
@@ -16,11 +16,11 @@ description: "Learn more about Prabhat Kumar Sahu"
 
 <p class="about-intro">
   <strong>Hi there, my name is Prabhat.</strong>
-  I'm a software engineer working on <strong>ML infrastructure</strong> at
-  <a href="https://deepedge.ai/">DeepEdge</a>.
+  I build software, mostly around distributed systems and ML infrastructure. I previously worked at <strong> <a href="https://deepedge.ai/">DeepEdge</a> </strong> as a <strong>Lead MLEngineer</strong>  and these days I'm exploring ideas, building things, and figuring out what I want to work on next.
+  
 </p>
 
-I spend most of my time working on distributed systems, software design, and ML infrastructure. But I also enjoy exploring random topics that have nothing to do with my day job. Curiosity gets the better of me more often than not.
+My interests tend to wander well beyond work. I enjoy exploring random topics that have nothing to do with my day job. Curiosity gets the better of me more often than not.
 
 I write about my experiences in tech, personal interests, self-reflection, and my growth as a developer. In addition, I hope to become a better writer by blogging.
 
@@ -28,10 +28,10 @@ When I'm not hacking away on a project, I enjoy watching tv series, anime, writi
 
 ## Timeline
 
-- **Aug 2020 – Present** · DeepEdge, Hyderabad · *Machine Learning Engineer*
-- **Jun 2019 – Mar 2020** · Frolic, Hyderabad · *ML Intern*
-- **May 2018 – Jul 2018** · Central University Of Rajasthan · *Machine Learning Intern*
-- **2015 – 2019** · SUIIT, Burla, Odisha · *B.Tech in Computer Science Engineering*
+- **Aug 2020 – Aug 2026** · DeepEdge, Hyderabad · MLEngineer → Lead ML Engineer
+- **Jun 2019 – Mar 2020** · Frolic, Hyderabad · _ML Intern_
+- **May 2018 – Jul 2018** · Central University Of Rajasthan · _Machine Learning Intern_
+- **2015 – 2019** · SUIIT, Burla, Odisha · _B.Tech in Computer Science Engineering_
 
 ## Contact
 
