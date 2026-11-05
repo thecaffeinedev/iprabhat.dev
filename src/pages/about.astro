@@ -14,9 +14,18 @@ const { Content } = await render(entry);
 
 <Layout title={entry.data.title} description={entry.data.description}>
   <Container>
-    <div class="space-y-8">
-      <div>
-        <h1 class="page-title mt-4">About</h1>
+    <div class="about-page">
+      <div class="about-heading">
+        <p class="section-label mb-5">About</p>
+        <div class="about-portrait">
+          <img
+            src="/pks8.jpeg"
+            alt="Prabhat standing by the sea at sunset"
+            width="2162"
+            height="1452"
+          />
+        </div>
+        <h1 class="page-title about-name">Prabhat Kumar Sahu</h1>
       </div>
       <article class="about-content prose dark:prose-invert">
         <Content />

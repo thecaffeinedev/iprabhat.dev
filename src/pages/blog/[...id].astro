@@ -96,7 +96,7 @@ const { Content, headings } = await render(post);
       }
     </div>
     {headings.length > 0 && <TableOfContents headings={headings} />}
-    <article data-pagefind-body>
+    <article data-pagefind-body class="reading-content">
       <Content />
     </article>
     <div class="mt-12">

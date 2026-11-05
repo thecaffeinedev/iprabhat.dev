@@ -335,3 +335,35 @@ article :where(h2, h3, h4) {
     scroll-behavior: auto !important;
   }
 }
+
+/* A compact portrait above the About introduction. */
+.about-portrait {
+  width: 112px;
+  aspect-ratio: 1;
+  overflow: hidden;
+  border-radius: 50%;
+  background: var(--surface);
+}
+.about-portrait img {
+  display: block;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 48% 65%;
+  transform: scale(2.6);
+  transform-origin: 50% 65%;
+}
+/* About introduction spacing within the shared page grid. */
+.about-page { padding-top: 16px; }
+.about-name { margin-top: 24px; }
+.about-heading { margin-bottom: 32px; }
+.about-content { max-width: none; }
+.about-content > p:first-child { margin-top: 0; }
+.about-content > p { margin-block: 0 24px; }
+@media (min-width: 640px) {
+  .about-name { font-size: 48px; }
+  .about-heading { margin-bottom: 32px; }
+}
+
+/* Limit long-form line length while preserving the shared left alignment. */
+article.reading-content { max-width: 72ch; }
