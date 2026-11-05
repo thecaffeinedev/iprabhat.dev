@@ -6,10 +6,10 @@ const { entry } = Astro.props;
 
 <a
   href={`/${entry.collection}/${entry.id}`}
-  class="not-prose group border-border text-body hover:text-accent block border-b py-5 transition-colors"
+  class="not-prose group border-border/60 text-body hover:text-accent block border-b py-5 transition-colors"
 >
   <div
-    class="text-ink group-hover:text-accent text-lg leading-snug font-semibold"
+    class="text-ink group-hover:text-accent text-lg leading-snug font-medium"
   >
     {entry.data.title}
   </div>

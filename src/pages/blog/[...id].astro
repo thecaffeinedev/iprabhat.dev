@@ -62,7 +62,7 @@ const { Content, headings } = await render(post);
     <div>
       <BackToPrevious href="/blog">Back to blog</BackToPrevious>
     </div>
-    <div class="mt-[34px] mb-10 space-y-3.5">
+    <div class="mt-5 mb-6 space-y-2.5">
       <div class="text-muted flex items-center gap-2 font-mono text-[13px]">
         <FormattedDate date={post.data.date} />
         {
@@ -79,7 +79,7 @@ const { Content, headings } = await render(post);
       </h1>
       {
         post.data.tags && post.data.tags?.length > 0 ? (
-          <div class="flex flex-wrap gap-[9px] pt-1">
+          <div class="flex flex-wrap gap-[9px]">
             {post.data.tags.map((tag) => (
               <a
                 href={`/tags/${tag}`}

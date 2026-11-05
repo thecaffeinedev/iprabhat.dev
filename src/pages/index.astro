@@ -78,12 +78,12 @@ const contacts = [
       <ul>
         {
           blog.map((post) => (
-            <li class="border-border border-b">
+            <li class="border-border/60 border-b">
               <a
                 href={`/blog/${post.id}`}
                 class="hover:bg-surface2 -mx-3 grid gap-2 rounded-lg px-3 py-5 transition-colors sm:grid-cols-[1fr_auto] sm:items-baseline sm:gap-6"
               >
-                <span class="text-ink text-lg leading-snug font-semibold">
+                <span class="text-ink text-lg leading-snug font-medium">
                   {post.data.title}
                 </span>
                 <time
