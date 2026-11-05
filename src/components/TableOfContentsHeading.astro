@@ -1,28 +1,21 @@
 ---
 import type { Heading } from "./TableOfContents.astro";
-
-// https://kld.dev/building-table-of-contents/
-
-const { heading, index } = Astro.props;
-const num = index != null ? String(index).padStart(2, "0") : null;
+interface TocHeading extends Heading {
+  subheadings: TocHeading[];
+}
+const { heading } = Astro.props as { heading: TocHeading };
 ---
 
 <li class="list-none">
-  <div class="flex items-baseline gap-3.5 py-1.5">
-    {num && (
-      <span class="min-w-[20px] font-mono text-[12.5px] text-accent">{num}</span>
-    )}
-    <a
-      href={"#" + heading.slug}
-      class="text-[15px] text-ink no-underline transition-colors hover:text-accent"
-    >
-      {heading.text}
-    </a>
-  </div>
+  <a
+    href={"#" + heading.slug}
+    class="text-body hover:text-accent inline-block py-1.5 text-[15px] leading-relaxed"
+    >{heading.text}</a
+  >
   {
     heading.subheadings.length > 0 && (
-      <ul class="ml-[34px]">
-        {heading.subheadings.map((subheading: Heading) => (
+      <ul class="border-border ml-4 border-l pl-4">
+        {heading.subheadings.map((subheading) => (
           <Astro.self heading={subheading} />
         ))}
       </ul>

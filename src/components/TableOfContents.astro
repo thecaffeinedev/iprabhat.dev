@@ -1,43 +1,53 @@
 ---
 import TableOfContentsHeading from "./TableOfContentsHeading.astro";
-
-// https://kld.dev/building-table-of-contents/
-const { headings } = Astro.props;
-const toc = buildToc(headings);
-
 export interface Heading {
   depth: number;
   slug: string;
   text: string;
 }
-
-function buildToc(headings: Heading[]) {
-  const toc: Heading[] = [];
-  const parentHeadings = new Map();
-  headings.forEach((h) => {
-    const heading = { ...h, subheadings: [] };
-    parentHeadings.set(heading.depth, heading);
-    if (heading.depth === 2) {
-      toc.push(heading);
-    } else {
-      // Fix: Check if parent exists before accessing
-      const parent = parentHeadings.get(heading.depth - 1);
-      if (parent && parent.subheadings) {
-        parent.subheadings.push(heading);
-      }
-    }
-  });
-  return toc;
+interface TocHeading extends Heading {
+  subheadings: TocHeading[];
+}
+const { headings } = Astro.props as { headings: Heading[] };
+const toc: TocHeading[] = [];
+const stack: TocHeading[] = [];
+for (const heading of headings.filter((heading) => heading.depth >= 2)) {
+  const node: TocHeading = { ...heading, subheadings: [] };
+  while (stack.length && stack[stack.length - 1].depth >= node.depth)
+    stack.pop();
+  if (stack.length) stack[stack.length - 1].subheadings.push(node);
+  else toc.push(node);
+  stack.push(node);
 }
 ---
 
-<nav
-  class="animate not-prose my-10 max-w-[560px] rounded-l-none rounded-r-[12px] border border-border border-l-[3px] border-l-accent bg-surface2 px-[26px] pb-[18px] pt-[22px]"
->
-  <p class="mb-3.5 font-mono text-[11.5px] uppercase tracking-[2.5px] text-muted">
-    Contents
-  </p>
-  <ul>
-    {toc.map((heading, i) => <TableOfContentsHeading heading={heading} index={i + 1} />)}
-  </ul>
-</nav>
+{
+  headings.length >= 4 && (
+    <details
+      data-pagefind-ignore
+      data-toc
+      open
+      class="not-prose border-border bg-surface2 my-8 rounded-lg border px-5 py-4"
+    >
+      <summary class="text-body cursor-pointer text-sm font-semibold">
+        On this page
+      </summary>
+      <nav aria-label="Table of contents" class="mt-3">
+        <ul>
+          {toc.map((heading) => (
+            <TableOfContentsHeading heading={heading} />
+          ))}
+        </ul>
+      </nav>
+    </details>
+  )
+}
+<script>
+  document.addEventListener("astro:page-load", () => {
+    document
+      .querySelectorAll<HTMLDetailsElement>("[data-toc]")
+      .forEach((toc) => {
+        toc.open = window.matchMedia("(min-width: 640px)").matches;
+      });
+  });
+</script>

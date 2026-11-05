@@ -45,7 +45,7 @@ if (SITE.EMAIL) {
 <script is:inline>
   (function() {
     const theme = localStorage.getItem('theme');
-    const isDark = theme === 'dark' || (!theme && window.matchMedia('(prefers-color-scheme: dark)').matches);
+    const isDark = theme !== 'light';
     
     if (isDark) {
       document.documentElement.classList.add('dark');
@@ -66,8 +66,7 @@ if (SITE.EMAIL) {
 <link rel="manifest" href="/favicon/site.webmanifest" />
 <link rel="shortcut icon" href="/favicon/favicon.ico" />
 <meta name="msapplication-TileColor" content="#25231d" />
-<meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
-<meta name="theme-color" media="(prefers-color-scheme: dark)" content="#121212" />
+<meta name="theme-color" content="#151515" />
 
 <meta name="generator" content={Astro.generator} />
 
@@ -94,9 +93,7 @@ if (SITE.EMAIL) {
 <meta property="twitter:description" content={description} />
 <meta property="twitter:image" content={new URL(image, Astro.url)} />
 
-<!-- PageFind -->
-<link href="/pagefind/pagefind-ui.css" rel="stylesheet" />
-<script is:inline src="/pagefind/pagefind-ui.js"></script>
+<link rel="alternate" type="application/rss+xml" title="Prabhat’s writing" href="/rss.xml" />
 
 <!-- Analytics (one provider, configured via SITE.ANALYTICS) -->
 {SITE.ANALYTICS?.PROVIDER === "google" && (
@@ -153,11 +150,13 @@ function init() {
 
   document.addEventListener("scroll", onScroll);
   addCopyCodeButtons();
-  animate();
+  onScroll();
 }
 
 function updateThemeToggle() {
   const isDark = document.documentElement.classList.contains("dark");
+  document.querySelector('meta[name="theme-color"]')?.setAttribute("content", isDark ? "#151515" : "#faf9f6");
+  document.getElementById("theme-toggle")?.setAttribute("aria-label", isDark ? "Switch to light theme" : "Switch to dark theme");
   const lightIcon = document.getElementById("theme-toggle-light-icon");
   const darkIcon = document.getElementById("theme-toggle-dark-icon");
   
@@ -174,15 +173,6 @@ function updateThemeToggle() {
   }
 }
 
-function animate() {
-  const animateElements = document.querySelectorAll(".animate");
-  animateElements.forEach((element, index) => {
-    setTimeout(() => {
-      element.classList.add("show");
-    }, index * 100);
-  });
-}
-
 function onScroll() {
   if (window.scrollY > 0) {
     document.documentElement.classList.add("scrolled");
@@ -195,7 +185,7 @@ function scrollToTop(event) {
   event.preventDefault();
   window.scrollTo({
     top: 0,
-    behavior: "smooth",
+    behavior: window.matchMedia("(prefers-reduced-motion: reduce)").matches ? "instant" : "smooth",
   });
 }
 
@@ -232,9 +222,8 @@ function preloadTheme() {
   if (userTheme === "light" || userTheme === "dark") {
     toggleTheme(userTheme === "dark");
   } else {
-    // Default to system preference
-    const isDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-    toggleTheme(isDark);
+    // Default to dark until the visitor explicitly chooses a theme.
+    toggleTheme(true);
   }
   
   // Force Safari to recognize the theme immediately
@@ -246,29 +235,37 @@ function preloadTheme() {
 }
 
 function addCopyCodeButtons() {
-  let copyButtonLabel = "📋";
+  let copyButtonLabel = "Copy";
   let codeBlocks = Array.from(document.querySelectorAll("pre"));
 
   async function copyCode(codeBlock, copyButton) {
-    const codeText = codeBlock.innerText;
-    const buttonText = copyButton.innerText;
-    const textToCopy = codeText.replace(buttonText, "");
-
-    await navigator.clipboard.writeText(textToCopy);
-    copyButton.innerText = "✅";
+    const textToCopy = codeBlock.querySelector("code")?.textContent || "";
+    try {
+      await navigator.clipboard.writeText(textToCopy);
+      copyButton.innerText = "Copied";
+      copyButton.setAttribute("aria-label", "Code copied");
+    } catch {
+      copyButton.innerText = "Retry";
+      copyButton.setAttribute("aria-label", "Copy failed. Try again");
+    }
 
     setTimeout(() => {
       copyButton.innerText = copyButtonLabel;
+      copyButton.setAttribute("aria-label", "Copy code");
     }, 2000);
   }
 
   for (let codeBlock of codeBlocks) {
+    if (codeBlock.querySelector(".copy-code")) continue;
     const wrapper = document.createElement("div");
     wrapper.style.position = "relative";
 
     const copyButton = document.createElement("button");
     copyButton.innerText = copyButtonLabel;
-    copyButton.classList = "copy-code";
+    copyButton.className = "copy-code";
+    copyButton.type = "button";
+    copyButton.setAttribute("aria-label", "Copy code");
+    copyButton.setAttribute("aria-live", "polite");
 
     codeBlock.setAttribute("tabindex", "0");
     codeBlock.appendChild(copyButton);
@@ -293,7 +290,6 @@ const setGiscusTheme = () => {
   }
 };
 
-document.addEventListener("DOMContentLoaded", () => init());
-document.addEventListener("astro:after-swap", () => init());
+document.addEventListener("astro:page-load", () => init());
 preloadTheme();
 </script>

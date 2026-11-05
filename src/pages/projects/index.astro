@@ -3,30 +3,45 @@ import { getCollection } from "astro:content";
 import Layout from "@layouts/Layout.astro";
 import Container from "@components/Container.astro";
 import ArrowCard from "@components/ArrowCard.astro";
-import { PROJECTS } from "@consts";
-
+import SelectedWork from "@components/SelectedWork.astro";
 const projects = (await getCollection("projects"))
   .filter((project) => !project.data.draft)
   .sort((a, b) => b.data.date.valueOf() - a.data.date.valueOf());
 ---
 
-<Layout title={PROJECTS.TITLE} description={PROJECTS.DESCRIPTION}>
+<Layout
+  title="Work"
+  description="Selected projects and engineering experiments by Prabhat Kumar Sahu."
+>
   <Container>
-    <aside data-pagefind-ignore>
-      <div class="space-y-10">
-        <div class="animate font-semibold text-black dark:text-white">
-          Projects
-        </div>
-        <ul class="animate not-prose flex flex-col gap-4">
-          {
-            projects.map((project) => (
-              <li>
-                <ArrowCard entry={project} />
-              </li>
-            ))
-          }
-        </ul>
-      </div>
-    </aside>
+    <h1 class="page-title mt-4">Work</h1>
+    <p class="text-body mt-5 text-[17px] leading-relaxed">
+      Small apps and engineering experiments, with notes on how I built them and
+      what I learned along the way.
+    </p>
+    <section aria-labelledby="selected-work" class="mt-10">
+      <h2 id="selected-work" class="section-label border-border border-b pb-3">
+        Selected work
+      </h2>
+      <SelectedWork />
+    </section>
+    {
+      projects.length > 0 && (
+        <section class="mt-10" aria-labelledby="more-projects">
+          <>
+            <h2 id="more-projects" class="section-label mb-3">
+              More projects
+            </h2>
+            <ul>
+              {projects.map((project) => (
+                <li>
+                  <ArrowCard entry={project} />
+                </li>
+              ))}
+            </ul>
+          </>
+        </section>
+      )
+    }
   </Container>
 </Layout>

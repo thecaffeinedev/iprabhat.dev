@@ -2,142 +2,124 @@
 import Search from "astro-pagefind/components/Search";
 ---
 
-<aside data-pagefind-ignore>
-  <div
-    transition:persist
-    id="backdrop"
-    class="bg-[rgba(0, 0, 0, 0.5] invisible fixed left-0 top-0 z-50 flex h-screen w-full justify-center p-6 backdrop-blur-xs"
-  >
-    <div
-      id="pagefind-container"
-      class="m-0 flex h-fit max-h-[80%] w-full max-w-(--breakpoint-sm) flex-col overflow-auto rounded-sm border border-black/15 bg-neutral-100 p-2 px-4 py-3 shadow-lg dark:border-white/20 dark:bg-neutral-900"
-    >
-      <Search
-        id="search"
-        className="pagefind-ui"
-        uiOptions={{
-          showImages: false,
-          excerptLength: 15,
-          resetStyles: false,
-        }}
-      />
-      <div class="mr-2 pb-1 pt-4 text-right text-xs dark:prose-invert">
-        Press <span class="prose text-xs dark:prose-invert"
-          ><kbd class="">Esc</kbd></span
-        > or click anywhere to close
-      </div>
-    </div>
+<dialog
+  data-pagefind-ignore
+  id="search-dialog"
+  aria-labelledby="search-title"
+  class="border-border bg-bg text-ink m-auto w-[calc(100%-2rem)] max-w-xl rounded-xl border p-5 shadow-xl backdrop:bg-black/40 backdrop:backdrop-blur-sm"
+>
+  <div class="mb-4 flex items-center justify-between gap-4">
+    <h2 id="search-title" class="text-lg font-semibold">Search the site</h2>
+    <form method="dialog">
+      <button class="text-muted hover:bg-surface rounded-md px-3 py-2 text-sm"
+        >Close <span aria-hidden="true">×</span></button>
+    </form>
   </div>
-</aside>
-
+  <Search
+    id="search"
+    className="pagefind-ui"
+    uiOptions={{ showImages: false, excerptLength: 20, resetStyles: false }}
+  />
+  <p class="text-muted mt-4 text-xs">
+    Press Esc to close. Open search with / or ⌘ / Ctrl K.
+  </p>
+</dialog>
 <script>
-  function setupPagefind() {
-    const magnifyingGlass = document.getElementById("magnifying-glass");
-    const backdrop = document.getElementById("backdrop");
-
-    function openPagefind() {
-      const searchDiv = document.getElementById("search");
-      const search = searchDiv?.querySelector("input");
-      setTimeout(() => {
-        search?.focus();
-      }, 0);
-      backdrop?.classList.remove("invisible");
-      backdrop?.classList.add("visible");
+  let cleanup: (() => void) | undefined;
+  function setupSearch() {
+    cleanup?.();
+    const dialog = document.getElementById(
+      "search-dialog",
+    ) as HTMLDialogElement | null;
+    if (!dialog) return;
+    const controller = new AbortController();
+    const { signal } = controller;
+    cleanup = () => {
+      controller.abort();
+      if (dialog.open) dialog.close();
+    };
+    function openSearch() {
+      if (dialog!.open) return;
+      dialog!.showModal();
+      dialog!.querySelector<HTMLInputElement>("input")?.focus();
     }
-
-    function closePagefind() {
-      const searchDiv = document.getElementById("search");
-      const search = searchDiv?.querySelector("input");
-      if (search) search.value = "";
-      backdrop?.classList.remove("visible");
-      backdrop?.classList.add("invisible");
-    }
-
-    // open pagefind
-    magnifyingGlass?.addEventListener("click", () => {
-      openPagefind();
-    });
-
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "/") {
-        e.preventDefault();
-        openPagefind();
-      } else if ((e.metaKey || e.ctrlKey) && e.key === "k") {
-        e.preventDefault();
-        openPagefind();
-      }
-    });
-
-    // close pagefind
-    document.addEventListener("keydown", (e) => {
-      if (e.key === "Escape") {
-        closePagefind();
-      }
-    });
-
-    // close pagefind when searched result(link) clicked
-    document.addEventListener("click", (event) => {
-      const target = event.target as HTMLElement;
-      if (target.classList.contains("pagefind-ui__result-link")) {
-        closePagefind();
-      }
-    });
-
-    backdrop?.addEventListener("click", (event) => {
-      const target = event.target as HTMLElement;
-      if (!target.closest("#pagefind-container")) {
-        closePagefind();
-      }
-    });
-
-    // prevent form submission
-    const form = document.getElementById("form");
-    form?.addEventListener("submit", (event) => {
-      event.preventDefault();
-    });
+    document
+      .querySelectorAll("[data-search-open]")
+      .forEach((button) =>
+        button.addEventListener("click", openSearch, { signal }),
+      );
+    document.addEventListener(
+      "keydown",
+      (event) => {
+        const target = event.target;
+        const isEditing =
+          target instanceof HTMLElement &&
+          (target.isContentEditable ||
+            !!target.closest("input, textarea, select, [contenteditable]"));
+        if (isEditing) return;
+        if (
+          (event.key === "/" &&
+            !event.metaKey &&
+            !event.ctrlKey &&
+            !event.altKey) ||
+          ((event.metaKey || event.ctrlKey) && event.key.toLowerCase() === "k")
+        ) {
+          event.preventDefault();
+          openSearch();
+        }
+      },
+      { signal },
+    );
+    dialog.addEventListener(
+      "click",
+      (event) => {
+        if (event.target !== dialog) return;
+        const rect = dialog.getBoundingClientRect();
+        if (
+          event.clientX < rect.left ||
+          event.clientX > rect.right ||
+          event.clientY < rect.top ||
+          event.clientY > rect.bottom
+        )
+          dialog.close();
+      },
+      { signal },
+    );
+    dialog.addEventListener(
+      "click",
+      (event) => {
+        if (
+          event.target instanceof Element &&
+          event.target.closest(".pagefind-ui__result-link")
+        )
+          dialog.close();
+      },
+      { signal },
+    );
   }
-
-  // Run on initial load
-  setupPagefind();
-
-  // Re-run after view transitions
-  document.addEventListener('astro:after-swap', setupPagefind);
+  document.addEventListener("astro:page-load", setupSearch);
+  document.addEventListener("astro:before-swap", () => cleanup?.());
 </script>
-
 <style is:global>
   :root {
-    --pagefind-ui-scale: 0.75;
+    --pagefind-ui-scale: 0.85;
     --pagefind-ui-border-width: 1px;
-    --pagefind-ui-border-radius: 3px;
+    --pagefind-ui-border-radius: 6px;
     --pagefind-ui-font: "Hanken Grotesk", sans-serif;
-    --pagefind-ui-primary: #3d3d3d;
-    --pagefind-ui-text: #3d3d3d;
-    --pagefind-ui-background: #ffffff;
-    --pagefind-ui-border: #d0d0d0;
-    --pagefind-ui-tag: #f5f5f5;
   }
-
-  .dark {
-    --pagefind-ui-primary: #d4d4d4;
-    --pagefind-ui-text: #d4d4d4;
-    --pagefind-ui-background: #171717;
-    --pagefind-ui-border: #404040;
+  #search-dialog {
+    max-height: 85dvh;
+    --pagefind-ui-primary: var(--accent);
+    --pagefind-ui-text: var(--body);
+    --pagefind-ui-background: var(--bg);
+    --pagefind-ui-border: var(--border);
+    --pagefind-ui-tag: var(--surface);
   }
-
-  #search input {
-    font-weight: normal;
-  }
-
+  #search input,
   #search p {
-    font-weight: normal;
+    font-weight: 400;
   }
-
   #search .pagefind-ui__result-title {
     font-weight: 600;
-  }
-
-  #search .pagefind-ui__message {
-    padding: 0;
-    padding-bottom: 0.75rem;
   }
 </style>

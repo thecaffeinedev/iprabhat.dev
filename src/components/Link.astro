@@ -22,8 +22,9 @@ const {
 <a
   href={href}
   target={external ? "_blank" : "_self"}
+  rel={external ? "noopener noreferrer" : undefined}
   class={cn(
-    "inline-block decoration-black/25 dark:decoration-white/30 hover:decoration-black/60 focus-visible:decoration-black/60 dark:hover:decoration-white/65 dark:focus-visible:decoration-white/65 text-current hover:text-black focus-visible:text-black dark:hover:text-white dark:focus-visible:text-white transition-colors duration-200 ease-in-out",
+    "inline-block decoration-border hover:decoration-accent focus-visible:decoration-accent text-current hover:text-accent focus-visible:text-accent transition-colors duration-150",
     underline && "underline underline-offset-[3px]",
     group && "group",
     className,

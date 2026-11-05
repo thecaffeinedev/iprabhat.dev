@@ -9,29 +9,49 @@ const isActive = (href: string) =>
     : pathname === href || pathname.startsWith(`${href}/`);
 ---
 
-<header>
+<header data-pagefind-ignore>
   <Container>
     <div class="flex flex-wrap items-center justify-between gap-y-2">
-      <Link href="/" underline={false}>
-        <div class="font-mono text-[21px] font-semibold tracking-[-1px] text-ink">
+      <Link href="/" underline={false} aria-label="Prabhat — home">
+        <div
+          class="text-ink font-mono text-[21px] font-semibold tracking-[-1px]"
+        >
           ~/
         </div>
       </Link>
-      <nav class="flex items-center gap-6 text-[15px] font-medium text-muted">
-        <Link href="/blog" underline={false} class="py-1.5 transition-colors hover:text-accent" aria-current={isActive("/blog") ? "page" : undefined}>
+      <nav
+        aria-label="Main navigation"
+        class="text-muted flex items-center gap-3 text-[15px] font-medium sm:gap-6"
+      >
+        <Link
+          href="/blog"
+          underline={false}
+          class="hover:text-accent py-1.5 transition-colors"
+          aria-current={isActive("/blog") ? "page" : undefined}
+        >
           blog
         </Link>
-        <Link href="/uses" underline={false} class="py-1.5 transition-colors hover:text-accent" aria-current={isActive("/uses") ? "page" : undefined}>
+        <Link
+          href="/uses"
+          underline={false}
+          class="hover:text-accent py-1.5 transition-colors"
+          aria-current={isActive("/uses") ? "page" : undefined}
+        >
           uses
         </Link>
-        <Link href="/about" underline={false} class="py-1.5 transition-colors hover:text-accent" aria-current={isActive("/about") ? "page" : undefined}>
+        <Link
+          href="/about"
+          underline={false}
+          class="hover:text-accent py-1.5 transition-colors"
+          aria-current={isActive("/about") ? "page" : undefined}
+        >
           about
         </Link>
 
         <button
           id="theme-toggle"
           aria-label="Toggle theme"
-          class="group ml-1 flex size-[38px] items-center justify-center rounded-[10px] border border-border bg-surface text-ink transition-colors hover:border-accent"
+          class="group border-border bg-surface text-ink hover:border-accent ml-1 flex size-[38px] items-center justify-center rounded-[10px] border transition-colors"
         >
           <svg
             id="theme-toggle-light-icon"
@@ -44,7 +64,7 @@ const isActive = (href: string) =>
             stroke-width="1.5"
             stroke-linecap="round"
             stroke-linejoin="round"
-            class="hidden transition-colors duration-300 ease-in-out group-hover:stroke-black group-focus-visible:stroke-black dark:group-hover:stroke-white dark:group-focus-visible:stroke-white dark:block"
+            class="hidden transition-colors duration-300 ease-in-out group-hover:stroke-black group-focus-visible:stroke-black dark:block dark:group-hover:stroke-white dark:group-focus-visible:stroke-white"
           >
             <circle cx="12" cy="12" r="5"></circle>
             <line x1="12" y1="1" x2="12" y2="3"></line>
@@ -67,7 +87,7 @@ const isActive = (href: string) =>
             stroke-width="1.5"
             stroke-linecap="round"
             stroke-linejoin="round"
-            class="block transition-colors duration-300 ease-in-out group-hover:stroke-black group-focus-visible:stroke-black dark:group-hover:stroke-white dark:group-focus-visible:stroke-white dark:hidden"
+            class="block transition-colors duration-300 ease-in-out group-hover:stroke-black group-focus-visible:stroke-black dark:hidden dark:group-hover:stroke-white dark:group-focus-visible:stroke-white"
           >
             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
           </svg>

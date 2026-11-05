@@ -1,0 +1,42 @@
+---
+const work = [
+  {
+    title: "A personal expense tracker",
+    description:
+      "A SwiftUI app for recording expenses, filtering transactions, and viewing spending charts, with local storage through SwiftData.",
+    type: "iOS app",
+    href: "/blog/2026-01-05-building-my-own-expense-tracker-in-swiftui",
+  },
+  {
+    title: "The transactional outbox in practice",
+    description:
+      "An end-to-end demo that saves orders in Postgres and publishes events through Debezium and Redpanda, running locally with Docker Compose.",
+    type: "Engineering demo",
+    href: "/blog/2026-05-01-outbox-pattern-implementation",
+  },
+];
+---
+
+<ul>
+  {
+    work.map((item) => (
+      <li class="border-border border-b">
+        <a
+          href={item.href}
+          class="group hover:bg-surface2 -mx-3 block rounded-lg px-3 py-5 transition-colors"
+        >
+          <span class="text-muted text-xs">{item.type}</span>
+          <h3 class="text-ink group-hover:text-accent mt-1 text-lg font-semibold">
+            {item.title}
+          </h3>
+          <p class="text-body mt-2 max-w-[58ch] text-[15px] leading-relaxed">
+            {item.description}
+          </p>
+          <span class="text-accent mt-3 inline-block text-sm">
+            Read the write-up <span aria-hidden="true">→</span>
+          </span>
+        </a>
+      </li>
+    ))
+  }
+</ul>

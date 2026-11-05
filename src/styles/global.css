@@ -1,4 +1,4 @@
-@import 'tailwindcss';
+@import "tailwindcss";
 
 @plugin '@tailwindcss/typography';
 
@@ -13,10 +13,12 @@
   reference the live var.
 */
 @theme inline {
-  --font-sans: 'Hanken Grotesk', ui-sans-serif, system-ui, sans-serif,
-    'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol', 'Noto Color Emoji';
-  --font-mono: 'IBM Plex Mono', ui-monospace, SFMono-Regular, Menlo, Monaco,
-    Consolas, 'Liberation Mono', 'Courier New', monospace;
+  --font-sans:
+    "Hanken Grotesk", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --font-mono:
+    "IBM Plex Mono", ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas,
+    "Liberation Mono", "Courier New", monospace;
 
   --color-bg: var(--bg);
   --color-ink: var(--text);
@@ -30,35 +32,35 @@
 }
 
 :root {
-  --bg: #ffffff;
-  --text: #1a1a1a;
-  --body: #454545;
-  --muted: #6b6b6b;
-  --faint: #8a8a8a;
-  --accent: #ef2f14;
-  --surface: #f4f4f5;
-  --surface2: #f7f7f8;
-  --border: #e6e6e8;
+  --bg: #faf9f6;
+  --text: #202020;
+  --body: #262626;
+  --muted: #555550;
+  --faint: #555550;
+  --accent: #c2412d;
+  --surface: #f0efeb;
+  --surface2: #f5f4f0;
+  --border: #e5e3dd;
 }
 
 .dark {
-  --bg: #121212;
-  --text: #ededed;
-  --body: #c4c4c4;
-  --muted: #9a9a9a;
-  --faint: #777777;
-  --accent: #f3543c;
-  --surface: #1e1e1f;
-  --surface2: #1a1a1b;
-  --border: #2c2c2e;
+  --bg: #151515;
+  --text: #eeeeea;
+  --body: #deded8;
+  --muted: #a0a099;
+  --faint: #a0a099;
+  --accent: #f08068;
+  --surface: #222220;
+  --surface2: #1c1c1b;
+  --border: #30302d;
 }
 
 ::selection {
-  background: rgba(239, 47, 20, 0.22);
+  background: color-mix(in srgb, var(--accent) 20%, transparent);
 }
 
 .dark ::selection {
-  background: rgba(243, 84, 60, 0.24);
+  background: color-mix(in srgb, var(--accent) 24%, transparent);
 }
 
 /*
@@ -96,7 +98,9 @@
     @apply flex flex-col;
     background-color: var(--bg);
     color: var(--text);
-    transition: background-color 0.3s ease, color 0.3s ease;
+    transition:
+      background-color 0.3s ease,
+      color 0.3s ease;
   }
 
   header {
@@ -114,8 +118,8 @@
   }
 
   article {
-    @apply prose prose-neutral max-w-full dark:prose-invert prose-img:mx-auto prose-img:my-auto;
-    @apply prose-headings:font-sans prose-headings:font-extrabold prose-headings:tracking-tight;
+    @apply prose prose-neutral dark:prose-invert prose-img:mx-auto prose-img:my-8 max-w-full;
+    @apply prose-headings:font-sans prose-headings:font-bold prose-headings:tracking-[-0.02em];
     @apply prose-headings:text-ink dark:prose-headings:text-ink;
     color: var(--body);
   }
@@ -156,14 +160,14 @@
 
   .uses-content ul > li::marker,
   .about-content ul > li::marker {
-    content: '';
+    content: "";
   }
 
   .uses-content ul > li::before,
   .about-content ul > li::before {
-    content: '';
-    @apply absolute left-0 top-[0.62em] block size-[7px] rounded-[2px];
-    background-color: var(--accent);
+    content: "";
+    @apply absolute top-[0.62em] left-0 block size-[7px] rounded-[2px];
+    background-color: var(--muted);
   }
 }
 
@@ -172,15 +176,6 @@ header nav a[aria-current="page"] {
   @apply no-underline;
   border-bottom: 2px solid var(--accent);
   padding-bottom: 3px;
-}
-
-.animate {
-  @apply -translate-y-3 opacity-0;
-  @apply transition-all duration-300 ease-out;
-}
-
-.animate.show {
-  @apply translate-y-0 opacity-100;
 }
 
 html #back-to-top {
@@ -207,15 +202,15 @@ pre {
 :root {
   --astro-code-foreground: #383a42;
   --astro-code-background: transparent;
-  --astro-code-token-comment: #a0a1a7;
+  --astro-code-token-comment: #696b72;
   --astro-code-token-keyword: #a626a4;
-  --astro-code-token-string: #50a14f;
-  --astro-code-token-function: #4078f2;
+  --astro-code-token-string: #367235;
+  --astro-code-token-function: #315fc1;
   --astro-code-token-constant: #986801;
   --astro-code-token-parameter: #e45649;
-  --astro-code-token-string-expression: #50a14f;
+  --astro-code-token-string-expression: #367235;
   --astro-code-token-punctuation: #696c77;
-  --astro-code-token-link: #4078f2;
+  --astro-code-token-link: #315fc1;
 }
 
 .dark {
@@ -234,7 +229,7 @@ pre {
 
 /* copy code button on codeblocks */
 .copy-code {
-  @apply absolute right-3 top-3 grid size-9 place-content-center rounded-sm border text-center duration-300 ease-in-out;
+  @apply absolute top-3 right-3 grid h-9 min-w-12 place-content-center rounded-sm border px-2 text-center text-xs duration-300 ease-in-out;
   border-color: var(--border);
   background-color: var(--surface);
 }
@@ -246,4 +241,94 @@ pre {
 
 .copy-code:active {
   @apply scale-90 transition-transform;
+}
+
+/* Shared reading and interaction styles. */
+article {
+  font-size: 17px;
+  line-height: 1.75;
+  overflow-wrap: anywhere;
+  --tw-prose-bold: var(--text);
+  --tw-prose-quotes: var(--body);
+  --tw-prose-code: var(--text);
+  --tw-prose-counters: var(--muted);
+  --tw-prose-bullets: var(--muted);
+  --tw-prose-hr: var(--border);
+  --tw-prose-th-borders: var(--border);
+  --tw-prose-td-borders: var(--border);
+}
+article pre {
+  font-size: 14px;
+  line-height: 1.7;
+  overflow-wrap: normal;
+  padding-right: 4.5rem;
+}
+article img {
+  border-radius: 8px;
+}
+article :where(img):not(:where(.not-prose *)) {
+  height: auto;
+}
+article figure img {
+  margin-bottom: 0;
+}
+article figcaption {
+  color: var(--muted);
+  font-size: 14px;
+}
+article table {
+  display: block;
+  overflow-x: auto;
+}
+article :where(h2, h3, h4) {
+  line-height: 1.3;
+}
+@media (min-width: 640px) {
+  article {
+    font-size: 18px;
+  }
+}
+:where(a, button, summary, input, [tabindex]):focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 4px;
+}
+.skip-link {
+  position: fixed;
+  top: 12px;
+  left: 12px;
+  z-index: 100;
+  transform: translateY(-200%);
+  padding: 12px 16px;
+  background: var(--bg);
+  color: var(--text);
+  border: 1px solid var(--border);
+}
+.skip-link:focus {
+  transform: translateY(0);
+}
+.page-title {
+  font-size: 34px;
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  line-height: 1.15;
+  color: var(--text);
+}
+.section-label {
+  font-size: 13px;
+  font-weight: 600;
+  color: var(--muted);
+}
+@media (min-width: 640px) {
+  .page-title {
+    font-size: 44px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation: none !important;
+    transition: none !important;
+    scroll-behavior: auto !important;
+  }
 }
