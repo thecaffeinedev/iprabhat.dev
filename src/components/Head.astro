@@ -155,7 +155,7 @@ function init() {
 
 function updateThemeToggle() {
   const isDark = document.documentElement.classList.contains("dark");
-  document.querySelector('meta[name="theme-color"]')?.setAttribute("content", isDark ? "#151515" : "#faf9f6");
+  document.querySelector('meta[name="theme-color"]')?.setAttribute("content", isDark ? "#151515" : "#ffffff");
   document.getElementById("theme-toggle")?.setAttribute("aria-label", isDark ? "Switch to light theme" : "Switch to dark theme");
   const lightIcon = document.getElementById("theme-toggle-light-icon");
   const darkIcon = document.getElementById("theme-toggle-dark-icon");

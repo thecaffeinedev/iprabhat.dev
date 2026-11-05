@@ -32,15 +32,15 @@
 }
 
 :root {
-  --bg: #faf9f6;
+  --bg: #ffffff;
   --text: #202020;
   --body: #262626;
   --muted: #555550;
   --faint: #555550;
-  --accent: #c2412d;
-  --surface: #f0efeb;
-  --surface2: #f5f4f0;
-  --border: #e5e3dd;
+  --accent: #303030;
+  --surface: #f3f4f6;
+  --surface2: #f8f9fa;
+  --border: #e5e7eb;
 }
 
 .dark {
@@ -49,7 +49,7 @@
   --body: #deded8;
   --muted: #a0a099;
   --faint: #a0a099;
-  --accent: #f08068;
+  --accent: #e6e6e6;
   --surface: #222220;
   --surface2: #1c1c1b;
   --border: #30302d;
