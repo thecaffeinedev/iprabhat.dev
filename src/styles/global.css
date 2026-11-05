@@ -29,6 +29,7 @@
   --color-surface: var(--surface);
   --color-surface2: var(--surface2);
   --color-border: var(--border);
+  --color-control-border: var(--control-border);
 }
 
 :root {
@@ -41,6 +42,7 @@
   --surface: #f3f4f6;
   --surface2: #f8f9fa;
   --border: #e5e7eb;
+  --control-border: #878782;
 }
 
 .dark {
@@ -53,6 +55,7 @@
   --surface: #222220;
   --surface2: #1c1c1b;
   --border: #30302d;
+  --control-border: #686864;
 }
 
 ::selection {

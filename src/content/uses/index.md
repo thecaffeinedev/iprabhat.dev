@@ -11,103 +11,103 @@ description: Tools, apps, and gear I use
   />
 </figure>
 
-The following is a list of the tools that I use on a daily basis. This page is inspired by [Wes Bos](https://wesbos.com/uses).
+The hardware, development tools, and everyday apps in my setup, with a short note on what each one is for. This page is inspired by [Wes Bos](https://wesbos.com/uses).
 
 ## Hardware
 
-### Computer Setup
+The computers, peripherals, and devices that make up my setup.
 
-- [Macbook Pro M5-Pro (2026)](https://www.apple.com/in/shop/buy-mac/macbook-pro/14-inch-space-black-standard-display-apple-m5-pro-chip-15-core-cpu-16-core-gpu-24gb-memory-1tb-storage) - 24GB, 1TB SSD (Currently Using)
-- [M1 MacBook Pro 2020](https://www.apple.com/in/shop/buy-mac/macbook-pro/13-inch-macbook-pro) - 16GB, 512GB SSD
-- [Samsung Gaming Monitor](https://www.samsung.com/in/monitors/gaming/odyssey-g7-27-inch-240hz-1ms-curved-lc27g75tqswxxl/) - 27" Odyssey G7
-- **Gaming PC** - RTX 3060 Ti, 32GB RAM, 1TB SSD, i7 12th Gen
+### Computers & display
+
+- [Macbook Pro M5-Pro (2026)](https://www.apple.com/in/shop/buy-mac/macbook-pro/14-inch-space-black-standard-display-apple-m5-pro-chip-15-core-cpu-16-core-gpu-24gb-memory-1tb-storage) - My current computer, with 24GB memory and a 1TB SSD.
+- [M1 MacBook Pro 2020](https://www.apple.com/in/shop/buy-mac/macbook-pro/13-inch-macbook-pro) - My earlier MacBook, with 16GB memory and a 512GB SSD.
+- [Samsung Gaming Monitor](https://www.samsung.com/in/monitors/gaming/odyssey-g7-27-inch-240hz-1ms-curved-lc27g75tqswxxl/) - A 27-inch Odyssey G7 for my desk setup.
+- **Gaming PC** - My gaming setup: RTX 3060 Ti, 32GB RAM, 1TB SSD, and a 12th-gen i7.
 
 ### Peripherals
 
-- [NuPhy Kick75](https://nuphy.com/products/nuphy-kick75?variant=43805710450797) - Wireless MK High Profile With Blush Max Keys (Currently Using)
-- [Keychron K2-V2](https://keychron.in/product/keychron-k2-v-2/) - Wireless mechanical keyboard with Blue switches
-- [Logitech K380s](https://www.logitech.com/en-in/shop/p/pebble-keys-2.920-011753) - Wireless minimalist and slim keyboard
-- [Logitech MX MASTER 3S](https://www.logitech.com/en-in/products/mice/mx-master-3s.910-006561.html) - Wireless mouse (Currently Using)
-- [Razor Viper 8K](https://www.amazon.in/Razer-Ambidextrous-Esports-Polling-Optical/dp/B08P1PWN2Q) - Wired Gaming mouse
+- [NuPhy Kick75](https://nuphy.com/products/nuphy-kick75?variant=43805710450797) - My current wireless keyboard, with high-profile Blush Max keys.
+- [Keychron K2-V2](https://keychron.in/product/keychron-k2-v-2/) - A wireless mechanical keyboard with Blue switches.
+- [Logitech K380s](https://www.logitech.com/en-in/shop/p/pebble-keys-2.920-011753) - A compact, slim wireless keyboard.
+- [Logitech MX MASTER 3S](https://www.logitech.com/en-in/products/mice/mx-master-3s.910-006561.html) - My current everyday wireless mouse.
+- [Razor Viper 8K](https://www.amazon.in/Razer-Ambidextrous-Esports-Polling-Optical/dp/B08P1PWN2Q) - A wired mouse for gaming.
 
 ### Workspace
 
-- **[IKEA Thyge Desk](https://www.ikea.com/sg/en/p/thyge-desk-white-silver-colour-s19245192/)** - Height adjustable
+- **[IKEA Thyge Desk](https://www.ikea.com/sg/en/p/thyge-desk-white-silver-colour-s19245192/)** - A height-adjustable desk for the setup.
 
-## Software & Development
+### Audio
 
-### Code Editors & Extensions
+- **[OnePlus Buds 3](https://www.oneplus.in/oneplus-buds-3)** - My primary earbuds.
+- [Apple EarPods](https://www.apple.com/in/shop/product/myqy3zm/a/earpods-usb-c) - Wired USB-C listening.
+- **[HyperX QuadCast Microphone](https://hyperx.com/products/hyperx-quadcast-usb-microphone)** - My primary microphone for recording and podcasts.
+- **[AirPods Pro](https://www.apple.com/airpods-pro/)** - Previously used; no longer part of my current setup.
 
-- **[Visual Studio Code](https://code.visualstudio.com/)** - Primary editor with default Dark Modern Theme
-- **[Neovim](https://neovim.io/)** - Occasionally
-- **[Zed](https://zed.dev/)** - Secondary editor
+### Phone
+
+- **iPhone 17 Pro** — My current phone, since December 2025
+
+#### Previous phones
+
+- **iPhone 13** – (2022 – 2025)
+- **OnePlus 7T** - (2020 Mid -2022)
+- **Asus Zenfone Max Pro M2** - (2019-2020 Mid)
+- **Moto G3** - (2015-2019)
+
+## Development
+
+The tools I use to write code, work in the terminal, and run and deploy projects.
+
+### Editors
+
+- **[Visual Studio Code](https://code.visualstudio.com/)** - My main code editor, using the default Dark Modern theme.
+- **[Neovim](https://neovim.io/)** - An editor I use occasionally.
+- **[Zed](https://zed.dev/)** - My secondary code editor.
 
 ### Terminal & Shell
 
-- **[Ghostty](https://ghostty.org/)** - Terminal emulator
-- **[Starship](https://starship.rs/)** - Cross-shell prompt
-- **Zsh** - Default shell
+- **[Ghostty](https://ghostty.org/)** - My terminal for command-line work.
+- **[Starship](https://starship.rs/)** - A consistent prompt across shells.
+- **Zsh** - My default shell.
 
 ### CLI Tools
 
 - **[exa](https://github.com/ogham/exa)** - `ls` replacement with [aliases](https://github.com/gazorby/fish-exa)
-- **[fzf](https://github.com/junegunn/fzf)** - Fuzzy finder
-- **[tldr](https://github.com/dbrgn/tealdeer)** - Simplified man pages
-- **[bat](https://github.com/sharkdp/bat)** - Better `cat` with syntax highlighting
+- **[fzf](https://github.com/junegunn/fzf)** - Fuzzy search for finding things from the terminal.
+- **[tldr](https://github.com/dbrgn/tealdeer)** - Short command examples when I need a quick reference.
+- **[bat](https://github.com/sharkdp/bat)** - Reading files in the terminal with syntax highlighting.
 
-### Development Tools
+### Containers, APIs & databases
 
-- [Orbstack](https://orbstack.dev/) - Container management (Pro)
-- **[Git](https://git-scm.com/)** - Version control
-- **[HTTPie](https://httpie.io/)** - GUI and Command-line HTTP client
-- **[Bruno](https://www.usebruno.com/)** - API testing and development
-- **[Beekeeper Studio](https://www.beekeeperstudio.io/)** - SQL database GUI
-- **[RedisInsight](https://redis.com/redis-enterprise/redis-insight/)** - Redis GUI by Redis Team
+- [Orbstack](https://orbstack.dev/) - Running and managing local containers; I use the Pro version.
+- **[Git](https://git-scm.com/)** - Tracking changes and managing branches.
+- **[HTTPie](https://httpie.io/)** - Making HTTP requests from the desktop or command line.
+- **[Bruno](https://www.usebruno.com/)** - Testing APIs during development.
+- **[Beekeeper Studio](https://www.beekeeperstudio.io/)** - Browsing and querying SQL databases.
+- **[RedisInsight](https://redis.com/redis-enterprise/redis-insight/)** - Inspecting Redis data through a graphical interface.
 
-## Applications
+### Domains & hosting
 
-### Browsers & Web
+- **[Namecheap](https://www.namecheap.com/)** - Registering and managing domains.
+- **[Vercel](https://vercel.com/)** - Hosting this website.
+- **[Railway](https://railway.app/)** - Deploying prototypes quickly.
 
-- **[Chrome](https://www.google.com/)** - Primary browser
-- **[Firefox](https://www.mozilla.org/firefox/)** - Secondary browser
+### Code & cloud
 
-### Productivity & Utilities
+- **[GitHub](https://github.com/)** - Hosting code repositories.
+- **[AWS](https://aws.amazon.com/)** - Cloud services for development projects.
 
-- **[Bear](https://bear.app/)** - Note-taking and writing
-- **[UpNote](https://getupnote.com/)** - Additional note-taking app
-- **[Rectangle](https://rectangleapp.com/)** - Window management
+## Everyday apps
 
-### Audio & Communication
+Browsers, writing apps, and small utilities for day-to-day use.
 
-- **[OnePlus Buds 3](https://www.oneplus.in/oneplus-buds-3)** - Primary
-- [Apple EarPods](https://www.apple.com/in/shop/product/myqy3zm/a/earpods-usb-c) - Type C
-- **[HyperX QuadCast Microphone](https://hyperx.com/products/hyperx-quadcast-usb-microphone)** - Primary Microphone / Podcast Mic
-- **[AirPods Pro](https://www.apple.com/airpods-pro/)** - Not using anymore
+### Browsers
 
-## Services & Hosting
+- **[Chrome](https://www.google.com/)** - My main browser.
+- **[Firefox](https://www.mozilla.org/firefox/)** - My secondary browser.
 
-### Domain & Hosting
+### Notes & utilities
 
-- **[Namecheap](https://www.namecheap.com/)** - Domain registrar
-- **[Vercel](https://vercel.com/)** - Website hosting
-- **[Railway](https://railway.app/)** - Fast deployment and prototyping
-
-### Development Services
-
-- **[GitHub](https://github.com/)** - Code hosting
-- **[AWS](https://aws.amazon.com/)** - Cloud services
-
-## Mobile & Personal
-
-### Devices
-
-#### Current
-
-- **iPhone 17 Pro** – Since Dec 2025
-
-#### Previously Used
-
-- **iPhone 13** – (2022 – 2025)
-- **OnePlus 7T** - (2020 Mid -2022)
-- **Asus Zenfone Max Pro M2** - (2019-2020 Mid) 
-- **Moto G3** - (2015-2019)
+- **[Bear](https://bear.app/)** - Keeping notes and writing.
+- **[UpNote](https://getupnote.com/)** - Another place for notes.
+- **[Rectangle](https://rectangleapp.com/)** - Arranging windows on my desktop.

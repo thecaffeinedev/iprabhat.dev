@@ -4,7 +4,6 @@ import Layout from "@layouts/Layout.astro";
 import Container from "@components/Container.astro";
 import FormattedDate from "@components/FormattedDate.astro";
 import { readingTime } from "@lib/utils";
-import BackToPrevious from "@components/BackToPrevious.astro";
 import PostNavigation from "@components/PostNavigation.astro";
 import TableOfContents from "@components/TableOfContents.astro";
 import Giscus from "@components/Giscus.astro";
@@ -60,7 +59,11 @@ const { Content, headings } = await render(post);
   </div>
   <Container>
     <div>
-      <BackToPrevious href="/blog">Back to blog</BackToPrevious>
+      <a
+        href="/blog"
+        class="text-muted hover:text-ink inline-flex items-center gap-2 py-1 text-sm underline-offset-4 hover:underline"
+        ><span aria-hidden="true">←</span> Blog</a
+      >
     </div>
     <div class="mt-5 mb-6 space-y-2.5">
       <div class="text-muted flex items-center gap-2 font-mono text-[13px]">
@@ -79,11 +82,11 @@ const { Content, headings } = await render(post);
       </h1>
       {
         post.data.tags && post.data.tags?.length > 0 ? (
-          <div class="flex flex-wrap gap-[9px]">
+          <div class="flex flex-wrap gap-x-4 gap-y-2">
             {post.data.tags.map((tag) => (
               <a
                 href={`/tags/${tag}`}
-                class="border-border bg-surface text-muted hover:border-accent hover:text-accent rounded-[7px] border px-3 py-[5px] text-[12px] font-medium transition-colors"
+                class="text-muted decoration-muted hover:text-ink hover:decoration-ink py-1 text-[13px] underline underline-offset-4 transition-colors"
               >
                 {tag}
               </a>

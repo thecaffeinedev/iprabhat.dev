@@ -60,7 +60,7 @@ function formatDate(date: Date): string {
               <a
                 href={`?topic=${value}#posts-container`}
                 data-topic={value}
-                class="topic-filter text-body hover:bg-surface rounded-md px-3 py-2"
+                class="topic-filter border-control-border text-body hover:border-ink hover:bg-surface rounded-md border px-3 py-1.5 transition-colors"
               >
                 {label}
               </a>
@@ -71,7 +71,17 @@ function formatDate(date: Date): string {
           data-search-open
           aria-haspopup="dialog"
           aria-controls="search-dialog"
-          class="text-accent py-2 text-sm underline underline-offset-4 hover:decoration-ink"
+          class="border-control-border text-ink hover:border-ink hover:bg-surface inline-flex items-center gap-2 rounded-md border px-3 py-1.5 text-sm transition-colors"
+          ><svg
+            aria-hidden="true"
+            width="15"
+            height="15"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="1.5"
+            ><circle cx="10.5" cy="10.5" r="6.5"></circle><path
+              d="m16 16 4.5 4.5"></path></svg
           >Search posts</button
         >
       </div>
@@ -79,14 +89,19 @@ function formatDate(date: Date): string {
       <div id="posts-container">
         {
           years.map((year) => (
-            <section data-year={year}>
-              <div class="bg-border mt-10 h-px" />
-              <h2 class="text-ink mt-11 mb-1 text-[22px] font-bold">
-                {year}{" "}
-                <span class="text-muted font-normal">
-                  ({posts[year].length})
-                </span>
-              </h2>
+            <section data-year={year} class="mt-10">
+              <div class="mb-3 flex items-center gap-4">
+                <h2 class="text-ink flex shrink-0 items-baseline gap-2 font-mono text-[14px] font-semibold tracking-wide">
+                  {year}
+                  <span class="text-muted text-xs font-normal tracking-normal">
+                    ({posts[year].length})
+                  </span>
+                </h2>
+                <div
+                  aria-hidden="true"
+                  class="bg-control-border/50 h-px flex-1"
+                />
+              </div>
               <ul>
                 {posts[year].map((post) => (
                   <li
@@ -117,8 +132,9 @@ function formatDate(date: Date): string {
 
 <style>
   .topic-filter[aria-current="true"] {
-    background: var(--surface);
-    color: var(--text);
+    background: var(--text);
+    border-color: var(--text);
+    color: var(--bg);
   }
 </style>
 <script>
