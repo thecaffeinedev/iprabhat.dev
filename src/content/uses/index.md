@@ -27,7 +27,7 @@ This page is inspired by [Wes Bos](https://wesbos.com/uses).
 - [NuPhy Kick75](https://nuphy.com/products/nuphy-kick75?variant=43805710450797) - Wireless MK High Profile With Blush Max Keys (Currently Using)
 - [Keychron K2-V2](https://keychron.in/product/keychron-k2-v-2/) - A wireless mechanical keyboard with Blue switches.
 - [Logitech K380s](https://www.logitech.com/en-in/shop/p/pebble-keys-2.920-011753) - A compact, slim wireless keyboard.
-- [Logitech MX MASTER 3S](https://www.logitech.com/en-in/products/mice/mx-master-3s.910-006561.html) - My current everyday wireless mouse.
+- [Logitech MX MASTER 3S](https://www.logitech.com/en-in/products/mice/mx-master-3s.910-006561.html) - My **current** everyday wireless mouse.
 - [Razor Viper 8K](https://www.amazon.in/Razer-Ambidextrous-Esports-Polling-Optical/dp/B08P1PWN2Q) - A wired mouse for gaming.
 
 ### Workspace
@@ -36,8 +36,9 @@ This page is inspired by [Wes Bos](https://wesbos.com/uses).
 
 ### Audio
 
-- **[OnePlus Buds 3](https://www.oneplus.in/oneplus-buds-3)** - My primary earbuds.
+- **[Apple Airpods Pro 3](https://www.apple.com/in/airpods-pro/)** - Currently Using
 - [Apple EarPods](https://www.apple.com/in/shop/product/myqy3zm/a/earpods-usb-c) - Wired USB-C listening.
+- **[OnePlus Buds 3](https://www.oneplus.in/oneplus-buds-3)** - Previously used. 
 - **[HyperX QuadCast Microphone](https://hyperx.com/products/hyperx-quadcast-usb-microphone)** - My primary microphone for recording and stuff.
 - **[AirPods Pro](https://www.apple.com/airpods-pro/)** - Previously used
 
